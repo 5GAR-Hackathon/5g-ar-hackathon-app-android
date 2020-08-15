@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.nanogiants.a5garapp">
 
+  <uses-permission android:name="android.permission.CAMERA" />
+
   <application
       android:name=".HackathonApp"
       android:allowBackup="false"
@@ -20,6 +22,10 @@
       </intent-filter>
     </activity>
     <activity android:name=".activities.ARTestActivity"/>
+
+    <meta-data
+        android:name="com.huawei.ar.engine"
+        android:value="required" />
   </application>
 
 </manifest>

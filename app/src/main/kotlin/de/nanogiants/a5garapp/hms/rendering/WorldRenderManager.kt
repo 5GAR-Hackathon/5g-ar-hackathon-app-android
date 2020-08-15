@@ -24,7 +24,6 @@ import android.util.Log
 import android.view.MotionEvent
 import android.view.View.MeasureSpec
 import android.widget.ImageView
-import android.widget.TextView
 import com.huawei.hiar.ARCamera
 import com.huawei.hiar.ARFrame
 import com.huawei.hiar.ARHitResult
@@ -36,14 +35,12 @@ import com.huawei.hiar.ARPoint.OrientationMode.ESTIMATED_SURFACE_NORMAL
 import com.huawei.hiar.ARPose
 import com.huawei.hiar.ARSession
 import com.huawei.hiar.ARTrackable.TrackingState.TRACKING
-import de.nanogiants.a5garapp.R
 import de.nanogiants.a5garapp.activities.ARTestActivity
 import de.nanogiants.a5garapp.hms.GestureEvent
 import de.nanogiants.a5garapp.hms.common.ArDemoRuntimeException
 import de.nanogiants.a5garapp.hms.common.DisplayRotationManager
 import de.nanogiants.a5garapp.hms.common.TextDisplay
 import de.nanogiants.a5garapp.hms.common.TextureDisplay
-import java.util.ArrayList
 import java.util.concurrent.ArrayBlockingQueue
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
@@ -55,7 +52,7 @@ import javax.microedition.khronos.opengles.GL10
  * @author HW
  * @since 2020-03-21
  */
-class WorldRenderManager(val mActivity: Activity) : Renderer {
+class WorldRenderManager(private val mActivity: Activity) : Renderer {
   private var mSession: ARSession? = null
 
   private var frames = 0
@@ -156,52 +153,55 @@ class WorldRenderManager(val mActivity: Activity) : Renderer {
 
   override fun onDrawFrame(unused: GL10) {
     GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
-    if (mSession == null) {
-      return
-    }
-    if (mDisplayRotationManager.getDeviceRotation()) {
-      mDisplayRotationManager.updateArSessionDisplayGeometry(mSession)
-    }
-    try {
-      mSession!!.setCameraTextureName(mTextureDisplay.getExternalTextureId())
-      val arFrame = mSession!!.update()
-      val arCamera = arFrame.camera
 
-      // The size of the projection matrix is 4 * 4.
-      val projectionMatrix = FloatArray(16)
-      arCamera.getProjectionMatrix(projectionMatrix, PROJ_MATRIX_OFFSET, PROJ_MATRIX_NEAR, PROJ_MATRIX_FAR)
-      mTextureDisplay.onDrawFrame(arFrame)
-      val sb = StringBuilder()
-      updateMessageData(sb)
-      mTextDisplay.onDrawFrame(sb)
+    mSession?.let {
+      if (mDisplayRotationManager.getDeviceRotation()) {
+        mDisplayRotationManager.updateArSessionDisplayGeometry(it)
+      }
+      try {
+        it.setCameraTextureName(mTextureDisplay.getExternalTextureId())
+        val arFrame = it.update()
+        val arCamera = arFrame.camera
 
-      // The size of ViewMatrix is 4 * 4.
-      val viewMatrix = FloatArray(16)
-      arCamera.getViewMatrix(viewMatrix, 0)
-      for (plane in mSession!!.getAllTrackables(ARPlane::class.java)) {
-        if (plane.type != UNKNOWN_FACING
-          && plane.trackingState == TRACKING
-        ) {
+        // The size of the projection matrix is 4 * 4.
+        val projectionMatrix = FloatArray(16)
+        arCamera.getProjectionMatrix(projectionMatrix, PROJ_MATRIX_OFFSET, PROJ_MATRIX_NEAR, PROJ_MATRIX_FAR)
+        mTextureDisplay.onDrawFrame(arFrame)
+        val sb = StringBuilder()
+        updateMessageData(sb)
+        mTextDisplay.onDrawFrame(sb)
+
+        // The size of ViewMatrix is 4 * 4.
+        val viewMatrix = FloatArray(16)
+        arCamera.getViewMatrix(viewMatrix, 0)
+        for (plane in it.getAllTrackables(ARPlane::class.java)) {
+          if (plane.type != UNKNOWN_FACING
+            && plane.trackingState == TRACKING
+          ) {
 //          hideLoadingMessage()
-          break
+            break
+          }
         }
-      }
-      mLabelDisplay.onDrawFrame(
-        mSession!!.getAllTrackables(ARPlane::class.java), arCamera.displayOrientedPose,
-        projectionMatrix
-      )
+        val planes =
+          it.getAllTrackables(ARPlane::class.java).filter { it.label == ARPlane.SemanticPlaneLabel.PLANE_WALL }
+        mLabelDisplay.onDrawFrame(
+          planes, arCamera.displayOrientedPose,
+          projectionMatrix
+        )
 //      handleGestureEvent(arFrame, arCamera, projectionMatrix, viewMatrix)
-      val lightEstimate = arFrame.lightEstimate
-      var lightPixelIntensity = 1f
-      if (lightEstimate.state != NOT_VALID) {
-        lightPixelIntensity = lightEstimate.pixelIntensity
-      }
+        val lightEstimate = arFrame.lightEstimate
+        var lightPixelIntensity = if (lightEstimate.state == NOT_VALID) {
+          1f
+        } else {
+          lightEstimate.pixelIntensity
+        }
 //      drawAllObjects(projectionMatrix, viewMatrix, lightPixelIntensity)
-    } catch (e: ArDemoRuntimeException) {
-      Log.e(TAG, "Exception on the ArDemoRuntimeException!")
-    } catch (t: Throwable) {
-      // This prevents the app from crashing due to unhandled exceptions.
-      Log.e(TAG, "Exception on the OpenGL thread: ", t)
+      } catch (e: ArDemoRuntimeException) {
+        Log.e(TAG, "Exception on the ArDemoRuntimeException!")
+      } catch (t: Throwable) {
+        // This prevents the app from crashing due to unhandled exceptions.
+        Log.e(TAG, "Exception on the OpenGL thread: ", t)
+      }
     }
   }
 
@@ -218,31 +218,31 @@ class WorldRenderManager(val mActivity: Activity) : Renderer {
 //    }
 //  }
 
-  private val planeBitmaps: ArrayList<Bitmap?>
-    get() {
-      val bitmaps = ArrayList<Bitmap?>()
-      bitmaps.add(getPlaneBitmap(R.id.dickbutt))
-      bitmaps.add(getPlaneBitmap(R.id.dickbutt02))
-      bitmaps.add(getPlaneBitmap(R.id.dickbutt03))
-      return bitmaps
-    }
-
-  private fun getPlaneBitmap(id: Int): Bitmap? {
-    val view = mActivity.findViewById<TextView>(id)
-    view.isDrawingCacheEnabled = true
-    view.measure(
-      MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
-      MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED)
-    )
-    view.layout(0, 0, view.measuredWidth, view.measuredHeight)
-    var bitmap = view.drawingCache
-    val matrix = Matrix()
-    matrix.setScale(MATRIX_SCALE_SX, MATRIX_SCALE_SY)
-    if (bitmap != null) {
-      bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
-    }
-    return bitmap
-  }
+//  private val planeBitmaps: ArrayList<Bitmap?>
+//    get() {
+//      val bitmaps = ArrayList<Bitmap?>()
+//      bitmaps.add(getPlaneBitmap(R.id.dickbutt))
+//      bitmaps.add(getPlaneBitmap(R.id.dickbutt02))
+//      bitmaps.add(getPlaneBitmap(R.id.dickbutt03))
+//      return bitmaps
+//    }
+//
+//  private fun getPlaneBitmap(id: Int): Bitmap? {
+//    val view = mActivity.findViewById<TextView>(id)
+//    view.isDrawingCacheEnabled = true
+//    view.measure(
+//      MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
+//      MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED)
+//    )
+//    view.layout(0, 0, view.measuredWidth, view.measuredHeight)
+//    var bitmap = view.drawingCache
+//    val matrix = Matrix()
+//    matrix.setScale(MATRIX_SCALE_SX, MATRIX_SCALE_SY)
+//    if (bitmap != null) {
+//      bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
+//    }
+//    return bitmap
+//  }
 
   private fun getImageBitmap(imageView: ImageView): Bitmap {
     imageView.isDrawingCacheEnabled = true
@@ -286,7 +286,7 @@ class WorldRenderManager(val mActivity: Activity) : Renderer {
 //  private fun hideLoadingMessage() {
 //    mActivity.runOnUiThread {
 //      if (mSearchingTextView != null) {
-//        mSearchingTextView!!.visibility = View.GONE
+//        mSearchingTextView.visibility = View.GONE
 //        mSearchingTextView = null
 //      }
 //    }

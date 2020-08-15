@@ -144,7 +144,7 @@ public class LabelDisplay {
     private ArrayList<ARPlane> getSortedPlanes(Collection<ARPlane> allPlanes, ARPose cameraPose) {
         // Planes must be sorted by the distance from the camera so that we can
         // first draw the closer planes, and have them block the further planes.
-        ArrayList<Pair<ARPlane, Float>> pairPlanes = new ArrayList<>();
+        List<Pair<ARPlane, Float>> pairPlanes = new ArrayList<>();
         for (ARPlane plane : allPlanes) {
             if ((plane.getType() == ARPlane.PlaneType.UNKNOWN_FACING)
                 || plane.getTrackingState() != ARTrackable.TrackingState.TRACKING

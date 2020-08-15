@@ -71,7 +71,5 @@ class ARTestActivity : BaseActivity() {
     super.onDestroy()
   }
 
-  fun provideViewList(): List<ImageView> {
-    return listOf(binding.dickbutt, binding.dickbutt02, binding.dickbutt03)
-  }
+  fun provideViewList(): List<ImageView> = listOf(binding.dickbutt, binding.dickbutt02, binding.dickbutt03)
 }
