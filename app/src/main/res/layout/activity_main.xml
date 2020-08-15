@@ -35,6 +35,17 @@
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:text="TEST AR"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+    <TextView
+        android:id="@+id/start_location_test"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="TEST GPS"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/start_ar_test"
         />
 
   </androidx.constraintlayout.widget.ConstraintLayout>

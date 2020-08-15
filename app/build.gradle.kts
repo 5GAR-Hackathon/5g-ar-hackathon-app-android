@@ -48,7 +48,7 @@ repositories {
   jcenter()
   maven("https://dl.bintray.com/kotlin/kotlin-eap")
   maven("https://kotlin.bintray.com/kotlinx")
-  maven("http://developer.huawei.com/repo/")
+  maven("https://developer.huawei.com/repo/")
 }
 
 val daggerVersion: String by project
@@ -75,8 +75,9 @@ dependencies {
   implementation("com.google.dagger:hilt-android:$daggerVersion")
   kapt("com.google.dagger:hilt-android-compiler:$daggerVersion")
 
-  // HMS
+  // Huawei
   implementation("com.huawei.hms:arenginesdk:2.12.0.1")
+  implementation("com.huawei.hms:location:5.0.0.301")
 }
 
 kapt {
