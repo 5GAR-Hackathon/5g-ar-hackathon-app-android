@@ -1,7 +1,7 @@
 package de.nanogiants.a5garapp
 
-import android.content.Intent
 import android.Manifest.permission.ACCESS_FINE_LOCATION
+import android.content.Intent
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
@@ -36,11 +36,12 @@ class MainActivity : BaseActivity() {
       startActivity(Intent(this, ARTestActivity::class.java))
     }
 
-    binding.root.setOnClickListener {
+    binding.startLocationTest.setOnClickListener {
       permissionController.requestPermissions(ACCESS_FINE_LOCATION, onGranted = {
+        binding.startLocationTest.isEnabled = false
         lifecycleScope.launch {
           locationController.getLocation().cancellable().filterNotNull()
-            .collect { binding.toolbar.title = "${it.longitude}/${it.latitude}" }
+            .collect { binding.startLocationTest.text = "Lat ${it.latitude}/Long ${it.longitude}" }
         }
       }, onDenied = {})
     }
