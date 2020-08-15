@@ -7,7 +7,7 @@ import androidx.viewbinding.ViewBinding
 
 abstract class BaseActivity : AppCompatActivity() {
 
-  protected abstract val binding: ViewBinding
+  public abstract val binding: ViewBinding
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)

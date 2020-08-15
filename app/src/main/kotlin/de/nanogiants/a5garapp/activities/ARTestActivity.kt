@@ -1,6 +1,7 @@
 package de.nanogiants.a5garapp.activities
 
 import android.opengl.GLSurfaceView
+import android.widget.ImageView
 import com.huawei.hiar.ARConfigBase
 import com.huawei.hiar.ARSession
 import com.huawei.hiar.ARWorldTrackingConfig
@@ -68,5 +69,9 @@ class ARTestActivity : BaseActivity() {
     arSession?.stop()
     arSession = null
     super.onDestroy()
+  }
+
+  fun provideViewList(): List<ImageView> {
+    return listOf(binding.dickbutt, binding.dickbutt02, binding.dickbutt03)
   }
 }

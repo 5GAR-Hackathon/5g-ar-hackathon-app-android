@@ -34,6 +34,7 @@ import java.nio.ShortBuffer;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Comparator;
+import java.util.List;
 
 /**
  * This class demonstrates how to use ARPlane, including how to obtain the center point of a plane.
@@ -88,7 +89,7 @@ public class LabelDisplay {
      *
      * @param labelBitmaps View data indicating the plane type.
      */
-    public void init(ArrayList<Bitmap> labelBitmaps) {
+    public void init(List<Bitmap> labelBitmaps) {
         ShaderUtil.checkGlError(TAG, "Init start.");
         if (labelBitmaps.size() == 0) {
             Log.e(TAG, "No bitmap.");

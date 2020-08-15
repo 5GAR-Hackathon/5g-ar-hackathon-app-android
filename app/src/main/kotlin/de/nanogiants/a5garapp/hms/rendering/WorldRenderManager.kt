@@ -17,14 +17,13 @@ package de.nanogiants.a5garapp.hms.rendering
 
 import android.app.Activity
 import android.graphics.Bitmap
-import android.graphics.Color
 import android.graphics.Matrix
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView.Renderer
 import android.util.Log
 import android.view.MotionEvent
-import android.view.View
 import android.view.View.MeasureSpec
+import android.widget.ImageView
 import android.widget.TextView
 import com.huawei.hiar.ARCamera
 import com.huawei.hiar.ARFrame
@@ -36,14 +35,13 @@ import com.huawei.hiar.ARPoint
 import com.huawei.hiar.ARPoint.OrientationMode.ESTIMATED_SURFACE_NORMAL
 import com.huawei.hiar.ARPose
 import com.huawei.hiar.ARSession
-import com.huawei.hiar.ARTrackable.TrackingState.STOPPED
 import com.huawei.hiar.ARTrackable.TrackingState.TRACKING
 import de.nanogiants.a5garapp.R
+import de.nanogiants.a5garapp.activities.ARTestActivity
 import de.nanogiants.a5garapp.hms.GestureEvent
 import de.nanogiants.a5garapp.hms.common.ArDemoRuntimeException
 import de.nanogiants.a5garapp.hms.common.DisplayRotationManager
 import de.nanogiants.a5garapp.hms.common.TextDisplay
-import de.nanogiants.a5garapp.hms.common.TextDisplay.OnTextInfoChangeListener
 import de.nanogiants.a5garapp.hms.common.TextureDisplay
 import java.util.ArrayList
 import java.util.concurrent.ArrayBlockingQueue
@@ -57,7 +55,7 @@ import javax.microedition.khronos.opengles.GL10
  * @author HW
  * @since 2020-03-21
  */
-class WorldRenderManager(private val mActivity: Activity) : Renderer {
+class WorldRenderManager(val mActivity: Activity) : Renderer {
   private var mSession: ARSession? = null
 
   private var frames = 0
@@ -117,8 +115,14 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
     GLES20.glClearColor(0.1f, 0.1f, 0.1f, 1.0f)
     mTextureDisplay.init()
 //    mTextDisplay.setListener { text, positionX, positionY -> showWorldTypeTextView(text, positionX, positionY) }
-    mLabelDisplay.init(planeBitmaps)
+    mLabelDisplay.init(buildBitmaps(activity = mActivity as ARTestActivity))
 //    mObjectDisplay.init(mActivity)
+  }
+
+  private fun buildBitmaps(activity: ARTestActivity): List<Bitmap> {
+    return activity.provideViewList().map {
+      getImageBitmap(it)
+    }
   }
 
   /**
@@ -215,14 +219,11 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
 //  }
 
   private val planeBitmaps: ArrayList<Bitmap?>
-    private get() {
+    get() {
       val bitmaps = ArrayList<Bitmap?>()
-//      bitmaps.add(getPlaneBitmap(R.id.plane_other))
-//      bitmaps.add(getPlaneBitmap(R.id.plane_wall))
-//      bitmaps.add(getPlaneBitmap(R.id.plane_floor))
-//      bitmaps.add(getPlaneBitmap(R.id.plane_seat))
-//      bitmaps.add(getPlaneBitmap(R.id.plane_table))
-//      bitmaps.add(getPlaneBitmap(R.id.plane_ceiling))
+      bitmaps.add(getPlaneBitmap(R.id.dickbutt))
+      bitmaps.add(getPlaneBitmap(R.id.dickbutt02))
+      bitmaps.add(getPlaneBitmap(R.id.dickbutt03))
       return bitmaps
     }
 
@@ -235,6 +236,22 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
     )
     view.layout(0, 0, view.measuredWidth, view.measuredHeight)
     var bitmap = view.drawingCache
+    val matrix = Matrix()
+    matrix.setScale(MATRIX_SCALE_SX, MATRIX_SCALE_SY)
+    if (bitmap != null) {
+      bitmap = Bitmap.createBitmap(bitmap, 0, 0, bitmap.width, bitmap.height, matrix, true)
+    }
+    return bitmap
+  }
+
+  private fun getImageBitmap(imageView: ImageView): Bitmap {
+    imageView.isDrawingCacheEnabled = true
+    imageView.measure(
+      MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED),
+      MeasureSpec.makeMeasureSpec(0, MeasureSpec.UNSPECIFIED)
+    )
+    imageView.layout(0, 0, imageView.measuredWidth, imageView.measuredHeight)
+    var bitmap = imageView.drawingCache
     val matrix = Matrix()
     matrix.setScale(MATRIX_SCALE_SX, MATRIX_SCALE_SY)
     if (bitmap != null) {
@@ -404,8 +421,8 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
 
       // Calculate the distance based on projection.
       return (cameraPose.tx() - planePose.tx()) * normals[0] // 0:x
-          + (cameraPose.ty() - planePose.ty()) * normals[1] // 1:y
-          + (cameraPose.tz() - planePose.tz()) * normals[2] // 2:z
+      +(cameraPose.ty() - planePose.ty()) * normals[1] // 1:y
+      +(cameraPose.tz() - planePose.tz()) * normals[2] // 2:z
     }
   }
 
