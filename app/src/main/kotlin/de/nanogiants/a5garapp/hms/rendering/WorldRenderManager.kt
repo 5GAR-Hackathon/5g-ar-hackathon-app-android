@@ -36,6 +36,7 @@ import com.huawei.hiar.ARPose
 import com.huawei.hiar.ARSession
 import com.huawei.hiar.ARTrackable.TrackingState.TRACKING
 import de.nanogiants.a5garapp.activities.ARTestActivity
+import de.nanogiants.a5garapp.hms.Banner
 import de.nanogiants.a5garapp.hms.GestureEvent
 import de.nanogiants.a5garapp.hms.common.ArDemoRuntimeException
 import de.nanogiants.a5garapp.hms.common.DisplayRotationManager
@@ -67,6 +68,8 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
 
   private lateinit var mDisplayRotationManager: DisplayRotationManager
   private lateinit var mQueuedSingleTaps: ArrayBlockingQueue<GestureEvent>
+
+  private val bannerList: MutableList<Banner> = mutableListOf()
 
   /**
    * Set ARSession, which will update and obtain the latest data in OnDrawFrame.
@@ -196,6 +199,7 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
           lightEstimate.pixelIntensity
         }
 //      drawAllObjects(projectionMatrix, viewMatrix, lightPixelIntensity)
+        drawBannerList(arCamera.displayOrientedPose, projectionMatrix)
       } catch (e: ArDemoRuntimeException) {
         Log.e(TAG, "Exception on the ArDemoRuntimeException!")
       } catch (t: Throwable) {
@@ -205,27 +209,11 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
     }
   }
 
-//  private fun drawAllObjects(projectionMatrix: FloatArray, viewMatrix: FloatArray, lightPixelIntensity: Float) {
-//    val ite: MutableIterator<VirtualObject> = mVirtualObjects.iterator()
-//    while (ite.hasNext()) {
-//      val obj: VirtualObject = ite.next()
-//      if (obj.getAnchor().getTrackingState() === STOPPED) {
-//        ite.remove()
-//      }
-//      if (obj.getAnchor().getTrackingState() === TRACKING) {
-////        mObjectDisplay.onDrawFrame(viewMatrix, projectionMatrix, lightPixelIntensity, obj)
-//      }
-//    }
-//  }
-
-//  private val planeBitmaps: ArrayList<Bitmap?>
-//    get() {
-//      val bitmaps = ArrayList<Bitmap?>()
-//      bitmaps.add(getPlaneBitmap(R.id.dickbutt))
-//      bitmaps.add(getPlaneBitmap(R.id.dickbutt02))
-//      bitmaps.add(getPlaneBitmap(R.id.dickbutt03))
-//      return bitmaps
-//    }
+  private fun drawBannerList(displayOrientedPose: ARPose, projectionMatrix: FloatArray) {
+    mLabelDisplay.onDrawBannerList(
+      bannerList.filter { it.anchor.trackingState === TRACKING }, displayOrientedPose, projectionMatrix
+    )
+  }
 //
 //  private fun getPlaneBitmap(id: Int): Bitmap? {
 //    val view = mActivity.findViewById<TextView>(id)
@@ -363,6 +351,7 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
       // TODO: 16.08.2020
 //      mVirtualObjects.add(VirtualObject(hitResult.createAnchor(), BLUE_COLORS))
     } else if (currentTrackable is ARPlane) {
+      bannerList.add(Banner(hitResult.createAnchor()))
       // TODO: 16.08.2020
 //      mVirtualObjects.add(VirtualObject(hitResult.createAnchor(), GREEN_COLORS))
     } else {
