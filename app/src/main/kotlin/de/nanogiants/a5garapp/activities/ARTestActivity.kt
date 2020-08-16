@@ -55,7 +55,7 @@ class ARTestActivity : BaseActivity() {
         return true
       }
 
-      override fun onDown(e: MotionEvent?): Boolean {
+      override fun onDown(e: MotionEvent): Boolean {
         onGestureEvent(GestureEvent.createDownEvent(e))
         return true
       }

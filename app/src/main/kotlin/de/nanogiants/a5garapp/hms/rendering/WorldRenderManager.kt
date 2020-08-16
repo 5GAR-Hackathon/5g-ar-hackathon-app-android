@@ -20,6 +20,7 @@ import android.graphics.Bitmap
 import android.graphics.Matrix
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView.Renderer
+import android.util.Log
 import android.view.MotionEvent
 import android.view.View.MeasureSpec
 import android.widget.ImageView

@@ -26,9 +26,9 @@ import android.view.MotionEvent
 class GestureEvent private constructor() {
   var type = 0
     private set
-  var eventFirst: MotionEvent? = null
+  lateinit var eventFirst: MotionEvent
     private set
-  var eventSecond: MotionEvent? = null
+  lateinit var eventSecond: MotionEvent
     private set
   var distanceX = 0f
     private set
@@ -62,7 +62,7 @@ class GestureEvent private constructor() {
      * @param motionEvent The gesture motion event: DOWN.
      * @return GestureEvent.
      */
-    fun createDownEvent(motionEvent: MotionEvent?): GestureEvent {
+    fun createDownEvent(motionEvent: MotionEvent): GestureEvent {
       val ret = GestureEvent()
       ret.type = GESTURE_EVENT_TYPE_DOWN
       ret.eventFirst = motionEvent
@@ -75,7 +75,7 @@ class GestureEvent private constructor() {
      * @param motionEvent The gesture motion event: SINGLETAPUP.
      * @return GestureEvent(SINGLETAPUP).
      */
-    fun createSingleTapUpEvent(motionEvent: MotionEvent?): GestureEvent {
+    fun createSingleTapUpEvent(motionEvent: MotionEvent): GestureEvent {
       val ret = GestureEvent()
       ret.type = GESTURE_EVENT_TYPE_SINGLETAPUP
       ret.eventFirst = motionEvent
@@ -91,7 +91,7 @@ class GestureEvent private constructor() {
      * @param distanceY The distance along the Y axis that has been scrolled since the last call to onScroll.
      * @return GestureEvent(SCROLL).
      */
-    fun createScrollEvent(e1: MotionEvent?, e2: MotionEvent?, distanceX: Float, distanceY: Float): GestureEvent {
+    fun createScrollEvent(e1: MotionEvent, e2: MotionEvent, distanceX: Float, distanceY: Float): GestureEvent {
       val ret = GestureEvent()
       ret.type = GESTURE_EVENT_TYPE_SCROLL
       ret.eventFirst = e1
