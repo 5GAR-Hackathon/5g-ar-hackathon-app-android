@@ -17,6 +17,7 @@ package de.nanogiants.a5garapp.hms.rendering
 
 import android.app.Activity
 import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView.Renderer
@@ -35,6 +36,7 @@ import com.huawei.hiar.ARPoint.OrientationMode.ESTIMATED_SURFACE_NORMAL
 import com.huawei.hiar.ARPose
 import com.huawei.hiar.ARSession
 import com.huawei.hiar.ARTrackable.TrackingState.TRACKING
+import de.nanogiants.a5garapp.R
 import de.nanogiants.a5garapp.activities.ARTestActivity
 import de.nanogiants.a5garapp.hms.Banner
 import de.nanogiants.a5garapp.hms.GestureEvent
@@ -352,12 +354,20 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
       // TODO: 16.08.2020
 //      mVirtualObjects.add(VirtualObject(hitResult.createAnchor(), BLUE_COLORS))
     } else if (currentTrackable is ARPlane) {
-      bannerList.add(Banner(hitResult.createAnchor()))
+      if (bannerList.size == 1) return
+      val bitmap = BitmapFactory.decodeResource(mActivity.resources, R.drawable.dickbutt)
+      bitmap.rotate(180+f)
+      bannerList.add(Banner(hitResult.createAnchor(), bitmap))
       // TODO: 16.08.2020
 //      mVirtualObjects.add(VirtualObject(hitResult.createAnchor(), GREEN_COLORS))
     } else {
       Log.i(TAG, "Hit result is not plane or point.")
     }
+  }
+
+  fun Bitmap.rotate(degrees: Float): Bitmap {
+    val matrix = Matrix().apply { postRotate(degrees) }
+    return Bitmap.createBitmap(this, 0, 0, width, height, matrix, true)
   }
 
   private fun hitTest4Result(frame: ARFrame, camera: ARCamera, event: MotionEvent): ARHitResult? {

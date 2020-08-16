@@ -120,20 +120,104 @@ class LabelDisplay {
     drawBanners(banners, cameraViewMatrix, cameraProjection)
   }
 
-  private fun drawBanners(banners: List<Banner>, cameraViewMatrix: FloatArray, cameraProjection: FloatArray) {}
+  private fun drawBanners(banners: List<Banner>, cameraViewMatrix: FloatArray, cameraProjection: FloatArray) {
+    ShaderUtil.checkGlError("Draw sorted plans start.")
+    GLES20.glDepthMask(false)
+    GLES20.glEnable(GLES20.GL_BLEND)
+    GLES20.glBlendFuncSeparate(
+      GLES20.GL_DST_ALPHA, GLES20.GL_ONE, GLES20.GL_ZERO, GLES20.GL_ONE_MINUS_SRC_ALPHA
+    )
+    GLES20.glUseProgram(mProgram)
+    GLES20.glEnableVertexAttribArray(glPositionParameter)
 
-  //private void drawBanner(Banner banner){
-  //  GLES20.glActiveTexture(GLES20.GL_TEXTURE0 + idx);
-  //  GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[idx]);
-  //
-  //  GLES20.glTexParameteri(
-  //      GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR_MIPMAP_LINEAR);
-  //  GLES20.glTexParameteri(
-  //      GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR);
-  //  GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, labelBitmap, 0);
-  //  GLES20.glGenerateMipmap(GLES20.GL_TEXTURE_2D);
-  //  GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0);
-  //}
+    banners.forEach {
+
+      loadImage(it)
+      val planeMatrix = FloatArray(MATRIX_SIZE)
+      it.anchor.pose.toMatrix(planeMatrix, 0)
+      System.arraycopy(planeMatrix, 0, modelMatrix, 0, MATRIX_SIZE)
+      val scaleU = 1.0f / LABEL_WIDTH
+
+      // Set the value of the plane angle uv matrix.
+      planeAngleUvMatrix[0] = scaleU
+      planeAngleUvMatrix[1] = 0.0f
+      planeAngleUvMatrix[2] = 0.0f
+      val scaleV = 1.0f / LABEL_HEIGHT
+      planeAngleUvMatrix[3] = scaleV
+//      var idx = plane.label.ordinal
+//      Timber.d("Plane getLabel:$idx")
+//      idx = Math.abs(idx)
+      GLES20.glActiveTexture(GLES20.GL_TEXTURE11)
+      GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[11])
+      GLES20.glUniform1i(glTexture, 11)
+      GLES20.glUniformMatrix2fv(glPlaneUvMatrix, 1, false, planeAngleUvMatrix, 0)
+      drawBanner(cameraViewMatrix, cameraProjection)
+    }
+    GLES20.glDisableVertexAttribArray(glPositionParameter)
+    GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0)
+    GLES20.glDisable(GLES20.GL_BLEND)
+    GLES20.glDepthMask(true)
+    ShaderUtil.checkGlError("Draw sorted plans end.")
+  }
+
+  private fun loadImage(banner: Banner) {
+    GLES20.glActiveTexture(GLES20.GL_TEXTURE11)
+    GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[11])
+    GLES20.glTexParameteri(
+      GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER, GLES20.GL_LINEAR_MIPMAP_LINEAR
+    )
+    GLES20.glTexParameteri(
+      GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER, GLES20.GL_LINEAR
+    )
+    GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, banner.bitmap, 0)
+    GLES20.glGenerateMipmap(GLES20.GL_TEXTURE_2D)
+    GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0)
+  }
+
+  private fun drawBanner(cameraViewMatrix: FloatArray, cameraProjection: FloatArray) {
+    ShaderUtil.checkGlError("Draw label start.")
+    Matrix.multiplyMM(modelViewMatrix, 0, cameraViewMatrix, 0, modelMatrix, 0)
+    Matrix.multiplyMM(modelViewProjectionMatrix, 0, cameraProjection, 0, modelViewMatrix, 0)
+    val halfWidth = LABEL_WIDTH / 2.0f
+    val halfHeight = LABEL_HEIGHT / 2.0f
+    val vertices = floatArrayOf(
+      -halfWidth, -halfHeight, 1f,
+      -halfWidth, halfHeight, 1f,
+      halfWidth, halfHeight, 1f,
+      halfWidth, -halfHeight, 1f
+    )
+
+    // The size of each floating point is 4 bits.
+    val vetBuffer = ByteBuffer.allocateDirect(4 * vertices.size)
+      .order(ByteOrder.nativeOrder()).asFloatBuffer()
+    vetBuffer.rewind()
+    for (i in vertices.indices) {
+      vetBuffer.put(vertices[i])
+    }
+    vetBuffer.rewind()
+
+    // The size of each floating point is 4 bits.
+    GLES20.glVertexAttribPointer(
+      glPositionParameter, COORDS_PER_VERTEX, GLES20.GL_FLOAT,
+      false, 4 * COORDS_PER_VERTEX, vetBuffer
+    )
+
+    // Set the sequence of OpenGL drawing points to generate two triangles that form a plane.
+    val indices = shortArrayOf(0, 1, 2, 0, 2, 3)
+
+    // Size of the allocated buffer.
+    val idxBuffer = ByteBuffer.allocateDirect(2 * indices.size)
+      .order(ByteOrder.nativeOrder()).asShortBuffer()
+    idxBuffer.rewind()
+    for (i in indices.indices) {
+      idxBuffer.put(indices[i])
+    }
+    idxBuffer.rewind()
+    GLES20.glUniformMatrix4fv(glModelViewProjectionMatrix, 1, false, modelViewProjectionMatrix, 0)
+    GLES20.glDrawElements(GLES20.GL_TRIANGLE_STRIP, idxBuffer.limit(), GLES20.GL_UNSIGNED_SHORT, idxBuffer)
+    ShaderUtil.checkGlError("Draw label end.")
+  }
+
   private fun getSortedPlanes(allPlanes: Collection<ARPlane>, cameraPose: ARPose): ArrayList<ARPlane> {
     // Planes must be sorted by the distance from the camera so that we can
     // first draw the closer planes, and have them block the further planes.
