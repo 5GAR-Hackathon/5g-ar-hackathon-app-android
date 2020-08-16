@@ -24,6 +24,8 @@ import timber.log.Timber
  * @author HW
  * @since 2020-04-05
  */
+object ShaderUtil {
+
   /**
    * Check OpenGL ES running exceptions and throw them when necessary.
    *
@@ -40,4 +42,5 @@ import timber.log.Timber
     if (lastError != GLES20.GL_NO_ERROR) {
       throw ArDemoRuntimeException("$label: glError $lastError")
     }
+  }
 }

@@ -101,7 +101,7 @@ class TextureDisplay {
    * @param frame ARFrame
    */
   fun onDrawFrame(frame: ARFrame?) {
-    checkGlError("On draw frame start.")
+    ShaderUtil.checkGlError("On draw frame start.")
     if (frame == null) {
       return
     }
@@ -134,7 +134,7 @@ class TextureDisplay {
     GLES20.glDisableVertexAttribArray(mCoord)
     GLES20.glDepthMask(true)
     GLES20.glEnable(GLES20.GL_DEPTH_TEST)
-    checkGlError("On draw frame end.")
+    ShaderUtil.checkGlError("On draw frame end.")
   }
 
   private fun generateExternalTexture() {

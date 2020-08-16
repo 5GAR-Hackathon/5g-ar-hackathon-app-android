@@ -25,7 +25,7 @@ import com.huawei.hiar.ARPlane.PlaneType.UNKNOWN_FACING
 import com.huawei.hiar.ARPose
 import com.huawei.hiar.ARTrackable.TrackingState.TRACKING
 import de.nanogiants.a5garapp.hms.Banner
-import de.nanogiants.a5garapp.hms.common.checkGlError
+import de.nanogiants.a5garapp.hms.common.ShaderUtil
 import de.nanogiants.a5garapp.hms.rendering.WorldShaderUtil.labelProgram
 import timber.log.Timber
 import java.io.Serializable
@@ -65,14 +65,13 @@ class LabelDisplay {
    * @param labelBitmaps View data indicating the plane type.
    */
   fun init(labelBitmaps: List<Bitmap?>) {
-    checkGlError("Init start.")
-    if (labelBitmaps.size == 0) {
+    ShaderUtil.checkGlError("Init start.")
+    if (labelBitmaps.isEmpty()) {
       Timber.e("No bitmap.")
     }
     createProgram()
-    var idx = 0
     GLES20.glGenTextures(textures.size, textures, 0)
-    for (labelBitmap in labelBitmaps) {
+    for ((idx, labelBitmap) in labelBitmaps.withIndex()) {
       // for semantic label plane
       GLES20.glActiveTexture(GLES20.GL_TEXTURE0 + idx)
       GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[idx])
@@ -85,20 +84,19 @@ class LabelDisplay {
       GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, labelBitmap, 0)
       GLES20.glGenerateMipmap(GLES20.GL_TEXTURE_2D)
       GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0)
-      idx++
-      checkGlError("Texture loading")
+      ShaderUtil.checkGlError("Texture loading")
     }
-    checkGlError("Init end.")
+    ShaderUtil.checkGlError("Init end.")
   }
 
   private fun createProgram() {
-    checkGlError("program start.")
+    ShaderUtil.checkGlError("program start.")
     mProgram = labelProgram
     glPositionParameter = GLES20.glGetAttribLocation(mProgram, "inPosXZAlpha")
     glModelViewProjectionMatrix = GLES20.glGetUniformLocation(mProgram, "inMVPMatrix")
     glTexture = GLES20.glGetUniformLocation(mProgram, "inTexture")
     glPlaneUvMatrix = GLES20.glGetUniformLocation(mProgram, "inPlanUVMatrix")
-    checkGlError("program end.")
+    ShaderUtil.checkGlError("program end.")
   }
 
   /**
@@ -184,7 +182,7 @@ class LabelDisplay {
   }
 
   private fun drawSortedPlans(sortedPlanes: ArrayList<ARPlane>, cameraViews: FloatArray, cameraProjection: FloatArray) {
-    checkGlError("Draw sorted plans start.")
+    ShaderUtil.checkGlError("Draw sorted plans start.")
     GLES20.glDepthMask(false)
     GLES20.glEnable(GLES20.GL_BLEND)
     GLES20.glBlendFuncSeparate(
@@ -217,11 +215,11 @@ class LabelDisplay {
     GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, 0)
     GLES20.glDisable(GLES20.GL_BLEND)
     GLES20.glDepthMask(true)
-    checkGlError("Draw sorted plans end.")
+    ShaderUtil.checkGlError("Draw sorted plans end.")
   }
 
   private fun drawLabel(cameraViews: FloatArray, cameraProjection: FloatArray) {
-    checkGlError("Draw label start.")
+    ShaderUtil.checkGlError("Draw label start.")
     Matrix.multiplyMM(modelViewMatrix, 0, cameraViews, 0, modelMatrix, 0)
     Matrix.multiplyMM(modelViewProjectionMatrix, 0, cameraProjection, 0, modelViewMatrix, 0)
     val halfWidth = LABEL_WIDTH / 2.0f
@@ -261,7 +259,7 @@ class LabelDisplay {
     idxBuffer.rewind()
     GLES20.glUniformMatrix4fv(glModelViewProjectionMatrix, 1, false, modelViewProjectionMatrix, 0)
     GLES20.glDrawElements(GLES20.GL_TRIANGLE_STRIP, idxBuffer.limit(), GLES20.GL_UNSIGNED_SHORT, idxBuffer)
-    checkGlError("Draw label end.")
+    ShaderUtil.checkGlError("Draw label end.")
   }
 
   companion object {
