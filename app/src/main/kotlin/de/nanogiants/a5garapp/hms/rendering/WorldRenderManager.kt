@@ -20,7 +20,6 @@ import android.graphics.Bitmap
 import android.graphics.Matrix
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView.Renderer
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View.MeasureSpec
 import android.widget.ImageView
@@ -42,6 +41,7 @@ import de.nanogiants.a5garapp.hms.common.ArDemoRuntimeException
 import de.nanogiants.a5garapp.hms.common.DisplayRotationManager
 import de.nanogiants.a5garapp.hms.common.TextDisplay
 import de.nanogiants.a5garapp.hms.common.TextureDisplay
+import timber.log.Timber
 import java.util.concurrent.ArrayBlockingQueue
 import javax.microedition.khronos.egl.EGLConfig
 import javax.microedition.khronos.opengles.GL10
@@ -78,7 +78,7 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
    */
   fun setArSession(arSession: ARSession?) {
     if (arSession == null) {
-      Log.e(TAG, "setSession error, arSession is null!")
+      Timber.e("setSession error, arSession is null!")
       return
     }
     mSession = arSession
@@ -91,7 +91,7 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
    */
   fun setQueuedSingleTaps(queuedSingleTaps: ArrayBlockingQueue<GestureEvent>?) {
     if (queuedSingleTaps == null) {
-      Log.e(TAG, "setSession error, arSession is null!")
+      Timber.e("setSession error, arSession is null!")
       return
     }
     mQueuedSingleTaps = queuedSingleTaps
@@ -104,7 +104,7 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
    */
   fun setDisplayRotationManage(displayRotationManager: DisplayRotationManager?) {
     if (displayRotationManager == null) {
-      Log.e(TAG, "SetDisplayRotationManage error, displayRotationManage is null!")
+      Timber.e("SetDisplayRotationManage error, displayRotationManage is null!")
       return
     }
     mDisplayRotationManager = displayRotationManager
@@ -158,11 +158,11 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
     GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT or GLES20.GL_DEPTH_BUFFER_BIT)
 
     mSession?.let {
-      if (mDisplayRotationManager.getDeviceRotation()) {
+      if (mDisplayRotationManager.deviceRotation) {
         mDisplayRotationManager.updateArSessionDisplayGeometry(it)
       }
       try {
-        it.setCameraTextureName(mTextureDisplay.getExternalTextureId())
+        it.setCameraTextureName(mTextureDisplay.externalTextureId)
         val arFrame = it.update()
         val arCamera = arFrame.camera
 
@@ -201,10 +201,10 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
 //      drawAllObjects(projectionMatrix, viewMatrix, lightPixelIntensity)
         drawBannerList(arCamera.displayOrientedPose, projectionMatrix)
       } catch (e: ArDemoRuntimeException) {
-        Log.e(TAG, "Exception on the ArDemoRuntimeException!")
+        Timber.e("Exception on the ArDemoRuntimeException!")
       } catch (t: Throwable) {
         // This prevents the app from crashing due to unhandled exceptions.
-        Log.e(TAG, "Exception on the OpenGL thread: ", t)
+        Timber.e(t)
       }
     }
   }

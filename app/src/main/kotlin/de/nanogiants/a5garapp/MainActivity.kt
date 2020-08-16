@@ -1,6 +1,7 @@
 package de.nanogiants.a5garapp
 
 import android.Manifest.permission.ACCESS_FINE_LOCATION
+import android.Manifest.permission.CAMERA
 import android.content.Intent
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
@@ -33,7 +34,9 @@ class MainActivity : BaseActivity() {
     binding.toolbar.title = resources.getString(R.string.app_name)
 
     binding.startArTest.setOnClickListener {
-      startActivity(Intent(this, ARTestActivity::class.java))
+      permissionController.requestPermissions(CAMERA, onGranted = {
+        startActivity(Intent(this, ARTestActivity::class.java))
+      }, onDenied = {})
     }
 
     binding.startLocationTest.setOnClickListener {
