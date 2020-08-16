@@ -84,7 +84,7 @@ public class GestureEvent {
      * @param motionEvent The gesture motion event: DOWN.
      * @return GestureEvent.
      */
-    static GestureEvent createDownEvent(MotionEvent motionEvent) {
+    public static GestureEvent createDownEvent(MotionEvent motionEvent) {
         GestureEvent ret = new GestureEvent();
         ret.type = GESTURE_EVENT_TYPE_DOWN;
         ret.eventFirst = motionEvent;
@@ -97,7 +97,7 @@ public class GestureEvent {
      * @param motionEvent The gesture motion event: SINGLETAPUP.
      * @return GestureEvent(SINGLETAPUP).
      */
-    static GestureEvent createSingleTapUpEvent(MotionEvent motionEvent) {
+    public static GestureEvent createSingleTapUpEvent(MotionEvent motionEvent) {
         GestureEvent ret = new GestureEvent();
         ret.type = GESTURE_EVENT_TYPE_SINGLETAPUP;
         ret.eventFirst = motionEvent;

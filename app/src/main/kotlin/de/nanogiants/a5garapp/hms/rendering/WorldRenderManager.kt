@@ -188,7 +188,7 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
           planes, arCamera.displayOrientedPose,
           projectionMatrix
         )
-//      handleGestureEvent(arFrame, arCamera, projectionMatrix, viewMatrix)
+        handleGestureEvent(arFrame, arCamera, projectionMatrix, viewMatrix)
         val lightEstimate = arFrame.lightEstimate
         var lightPixelIntensity = if (lightEstimate.state == NOT_VALID) {
           1f
@@ -292,23 +292,22 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
 //    }
 //  }
 
-//  private fun handleGestureEvent(
-//    arFrame: ARFrame,
-//    arCamera: ARCamera,
-//    projectionMatrix: FloatArray,
-//    viewMatrix: FloatArray
-//  ) {
-//    val event: Any = mQueuedSingleTaps!!.poll() ?: return
-//
-//    // Do not perform anything when the object is not tracked.
-//    if (arCamera.trackingState != TRACKING) {
-//      return
-//    }
-//    val eventType: Int = event.getType()
-//    when (eventType) {
-//      GestureEvent.GESTURE_EVENT_TYPE_DOWN -> {
+  private fun handleGestureEvent(
+    arFrame: ARFrame,
+    arCamera: ARCamera,
+    projectionMatrix: FloatArray,
+    viewMatrix: FloatArray
+  ) {
+    val event: GestureEvent = mQueuedSingleTaps.poll() ?: return
+
+    // Do not perform anything when the object is not tracked.
+    if (arCamera.trackingState != TRACKING) {
+      return
+    }
+    when (event.type) {
+      GestureEvent.GESTURE_EVENT_TYPE_DOWN -> {
 //        doWhenEventTypeDown(viewMatrix, projectionMatrix, event)
-//      }
+      }
 //      GestureEvent.GESTURE_EVENT_TYPE_SCROLL -> {
 //        if (mSelectedObj == null) {
 //          break
@@ -318,25 +317,25 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
 //          mSelectedObj.setAnchor(hitResult.createAnchor())
 //        }
 //      }
-//      GestureEvent.GESTURE_EVENT_TYPE_SINGLETAPUP -> {
-//
-//        // Do not perform anything when an object is selected.
+      GestureEvent.GESTURE_EVENT_TYPE_SINGLETAPUP -> {
+
+        // Do not perform anything when an object is selected.
 //        if (mSelectedObj != null) {
 //          return
 //        }
-//        val tap: MotionEvent = event.getEventFirst()
-//        var hitResult: ARHitResult? = null
-//        hitResult = hitTest4Result(arFrame, arCamera, tap)
-//        if (hitResult == null) {
-//          break
-//        }
-//        doWhenEventTypeSingleTap(hitResult)
-//      }
-//      else -> {
-//        Log.e(TAG, "Unknown motion event type, and do nothing.")
-//      }
-//    }
-//  }
+        val tap: MotionEvent = event.eventFirst
+        var hitResult: ARHitResult? = null
+        hitResult = hitTest4Result(arFrame, arCamera, tap)
+        if (hitResult == null) {
+          return
+        }
+        doWhenEventTypeSingleTap(hitResult)
+      }
+      else -> {
+        Log.e(TAG, "Unknown motion event type, and do nothing.")
+      }
+    }
+  }
 
 //  private fun doWhenEventTypeDown(viewMatrix: FloatArray, projectionMatrix: FloatArray, event: GestureEvent) {
 //    if (mSelectedObj != null) {
@@ -352,22 +351,24 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
 //    }
 //  }
 
-//  private fun doWhenEventTypeSingleTap(hitResult: ARHitResult) {
-//    // The hit results are sorted by distance. Only the nearest hit point is valid.
-//    // Set the number of stored objects to 10 to avoid the overload of rendering and AR Engine.
+  private fun doWhenEventTypeSingleTap(hitResult: ARHitResult) {
+    // The hit results are sorted by distance. Only the nearest hit point is valid.
+    // Set the number of stored objects to 10 to avoid the overload of rendering and AR Engine.
 //    if (mVirtualObjects.size >= 16) {
 //      mVirtualObjects[0].getAnchor().detach()
 //      mVirtualObjects.removeAt(0)
 //    }
-//    val currentTrackable = hitResult.trackable
-//    if (currentTrackable is ARPoint) {
+    val currentTrackable = hitResult.trackable
+    if (currentTrackable is ARPoint) {
+      // TODO: 16.08.2020
 //      mVirtualObjects.add(VirtualObject(hitResult.createAnchor(), BLUE_COLORS))
-//    } else if (currentTrackable is ARPlane) {
+    } else if (currentTrackable is ARPlane) {
+      // TODO: 16.08.2020
 //      mVirtualObjects.add(VirtualObject(hitResult.createAnchor(), GREEN_COLORS))
-//    } else {
-//      Log.i(TAG, "Hit result is not plane or point.")
-//    }
-//  }
+    } else {
+      Log.i(TAG, "Hit result is not plane or point.")
+    }
+  }
 
   private fun hitTest4Result(frame: ARFrame, camera: ARCamera, event: MotionEvent): ARHitResult? {
     var hitResult: ARHitResult? = null

@@ -1,14 +1,21 @@
 package de.nanogiants.a5garapp.activities
 
+import android.annotation.SuppressLint
 import android.opengl.GLSurfaceView
+import android.view.GestureDetector
+import android.view.GestureDetector.SimpleOnGestureListener
+import android.view.MotionEvent
 import android.widget.ImageView
 import com.huawei.hiar.ARConfigBase
 import com.huawei.hiar.ARSession
 import com.huawei.hiar.ARWorldTrackingConfig
 import de.nanogiants.a5garapp.BaseActivity
 import de.nanogiants.a5garapp.databinding.ActivityArTestBinding
+import de.nanogiants.a5garapp.hms.GestureEvent
 import de.nanogiants.a5garapp.hms.common.DisplayRotationManager
 import de.nanogiants.a5garapp.hms.rendering.WorldRenderManager
+import timber.log.Timber
+import java.util.concurrent.ArrayBlockingQueue
 
 class ARTestActivity : BaseActivity() {
 
@@ -20,9 +27,12 @@ class ARTestActivity : BaseActivity() {
   }
 
   private var arSession: ARSession? = null
+  private val tapQueue = ArrayBlockingQueue<GestureEvent>(2)
+  lateinit var detector: GestureDetector
 
   override val binding: ActivityArTestBinding by viewBinding(ActivityArTestBinding::inflate)
 
+  @SuppressLint("ClickableViewAccessibility")
   override fun initView() {
     // TODO: 15.08.2020 chech ar enging ability @see WorldActivity.java in ar sample project
 
@@ -36,6 +46,22 @@ class ARTestActivity : BaseActivity() {
 
     worldRenderManager.apply {
       setDisplayRotationManage(rotationManager)
+      setQueuedSingleTaps(tapQueue)
+    }
+
+    detector = GestureDetector(this, object : SimpleOnGestureListener() {
+      override fun onSingleTapUp(e: MotionEvent): Boolean {
+        onGestureEvent(GestureEvent.createSingleTapUpEvent(e))
+        return true
+      }
+
+      override fun onDown(e: MotionEvent?): Boolean {
+        onGestureEvent(GestureEvent.createDownEvent(e))
+        return true
+      }
+    })
+    binding.surfaceView.setOnTouchListener { _, event ->
+      detector.onTouchEvent(event)
     }
   }
 
@@ -72,4 +98,13 @@ class ARTestActivity : BaseActivity() {
   }
 
   fun provideViewList(): List<ImageView> = listOf(binding.dickbutt, binding.dickbutt02, binding.dickbutt03)
+
+  private fun onGestureEvent(e: GestureEvent) {
+    val offerResult: Boolean = tapQueue.offer(e)
+    if (offerResult) {
+      Timber.d("Successfully joined the queue.")
+    } else {
+      Timber.d("Failed to join queue.")
+    }
+  }
 }
