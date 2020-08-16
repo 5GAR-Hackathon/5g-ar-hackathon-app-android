@@ -17,9 +17,13 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import timber.log.Timber
+import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
-class LocationControllerImpl constructor(val activity: BaseActivity) : LocationController {
+class LocationControllerImpl @Inject constructor() : LocationController {
+
+  @Inject
+  lateinit var activity: BaseActivity
 
   private val locationState = MutableStateFlow<Location?>(null)
 
