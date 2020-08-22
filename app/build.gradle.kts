@@ -3,6 +3,7 @@ plugins {
   kotlin("android")
   kotlin("kapt")
   id("dagger.hilt.android.plugin")
+  id("com.huawei.agconnect")
 }
 
 android {
@@ -46,24 +47,21 @@ repositories {
   google()
   mavenCentral()
   jcenter()
-  maven("https://dl.bintray.com/kotlin/kotlin-eap")
-  maven("https://kotlin.bintray.com/kotlinx")
   maven("https://developer.huawei.com/repo/")
 }
 
-val daggerVersion: String by project
 dependencies {
   // Kotlin
-  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.8-1.4.0-rc")
+  implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.3.9")
 
   // AndroidX
-  implementation("androidx.appcompat:appcompat:1.3.0-alpha01")
-  implementation("androidx.core:core-ktx:1.5.0-alpha01")
-  implementation("androidx.activity:activity:1.2.0-alpha07")
-  implementation("androidx.fragment:fragment:1.3.0-alpha07")
-  implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.0-alpha06")
+  implementation("androidx.appcompat:appcompat:1.3.0-alpha02")
+  implementation("androidx.core:core-ktx:1.5.0-alpha02")
+  implementation("androidx.activity:activity:1.2.0-alpha08")
+  implementation("androidx.fragment:fragment:1.3.0-alpha08")
+  implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.0-alpha07")
   implementation("androidx.recyclerview:recyclerview:1.2.0-alpha05")
-  implementation("androidx.constraintlayout:constraintlayout:2.0.0-rc1")
+  implementation("androidx.constraintlayout:constraintlayout:2.0.0")
 
   // UI
   implementation("com.google.android.material:material:1.3.0-alpha02")
@@ -72,12 +70,14 @@ dependencies {
   implementation("com.jakewharton.timber:timber:4.7.1")
 
   // Dagger
-  implementation("com.google.dagger:hilt-android:$daggerVersion")
-  kapt("com.google.dagger:hilt-android-compiler:$daggerVersion")
+  implementation("com.google.dagger:hilt-android:${properties["daggerVersion"]}")
+  kapt("com.google.dagger:hilt-android-compiler:${properties["daggerVersion"]}")
 
   // Huawei
   implementation("com.huawei.hms:arenginesdk:2.12.0.1")
   implementation("com.huawei.hms:location:5.0.0.301")
+  implementation("com.huawei.hms:maps:5.0.1.300")
+  implementation("com.huawei.agconnect:agconnect-core:${properties["agcpVersion"]}")
 }
 
 kapt {

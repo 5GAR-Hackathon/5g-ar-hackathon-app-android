@@ -3,7 +3,7 @@ package de.nanogiants.a5garapp.controllers
 import android.content.pm.PackageManager
 import androidx.activity.result.contract.ActivityResultContracts.RequestMultiplePermissions
 import androidx.core.content.ContextCompat
-import de.nanogiants.a5garapp.BaseActivity
+import de.nanogiants.a5garapp.base.BaseActivity
 import javax.inject.Inject
 
 class PermissionControllerImpl @Inject constructor() : PermissionController {

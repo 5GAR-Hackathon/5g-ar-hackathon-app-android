@@ -12,7 +12,7 @@ import com.huawei.hms.location.LocationResult
 import com.huawei.hms.location.LocationServices
 import com.huawei.hms.location.LocationSettingsRequest
 import com.huawei.hms.location.LocationSettingsStatusCodes
-import de.nanogiants.a5garapp.BaseActivity
+import de.nanogiants.a5garapp.base.BaseActivity
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow

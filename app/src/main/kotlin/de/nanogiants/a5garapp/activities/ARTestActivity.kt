@@ -9,7 +9,7 @@ import android.widget.ImageView
 import com.huawei.hiar.ARConfigBase
 import com.huawei.hiar.ARSession
 import com.huawei.hiar.ARWorldTrackingConfig
-import de.nanogiants.a5garapp.BaseActivity
+import de.nanogiants.a5garapp.base.BaseActivity
 import de.nanogiants.a5garapp.databinding.ActivityArTestBinding
 import de.nanogiants.a5garapp.hms.GestureEvent
 import de.nanogiants.a5garapp.hms.common.DisplayRotationManager

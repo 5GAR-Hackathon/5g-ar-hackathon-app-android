@@ -1,4 +1,4 @@
-package de.nanogiants.a5garapp
+package de.nanogiants.a5garapp.base
 
 import android.os.Bundle
 import android.view.LayoutInflater

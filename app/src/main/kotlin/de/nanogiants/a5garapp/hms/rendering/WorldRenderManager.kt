@@ -356,7 +356,7 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
     } else if (currentTrackable is ARPlane) {
       if (bannerList.size == 1) return
       val bitmap = BitmapFactory.decodeResource(mActivity.resources, R.drawable.dickbutt)
-      bitmap.rotate(180+f)
+      bitmap.rotate(180f)
       bannerList.add(Banner(hitResult.createAnchor(), bitmap))
       // TODO: 16.08.2020
 //      mVirtualObjects.add(VirtualObject(hitResult.createAnchor(), GREEN_COLORS))

@@ -6,7 +6,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
-import de.nanogiants.a5garapp.BaseActivity
+import de.nanogiants.a5garapp.base.BaseActivity
 import de.nanogiants.a5garapp.controllers.LocationController
 import de.nanogiants.a5garapp.controllers.LocationControllerImpl
 import de.nanogiants.a5garapp.controllers.PermissionController

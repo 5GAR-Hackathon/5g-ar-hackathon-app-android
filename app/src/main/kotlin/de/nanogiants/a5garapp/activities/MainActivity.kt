@@ -1,4 +1,4 @@
-package de.nanogiants.a5garapp
+package de.nanogiants.a5garapp.activities
 
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.Manifest.permission.CAMERA
@@ -6,7 +6,8 @@ import android.content.Intent
 import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
-import de.nanogiants.a5garapp.activities.ARTestActivity
+import de.nanogiants.a5garapp.R
+import de.nanogiants.a5garapp.base.BaseActivity
 import de.nanogiants.a5garapp.controllers.LocationController
 import de.nanogiants.a5garapp.controllers.PermissionController
 import de.nanogiants.a5garapp.databinding.ActivityMainBinding
@@ -36,6 +37,12 @@ class MainActivity : BaseActivity() {
     binding.startArTest.setOnClickListener {
       permissionController.requestPermissions(CAMERA, onGranted = {
         startActivity(Intent(this, ARTestActivity::class.java))
+      }, onDenied = {})
+    }
+
+    binding.startArTest.setOnClickListener {
+      permissionController.requestPermissions(ACCESS_FINE_LOCATION, onGranted = {
+        startActivity(Intent(this, MapActivity::class.java))
       }, onDenied = {})
     }
 
