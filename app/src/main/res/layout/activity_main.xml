@@ -26,10 +26,12 @@
   <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
+      android:paddingStart="16dp"
+      android:paddingEnd="16dp"
       app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
       >
 
-    <TextView
+    <Button
         android:id="@+id/start_ar_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -38,16 +40,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         />
-    <TextView
+    <Button
         android:id="@+id/start_map_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:text="TEST MAP"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="start_ar_test"
+        app:layout_constraintTop_toBottomOf="@id/start_ar_test"
         />
-    <TextView
+    <Button
         android:id="@+id/start_location_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
