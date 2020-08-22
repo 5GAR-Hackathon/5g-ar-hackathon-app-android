@@ -1,4 +1,4 @@
-package de.nanogiants.a5garapp.activities
+package de.nanogiants.a5garapp.activities.ar
 
 import android.annotation.SuppressLint
 import android.opengl.GLSurfaceView

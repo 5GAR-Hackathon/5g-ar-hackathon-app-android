@@ -1,16 +1,20 @@
-package de.nanogiants.a5garapp.activities
+package de.nanogiants.a5garapp.activities.main
 
 import android.Manifest.permission.ACCESS_FINE_LOCATION
 import android.Manifest.permission.CAMERA
+import android.annotation.SuppressLint
 import android.content.Intent
-import android.widget.Toast
 import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import de.nanogiants.a5garapp.R
+import de.nanogiants.a5garapp.activities.ar.ARTestActivity
+import de.nanogiants.a5garapp.activities.map.MapActivity
 import de.nanogiants.a5garapp.base.BaseActivity
 import de.nanogiants.a5garapp.controllers.LocationController
 import de.nanogiants.a5garapp.controllers.PermissionController
 import de.nanogiants.a5garapp.databinding.ActivityMainBinding
+import de.nanogiants.a5garapp.model.datastore.POIDatastore
+import de.nanogiants.a5garapp.model.datastore.TagDatastore
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.cancellable
 import kotlinx.coroutines.flow.collect
@@ -18,9 +22,9 @@ import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-// TODO move hilt annotation to BaseActivity when https://github.com/google/dagger/issues/1955 is shipped
+@SuppressLint("SetTextI18n")
 @ExperimentalCoroutinesApi
-@AndroidEntryPoint
+@AndroidEntryPoint // TODO move hilt annotation to BaseActivity when https://github.com/google/dagger/issues/1955 is shipped
 class MainActivity : BaseActivity() {
 
   @Inject
@@ -28,6 +32,12 @@ class MainActivity : BaseActivity() {
 
   @Inject
   lateinit var locationController: LocationController
+
+  @Inject
+  lateinit var poiDatastore: POIDatastore
+
+  @Inject
+  lateinit var tagDatastore: TagDatastore
 
   override val binding: ActivityMainBinding by viewBinding(ActivityMainBinding::inflate)
 
@@ -59,6 +69,19 @@ class MainActivity : BaseActivity() {
 
   override fun onResume() {
     super.onResume()
-    Toast.makeText(this, "Hi Developer!", Toast.LENGTH_SHORT).show()
+    lifecycleScope.launch {
+      try {
+        val pois = poiDatastore.getAllPOIs()
+        binding.backendPois.text = "POIs: ${pois.map { it.name }.joinToString()}"
+      } catch (e: Exception) {
+        binding.backendPois.text = "Error loading data"
+      }
+      try {
+        val tags = tagDatastore.getAllTags()
+        binding.backendTags.text = "Tags: ${tags.map { it.name }.joinToString()}"
+      } catch (e: Exception) {
+        binding.backendTags.text = "Error loading data"
+      }
+    }
   }
 }

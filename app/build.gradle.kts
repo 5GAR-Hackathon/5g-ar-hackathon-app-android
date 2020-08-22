@@ -15,6 +15,8 @@ android {
     targetSdkVersion(29)
     versionCode = 1
     versionName = "1.0"
+
+    buildConfigField("String", "BASE_URL", "\"https://5gar.vercel.app/api/\"")
   }
 
   buildTypes {
@@ -68,6 +70,14 @@ dependencies {
 
   // Misc
   implementation("com.jakewharton.timber:timber:4.7.1")
+  implementation("com.squareup.moshi:moshi:1.9.3")
+
+  // Web
+  kapt("com.squareup.moshi:moshi-kotlin-codegen:1.9.3")
+  implementation("com.squareup.okhttp3:okhttp:4.8.1")
+  implementation("com.squareup.okhttp3:logging-interceptor:4.8.1")
+  implementation("com.squareup.retrofit2:retrofit:2.9.0")
+  implementation("com.squareup.retrofit2:converter-moshi:2.9.0")
 
   // Dagger
   implementation("com.google.dagger:hilt-android:${properties["daggerVersion"]}")

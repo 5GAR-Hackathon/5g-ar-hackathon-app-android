@@ -1,4 +1,4 @@
-package de.nanogiants.a5garapp.activities
+package de.nanogiants.a5garapp.activities.map
 
 import android.os.Bundle
 import com.huawei.hms.maps.HuaweiMap

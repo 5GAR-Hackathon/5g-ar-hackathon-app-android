@@ -15,7 +15,7 @@
       android:supportsRtl="false"
       android:theme="@style/Theme.5GARApp">
     <activity
-        android:name=".activities.MainActivity"
+        android:name=".activities.main.MainActivity"
         android:label="@string/app_name"
         android:theme="@style/Theme.5GARApp.NoActionBar">
       <intent-filter>
@@ -24,12 +24,12 @@
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
-    <activity android:name=".activities.ARTestActivity"/>
-    <activity android:name=".activities.MapActivity"/>
+    <activity android:name=".activities.ar.ARTestActivity"/>
+    <activity android:name=".activities.map.MapActivity"/>
 
     <meta-data
         android:name="com.huawei.ar.engine"
-        android:value="required" />
+        android:value="required"/>
   </application>
 
 </manifest>

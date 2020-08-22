@@ -18,7 +18,6 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 @InstallIn(ActivityComponent::class)
 abstract class ControllerModule {
 
-
   @Binds
   abstract fun providePermissionController(permissionControllerImpl: PermissionControllerImpl): PermissionController
 

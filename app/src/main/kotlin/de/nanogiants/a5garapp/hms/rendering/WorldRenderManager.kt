@@ -28,7 +28,6 @@ import android.widget.ImageView
 import com.huawei.hiar.ARCamera
 import com.huawei.hiar.ARFrame
 import com.huawei.hiar.ARHitResult
-import com.huawei.hiar.ARLightEstimate.State.NOT_VALID
 import com.huawei.hiar.ARPlane
 import com.huawei.hiar.ARPlane.PlaneType.UNKNOWN_FACING
 import com.huawei.hiar.ARPoint
@@ -37,7 +36,7 @@ import com.huawei.hiar.ARPose
 import com.huawei.hiar.ARSession
 import com.huawei.hiar.ARTrackable.TrackingState.TRACKING
 import de.nanogiants.a5garapp.R
-import de.nanogiants.a5garapp.activities.ARTestActivity
+import de.nanogiants.a5garapp.activities.ar.ARTestActivity
 import de.nanogiants.a5garapp.hms.Banner
 import de.nanogiants.a5garapp.hms.GestureEvent
 import de.nanogiants.a5garapp.hms.common.ArDemoRuntimeException
@@ -195,13 +194,13 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
           projectionMatrix
         )
         handleGestureEvent(arFrame, arCamera, projectionMatrix, viewMatrix)
-        val lightEstimate = arFrame.lightEstimate
-        var lightPixelIntensity = if (lightEstimate.state == NOT_VALID) {
-          1f
-        } else {
-          lightEstimate.pixelIntensity
-        }
-//      drawAllObjects(projectionMatrix, viewMatrix, lightPixelIntensity)
+//        val lightEstimate = arFrame.lightEstimate
+//        var lightPixelIntensity = if (lightEstimate.state == NOT_VALID) {
+//          1f
+//        } else {
+//          lightEstimate.pixelIntensity
+//        }
+//        drawAllObjects(projectionMatrix, viewMatrix, lightPixelIntensity)
         drawBannerList(arCamera.displayOrientedPose, projectionMatrix)
       } catch (e: ArDemoRuntimeException) {
         Timber.e("Exception on the ArDemoRuntimeException!")
@@ -315,11 +314,7 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
 //          return
 //        }
         val tap: MotionEvent = event.eventFirst
-        var hitResult: ARHitResult? = null
-        hitResult = hitTest4Result(arFrame, arCamera, tap)
-        if (hitResult == null) {
-          return
-        }
+        val hitResult: ARHitResult = hitTest4Result(arFrame, arCamera, tap) ?: return
         doWhenEventTypeSingleTap(hitResult)
       }
       else -> {
@@ -421,9 +416,9 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
       planePose.getTransformedAxis(1, 1.0f, normals, 0)
 
       // Calculate the distance based on projection.
-      return (cameraPose.tx() - planePose.tx()) * normals[0] // 0:x
-      +(cameraPose.ty() - planePose.ty()) * normals[1] // 1:y
-      +(cameraPose.tz() - planePose.tz()) * normals[2] // 2:z
+      return (cameraPose.tx() - planePose.tx()) * normals[0] + // 0:x
+          (cameraPose.ty() - planePose.ty()) * normals[1] + // 1:y
+          (cameraPose.tz() - planePose.tz()) * normals[2] // 2:z
     }
   }
 

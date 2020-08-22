@@ -1,7 +1,6 @@
 package de.nanogiants.a5garapp
 
 import android.app.Application
-import androidx.viewbinding.BuildConfig
 import dagger.hilt.android.HiltAndroidApp
 import timber.log.Timber
 

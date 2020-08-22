@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.MainActivity"
+    tools:context=".activities.main.MainActivity"
     >
 
   <com.google.android.material.appbar.AppBarLayout
@@ -26,8 +26,8 @@
   <androidx.constraintlayout.widget.ConstraintLayout
       android:layout_width="match_parent"
       android:layout_height="match_parent"
-      android:paddingStart="16dp"
       android:paddingEnd="16dp"
+      android:paddingStart="16dp"
       app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
       >
 
@@ -57,6 +57,28 @@
         android:text="TEST GPS"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/start_map_test"
+        />
+    <Button
+        android:id="@+id/backend_pois"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="Loading backend data..."
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/start_location_test"
+        />
+    <Button
+        android:id="@+id/backend_tags"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:enabled="false"
+        android:gravity="center"
+        android:padding="16dp"
+        android:text="Loading backend data..."
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/backend_pois"
         />
 
   </androidx.constraintlayout.widget.ConstraintLayout>
