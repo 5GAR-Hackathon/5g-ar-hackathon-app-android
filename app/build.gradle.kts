@@ -23,7 +23,6 @@ android {
     getByName("release") {
       isShrinkResources = false
       isMinifyEnabled = false
-      proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
     }
   }
   sourceSets {
@@ -70,9 +69,9 @@ dependencies {
 
   // Misc
   implementation("com.jakewharton.timber:timber:4.7.1")
-  implementation("com.squareup.moshi:moshi:1.9.3")
 
   // Web
+  implementation("com.squareup.moshi:moshi:1.9.3")
   kapt("com.squareup.moshi:moshi-kotlin-codegen:1.9.3")
   implementation("com.squareup.okhttp3:okhttp:4.8.1")
   implementation("com.squareup.okhttp3:logging-interceptor:4.8.1")
