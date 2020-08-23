@@ -15,11 +15,13 @@ import de.nanogiants.a5garapp.controllers.PermissionController
 import de.nanogiants.a5garapp.databinding.ActivityMainBinding
 import de.nanogiants.a5garapp.model.datastore.POIDatastore
 import de.nanogiants.a5garapp.model.datastore.TagDatastore
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.flow.cancellable
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @SuppressLint("SetTextI18n")
@@ -50,7 +52,7 @@ class MainActivity : BaseActivity() {
       }, onDenied = {})
     }
 
-    binding.startArTest.setOnClickListener {
+    binding.startMapTest.setOnClickListener {
       permissionController.requestPermissions(ACCESS_FINE_LOCATION, onGranted = {
         startActivity(Intent(this, MapActivity::class.java))
       }, onDenied = {})
@@ -71,14 +73,16 @@ class MainActivity : BaseActivity() {
     super.onResume()
     lifecycleScope.launch {
       try {
-        val pois = poiDatastore.getAllPOIs()
-        binding.backendPois.text = "POIs: ${pois.map { it.name }.joinToString()}"
+        withContext(Dispatchers.IO) { poiDatastore.getAllPOIs() }.let {
+          binding.backendPois.text = "POIs: ${it.joinToString { poi -> poi.name }}"
+        }
       } catch (e: Exception) {
         binding.backendPois.text = "Error loading data"
       }
       try {
-        val tags = tagDatastore.getAllTags()
-        binding.backendTags.text = "Tags: ${tags.map { it.name }.joinToString()}"
+        withContext(Dispatchers.IO) { tagDatastore.getAllTags() }.let {
+          binding.backendTags.text = "Tags: ${it.joinToString { tag -> tag.name }}"
+        }
       } catch (e: Exception) {
         binding.backendTags.text = "Error loading data"
       }
