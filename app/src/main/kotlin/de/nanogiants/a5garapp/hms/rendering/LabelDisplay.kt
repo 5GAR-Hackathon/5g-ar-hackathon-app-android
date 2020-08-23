@@ -33,6 +33,7 @@ import java.nio.ByteBuffer
 import java.nio.ByteOrder
 import java.util.ArrayList
 import java.util.Comparator
+import kotlin.math.abs
 
 /**
  * This class demonstrates how to use ARPlane, including how to obtain the center point of a plane.
@@ -288,7 +289,7 @@ class LabelDisplay {
       planeAngleUvMatrix[3] = scaleV
       var idx = plane.label.ordinal
       Timber.d("Plane getLabel:$idx")
-      idx = Math.abs(idx)
+      idx = abs(idx)
       GLES20.glActiveTexture(GLES20.GL_TEXTURE0 + idx)
       GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, textures[idx])
       GLES20.glUniform1i(glTexture, idx)

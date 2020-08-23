@@ -16,6 +16,7 @@
 package de.nanogiants.a5garapp.hms.common
 
 import android.opengl.Matrix
+import kotlin.math.sqrt
 
 /**
  * Matrix utility class.
@@ -54,7 +55,7 @@ object MatrixUtil {
    */
   fun normalizeVec3(vector: FloatArray) {
     // This data has three dimensions(0,1,2)
-    val length = 1.0f / Math.sqrt(vector[0] * vector[0] + vector[1] * vector[1] + (vector[2] * vector[2]).toDouble())
+    val length = 1.0f / sqrt(vector[0] * vector[0] + vector[1] * vector[1] + (vector[2] * vector[2]).toDouble())
       .toFloat()
     vector[0] *= length
     vector[1] *= length

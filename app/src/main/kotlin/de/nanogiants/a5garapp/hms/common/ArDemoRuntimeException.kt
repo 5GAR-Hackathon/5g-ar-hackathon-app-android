@@ -22,18 +22,19 @@ package de.nanogiants.a5garapp.hms.common
  * @author HW
  * @since 2020-03-25
  */
+@Suppress("unused")
 class ArDemoRuntimeException : RuntimeException {
   /**
    * Constructor.
    */
-  constructor() : super() {}
+  constructor() : super()
 
   /**
    * Constructor.
    *
    * @param message message
    */
-  constructor(message: String?) : super(message) {}
+  constructor(message: String?) : super(message)
 
   /**
    * Constructor.
@@ -41,5 +42,5 @@ class ArDemoRuntimeException : RuntimeException {
    * @param message message
    * @param cause cause
    */
-  constructor(message: String?, cause: Throwable?) : super(message, cause) {}
+  constructor(message: String?, cause: Throwable?) : super(message, cause)
 }

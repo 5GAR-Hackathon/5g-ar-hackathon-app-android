@@ -21,7 +21,6 @@ import android.graphics.BitmapFactory
 import android.graphics.Matrix
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView.Renderer
-import android.util.Log
 import android.view.MotionEvent
 import android.view.View.MeasureSpec
 import android.widget.ImageView
@@ -187,8 +186,8 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
             break
           }
         }
-        val planes =
-          it.getAllTrackables(ARPlane::class.java).filter { it.label == ARPlane.SemanticPlaneLabel.PLANE_WALL }
+        val planes = it.getAllTrackables(ARPlane::class.java)
+          .filter { item -> item.label == ARPlane.SemanticPlaneLabel.PLANE_WALL }
         mLabelDisplay.onDrawFrame(
           planes, arCamera.displayOrientedPose,
           projectionMatrix
@@ -318,7 +317,7 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
         doWhenEventTypeSingleTap(hitResult)
       }
       else -> {
-        Log.e(TAG, "Unknown motion event type, and do nothing.")
+        Timber.e("Unknown motion event type, and do nothing.")
       }
     }
   }
@@ -344,19 +343,22 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
 //      mVirtualObjects[0].getAnchor().detach()
 //      mVirtualObjects.removeAt(0)
 //    }
-    val currentTrackable = hitResult.trackable
-    if (currentTrackable is ARPoint) {
-      // TODO: 16.08.2020
-//      mVirtualObjects.add(VirtualObject(hitResult.createAnchor(), BLUE_COLORS))
-    } else if (currentTrackable is ARPlane) {
-      if (bannerList.size == 1) return
-      val bitmap = BitmapFactory.decodeResource(mActivity.resources, R.drawable.dickbutt)
-      bitmap.rotate(180f)
-      bannerList.add(Banner(hitResult.createAnchor(), bitmap))
-      // TODO: 16.08.2020
-//      mVirtualObjects.add(VirtualObject(hitResult.createAnchor(), GREEN_COLORS))
-    } else {
-      Log.i(TAG, "Hit result is not plane or point.")
+    when (hitResult.trackable) {
+      is ARPoint -> {
+        // TODO: 16.08.2020
+//        mVirtualObjects.add(VirtualObject(hitResult.createAnchor(), BLUE_COLORS))
+      }
+      is ARPlane -> {
+        if (bannerList.size == 1) return
+        val bitmap = BitmapFactory.decodeResource(mActivity.resources, R.drawable.dickbutt)
+        bitmap.rotate(180f)
+        bannerList.add(Banner(hitResult.createAnchor(), bitmap))
+        // TODO: 16.08.2020
+//        mVirtualObjects.add(VirtualObject(hitResult.createAnchor(), GREEN_COLORS))
+      }
+      else -> {
+        Timber.i("Hit result is not plane or point.")
+      }
     }
   }
 
@@ -391,7 +393,6 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
   }
 
   companion object {
-    private val TAG = WorldRenderManager::class.java.simpleName
     private const val PROJ_MATRIX_OFFSET = 0
     private const val PROJ_MATRIX_NEAR = 0.1f
     private const val PROJ_MATRIX_FAR = 100.0f
