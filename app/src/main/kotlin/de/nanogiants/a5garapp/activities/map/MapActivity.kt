@@ -15,8 +15,8 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
-    setContentView(R.layout.activity_main)
-    MapsInitializer.setApiKey("API_KEY") // TODO replace with api_key field value in agconnect-services.json
+    setContentView(R.layout.activity_map)
+    MapsInitializer.setApiKey("CgB6e3x9gfqxB02ElADVb3qDLuH58sBFXY8KZPSgdV6zGn1c7LI/EHbu9fXDxtLTdwpSOHQGzaiv9mcrcJ1K9iaC")
     binding.mapView.onCreate(savedInstanceState?.getBundle(MAPVIEW_BUNDLE_KEY))
     binding.mapView.getMapAsync(this)
   }
