@@ -1,6 +1,8 @@
 package de.nanogiants.a5garapp.activities.dashboard
 
 import android.content.Intent
+import android.view.View
+import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
@@ -17,6 +19,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
 import javax.inject.Inject
+
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
@@ -66,12 +69,18 @@ class DashboardActivity : BaseActivity() {
     }
   }
 
-  private fun onPOIClicked(poi: POI) {
+  private fun onPOIClicked(poi: POI, sharedElement: View) {
     Timber.d("Clicked $poi")
 
     val intent = Intent(this, POIDetailActivity::class.java)
     intent.putExtra("POI", poi)
 
-    startActivity(intent)
+    val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+      this@DashboardActivity,
+      sharedElement,
+      "poiBackgroundImage"
+    )
+
+    startActivity(intent, options.toBundle())
   }
 }

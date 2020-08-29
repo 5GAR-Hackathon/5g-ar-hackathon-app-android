@@ -16,10 +16,11 @@ class DashboardPOIViewholder(val viewBinding: ItemDashboardPoiBinding) :
   RecyclerView.ViewHolder(viewBinding.root) {
   fun bind(item: POI) {
     viewBinding.nameTextView.text = item.name
-    viewBinding.tagsTextView.text = item.tags.map { it.name.capitalize(Locale.getDefault()) }.joinToString(", ")
+    viewBinding.tagsTextView.text =
+      item.tags.map { it.name.capitalize(Locale.getDefault()) }.joinToString(", ")
 
     Glide.with(viewBinding.backgroundImageView)
-      .load("https://www.aekno.de/fileadmin/_processed_/1/6/csm_ks-duesseldorf-01_a8b7d2779a.jpg")
+      .load(if (item.imageUrls.isEmpty()) "https://www.aekno.de/fileadmin/_processed_/1/6/csm_ks-duesseldorf-01_a8b7d2779a.jpg" else item.imageUrls[0])
       .centerCrop()
       .into(viewBinding.backgroundImageView)
   }

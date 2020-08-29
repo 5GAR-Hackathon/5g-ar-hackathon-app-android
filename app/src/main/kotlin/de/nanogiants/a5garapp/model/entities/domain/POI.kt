@@ -6,5 +6,6 @@ data class POI(
   val id: Int,
   val name: String,
   val tags: List<Tag>,
-  val coordinates: Coordinates
+  val coordinates: Coordinates,
+  val imageUrls: List<String>
 ) : Serializable
