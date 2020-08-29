@@ -1,13 +1,16 @@
 package de.nanogiants.a5garapp.activities.dashboard
 
+import android.content.Intent
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import dagger.hilt.android.AndroidEntryPoint
 import de.nanogiants.a5garapp.activities.dashboard.adapters.DashboardPOIAdapter
+import de.nanogiants.a5garapp.activities.poidetail.POIDetailActivity
 import de.nanogiants.a5garapp.base.BaseActivity
 import de.nanogiants.a5garapp.databinding.ActivityDashboardBinding
 import de.nanogiants.a5garapp.model.datastore.POIDatastore
+import de.nanogiants.a5garapp.model.entities.domain.POI
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
@@ -34,8 +37,10 @@ class DashboardActivity : BaseActivity() {
   // lateinit var tagDatastore: TagDatastore
 
   override fun initView() {
-    poiAdapter = DashboardPOIAdapter()
     poiLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+
+    poiAdapter = DashboardPOIAdapter()
+    poiAdapter.onPOIClicked = this::onPOIClicked
 
     binding.dashboardPoiRecyclerview.apply {
       layoutManager = poiLayoutManager
@@ -59,5 +64,14 @@ class DashboardActivity : BaseActivity() {
         Timber.d("There was an error $e")
       }
     }
+  }
+
+  private fun onPOIClicked(poi: POI) {
+    Timber.d("Clicked $poi")
+
+    val intent = Intent(this, POIDetailActivity::class.java)
+    intent.putExtra("POI", poi)
+
+    startActivity(intent)
   }
 }
