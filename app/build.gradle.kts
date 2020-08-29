@@ -19,12 +19,12 @@ android {
     buildConfigField("String", "BASE_URL", "\"https://5gar.vercel.app/api/\"")
   }
   signingConfigs {
-    getByName("debug") {
-      storeFile = file("../debug.keystore")
-      storePassword = findProperty("5gar-storepass") as String?
-      keyAlias = findProperty("5gar-keyalias") as String?
-      keyPassword = findProperty("5gar-keypass") as String?
-    }
+    //getByName("debug") {
+    //  storeFile = file("../debug.keystore")
+    //  storePassword = findProperty("5gar-storepass") as String?
+    //  keyAlias = findProperty("5gar-keyalias") as String?
+    //  keyPassword = findProperty("5gar-keypass") as String?
+    //}
   }
   buildTypes {
     getByName("release") {
@@ -100,4 +100,4 @@ kapt {
   correctErrorTypes = true
 }
 
- apply(plugin = "com.huawei.agconnect")
+apply(plugin = "com.huawei.agconnect")
