@@ -4,6 +4,7 @@ plugins {
   kotlin("kapt")
   id("dagger.hilt.android.plugin")
   id("com.huawei.agconnect")
+  id("kotlin-android")
 }
 
 android {
@@ -73,12 +74,15 @@ dependencies {
 
   // UI
   implementation("com.google.android.material:material:1.3.0-alpha02")
+  implementation("com.github.bumptech.glide:glide:4.9.0")
+  kapt("com.github.bumptech.glide:compiler:4.9.0")
 
   // Misc
   implementation("com.jakewharton.timber:timber:4.7.1")
 
   // Web
   implementation("com.squareup.moshi:moshi:1.9.3")
+  implementation("org.jetbrains.kotlin:kotlin-stdlib:${rootProject.extra["kotlin_version"]}")
   kapt("com.squareup.moshi:moshi-kotlin-codegen:1.9.3")
   implementation("com.squareup.okhttp3:okhttp:4.8.1")
   implementation("com.squareup.okhttp3:logging-interceptor:4.8.1")

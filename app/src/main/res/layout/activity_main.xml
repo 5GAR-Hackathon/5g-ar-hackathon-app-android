@@ -59,6 +59,15 @@
         app:layout_constraintTop_toBottomOf="@id/start_map_test"
         />
     <Button
+        android:id="@+id/start_dashboard"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="Dashboard"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/start_location_test"
+        />
+    <Button
         android:id="@+id/backend_pois"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -67,7 +76,7 @@
         android:padding="16dp"
         android:text="Loading backend data..."
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/start_location_test"
+        app:layout_constraintTop_toBottomOf="@+id/start_dashboard"
         />
     <Button
         android:id="@+id/backend_tags"

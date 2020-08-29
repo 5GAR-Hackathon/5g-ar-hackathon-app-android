@@ -8,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import de.nanogiants.a5garapp.R
 import de.nanogiants.a5garapp.activities.ar.ARTestActivity
+import de.nanogiants.a5garapp.activities.dashboard.DashboardActivity
 import de.nanogiants.a5garapp.activities.map.MapActivity
 import de.nanogiants.a5garapp.base.BaseActivity
 import de.nanogiants.a5garapp.controllers.LocationController
@@ -66,6 +67,10 @@ class MainActivity : BaseActivity() {
             .collect { binding.startLocationTest.text = "Lat ${it.latitude}/Long ${it.longitude}" }
         }
       }, onDenied = {})
+    }
+
+    binding.startDashboard.setOnClickListener {
+      startActivity(Intent(this, DashboardActivity::class.java))
     }
   }
 
