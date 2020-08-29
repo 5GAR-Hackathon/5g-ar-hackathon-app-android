@@ -6,14 +6,64 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-  <TextView
-      android:id="@+id/textView"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="TextView"
+  <androidx.cardview.widget.CardView
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_marginBottom="16dp"
+      android:layout_marginEnd="16dp"
+      android:layout_marginStart="16dp"
+      android:layout_marginTop="16dp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      />
+      app:cardElevation="12dp"
+      app:cardCornerRadius="16dp"
+      >
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+      <ImageView
+          android:id="@+id/backgroundImageView"
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          android:adjustViewBounds="true"
+          android:scaleType="centerCrop"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="1.0"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:layout_constraintVertical_bias="1.0"
+          tools:srcCompat="@tools:sample/backgrounds/scenic"
+          app:srcCompat="@drawable/ic_launcher_background"
+          />
+      <TextView
+          android:id="@+id/nameTextView"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="16dp"
+          android:layout_marginEnd="32dp"
+          android:layout_marginStart="32dp"
+          android:text="TextView"
+          android:textColor="#FFFFFF"
+          android:textSize="36sp"
+          app:layout_constraintBottom_toTopOf="@+id/tagsTextView"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          />
+      <TextView
+          android:id="@+id/tagsTextView"
+          android:layout_width="0dp"
+          android:layout_height="wrap_content"
+          android:layout_marginBottom="64dp"
+          android:text="TextView"
+          android:textColor="#FFFFFF"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintStart_toStartOf="@+id/nameTextView"
+          />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+  </androidx.cardview.widget.CardView>
 </androidx.constraintlayout.widget.ConstraintLayout>

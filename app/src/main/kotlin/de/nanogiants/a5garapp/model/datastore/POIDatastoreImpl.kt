@@ -12,18 +12,25 @@ class POIDatastoreImpl @Inject constructor() : POIDatastore {
   lateinit var poiDatasource: POIDatasource
 
   @Inject
+  lateinit var tagDatastore: TagDatastore
+
+  @Inject
   lateinit var poiWebTransformer: POIWebTransformer
 
   override suspend fun getPOIsbyLocation(coordinates: Coordinates, distance: Int): List<POI> {
+    val tags = this.fetchTags()
     return poiDatasource.getPOIsbyLocation("${coordinates.lat},${coordinates.lng}", distance)
-      .map { poiWebTransformer.toModel(it) }
+      .map { poiWebTransformer.toModel(it, tags) }
   }
 
   override suspend fun getAllPOIs(): List<POI> {
-    return poiDatasource.getAllPOIs().map { poiWebTransformer.toModel(it) }
+    val tags = this.fetchTags()
+    return poiDatasource.getAllPOIs().map { poiWebTransformer.toModel(it, tags) }
   }
 
   override suspend fun getPOIByID(id: Int): POI {
-    return poiWebTransformer.toModel(poiDatasource.getPOIbyID(id))
+    return poiWebTransformer.toModel(poiDatasource.getPOIbyID(id), this.fetchTags())
   }
+
+  internal suspend fun fetchTags() = tagDatastore.getAllTags()
 }
