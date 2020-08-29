@@ -2,6 +2,7 @@ package de.nanogiants.a5garapp.activities.dashboard
 
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.LinearSnapHelper
 import dagger.hilt.android.AndroidEntryPoint
 import de.nanogiants.a5garapp.activities.dashboard.adapters.DashboardPOIAdapter
 import de.nanogiants.a5garapp.base.BaseActivity
@@ -24,6 +25,8 @@ class DashboardActivity : BaseActivity() {
 
   lateinit var poiLayoutManager: LinearLayoutManager
 
+  lateinit var poiSnapHelper: LinearSnapHelper
+
   @Inject
   lateinit var poiDatastore: POIDatastore
 
@@ -38,6 +41,9 @@ class DashboardActivity : BaseActivity() {
       layoutManager = poiLayoutManager
       adapter = poiAdapter
     }
+
+    poiSnapHelper = LinearSnapHelper()
+    poiSnapHelper.attachToRecyclerView(binding.dashboardPoiRecyclerview)
   }
 
   override fun onResume() {
