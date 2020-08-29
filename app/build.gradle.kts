@@ -57,6 +57,7 @@ repositories {
   mavenCentral()
   jcenter()
   maven("https://developer.huawei.com/repo/")
+  maven("https://jitpack.io")
 }
 
 dependencies {
@@ -77,6 +78,7 @@ dependencies {
   implementation("com.github.bumptech.glide:glide:4.9.0")
   kapt("com.github.bumptech.glide:compiler:4.9.0")
   implementation("me.zhanghai.android.materialratingbar:library:1.4.0")
+  implementation("com.github.stfalcon:stfalcon-imageviewer:1.0.1")
 
   // Misc
   implementation("com.jakewharton.timber:timber:4.7.1")

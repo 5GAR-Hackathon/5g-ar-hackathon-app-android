@@ -4,6 +4,7 @@ buildscript {
     google()
     gradlePluginPortal()
     mavenCentral()
+    maven("https://jitpack.io")
     maven("http://developer.huawei.com/repo/")
   }
   dependencies {

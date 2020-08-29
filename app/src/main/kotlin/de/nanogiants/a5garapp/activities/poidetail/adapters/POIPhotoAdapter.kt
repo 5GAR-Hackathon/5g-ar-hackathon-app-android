@@ -7,6 +7,7 @@ package de.nanogiants.a5garapp.activities.poidetail.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import de.nanogiants.a5garapp.databinding.ItemPhotoBinding
 
@@ -14,7 +15,7 @@ import de.nanogiants.a5garapp.databinding.ItemPhotoBinding
 class POIPhotoAdapter : RecyclerView.Adapter<POIPhotoViewHolder>() {
 
   private var items: MutableList<String> = mutableListOf()
-  var onPhotoClicked: ((String) -> Unit) = {}
+  var onPhotoClicked: ((String, Int, ImageView) -> Unit) = { s: String, i: Int, imageView: ImageView -> }
 
   override fun getItemCount() = items.size
 
@@ -34,7 +35,7 @@ class POIPhotoAdapter : RecyclerView.Adapter<POIPhotoViewHolder>() {
   override fun onBindViewHolder(holder: POIPhotoViewHolder, position: Int) {
     holder.bind(items.get(position))
     holder.viewBinding.rootView.setOnClickListener {
-      onPhotoClicked(items.get(position))
+      onPhotoClicked(items.get(position), position, holder.viewBinding.imageView)
     }
   }
 }

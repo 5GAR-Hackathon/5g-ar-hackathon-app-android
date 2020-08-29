@@ -1,7 +1,10 @@
 package de.nanogiants.a5garapp.activities.poidetail
 
+import android.media.Image
+import android.widget.ImageView
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
+import com.stfalcon.imageviewer.StfalconImageViewer
 import de.nanogiants.a5garapp.activities.poidetail.adapters.POIPhotoAdapter
 
 import de.nanogiants.a5garapp.base.BaseActivity
@@ -34,7 +37,18 @@ class POIDetailActivity : BaseActivity() {
 
     poiPhotoAdapter = POIPhotoAdapter()
     poiPhotoAdapter.addAll(poi.imageUrls)
-    poiPhotoAdapter.onPhotoClicked = { Timber.d("CLicked $it") }
+    poiPhotoAdapter.onPhotoClicked = { imageUrl: String, index: Int, imageView: ImageView, ->
+      StfalconImageViewer.Builder<String>(this@POIDetailActivity, poi.imageUrls) { view, image ->
+        Glide.with(view)
+          .load(image)
+          .centerCrop()
+          .into(view)
+      }
+        .withTransitionFrom(imageView)
+        .withHiddenStatusBar(false)
+        .withStartPosition(index)
+        .show()
+    }
 
     binding.photoRecyclerView.apply {
       layoutManager = poiPhotoLayoutManager
