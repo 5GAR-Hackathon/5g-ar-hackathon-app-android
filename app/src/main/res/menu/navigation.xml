@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+  <item
+      android:id="@+id/places"
+      android:icon="@drawable/ic_home_outline"
+      android:title="Places" />
+  <item
+      android:id="@+id/my_tours"
+      android:icon="@drawable/ic_compass_outline"
+      android:title="My Tours" />
+  <item
+      android:id="@+id/favorites"
+      android:icon="@drawable/ic_bookmark_outline"
+      android:title="Favorites" />
+  <item
+      android:id="@+id/settings"
+      android:icon="@drawable/ic_settings_2_outline"
+      android:title="Settings" />
+</menu>
