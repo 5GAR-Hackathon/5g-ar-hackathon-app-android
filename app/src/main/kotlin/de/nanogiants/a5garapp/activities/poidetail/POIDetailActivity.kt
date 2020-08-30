@@ -1,14 +1,10 @@
 package de.nanogiants.a5garapp.activities.poidetail
 
-import android.content.res.ColorStateList
-import android.media.Image
 import android.os.Bundle
-import android.text.Html
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -17,18 +13,16 @@ import com.google.android.material.chip.Chip
 import com.stfalcon.imageviewer.StfalconImageViewer
 import dagger.hilt.android.AndroidEntryPoint
 import de.nanogiants.a5garapp.R
+import de.nanogiants.a5garapp.R.id
 import de.nanogiants.a5garapp.activities.poidetail.adapters.POIPhotoAdapter
 import de.nanogiants.a5garapp.activities.poidetail.adapters.POIReviewAdapter
-
 import de.nanogiants.a5garapp.base.BaseActivity
+import de.nanogiants.a5garapp.controllers.SharedPreferencesController
 import de.nanogiants.a5garapp.databinding.ActivityPoiDetailBinding
 import de.nanogiants.a5garapp.model.datastore.ReviewDatastore
 import de.nanogiants.a5garapp.model.entities.domain.POI
-import de.nanogiants.a5garapp.utils.JSONReader
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 import timber.log.Timber
 import java.util.Locale
 import javax.inject.Inject
@@ -50,13 +44,21 @@ class POIDetailActivity : BaseActivity() {
   @Inject
   lateinit var reviewDatastore: ReviewDatastore
 
+  @Inject
+  lateinit var sharedPreferencesController: SharedPreferencesController
+
+  lateinit var poi: POI
+
+  lateinit
+  var optionsMenu: Menu
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setSupportActionBar(binding.toolbar)
   }
 
   override fun initView() {
-    val poi = intent.getSerializableExtra("POI") as POI
+    poi = intent.getSerializableExtra("POI") as POI
     Timber.d("New activity $poi")
 
     binding.toolbar.title = poi.name
@@ -119,6 +121,10 @@ class POIDetailActivity : BaseActivity() {
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
     val inflater = menuInflater
     inflater.inflate(R.menu.poi_detail, menu)
+
+    optionsMenu = menu
+    updateBookmarkOptionsIcon()
+
     return true
   }
 
@@ -126,13 +132,25 @@ class POIDetailActivity : BaseActivity() {
     return when (item.itemId) {
       R.id.add_to_tour -> {
         Toast.makeText(this, "click on tour", Toast.LENGTH_LONG).show()
+
         true
       }
       R.id.bookmark -> {
         Toast.makeText(this, "click on bookmark", Toast.LENGTH_LONG).show()
+        lifecycleScope.launch {
+          sharedPreferencesController.bookmarkPOI(poi)
+          updateBookmarkOptionsIcon()
+        }
         return true
       }
       else -> super.onOptionsItemSelected(item)
+    }
+  }
+
+  private fun updateBookmarkOptionsIcon() {
+    val menuItem: MenuItem = optionsMenu.findItem(R.id.bookmark)
+    lifecycleScope.launch {
+      menuItem.setIcon(if (sharedPreferencesController.isPOIBookmarked(poi)) R.drawable.ic_bookmark_white else R.drawable.ic_bookmark_white_outline)
     }
   }
 }
