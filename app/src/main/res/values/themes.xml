@@ -31,4 +31,10 @@
     <item name="android:homeAsUpIndicator">@drawable/baseline_arrow_back_24</item>
   </style>
 
+  <style name="TagChipTextStyle">
+    <item name="android:textSize">10sp</item>
+    <item name="android:textColor">@color/primary</item>
+    <item name="android:textStyle">bold</item>
+  </style>
+
 </resources>

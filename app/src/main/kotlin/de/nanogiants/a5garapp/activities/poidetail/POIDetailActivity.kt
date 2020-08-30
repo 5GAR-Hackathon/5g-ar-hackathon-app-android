@@ -1,14 +1,18 @@
 package de.nanogiants.a5garapp.activities.poidetail
 
+import android.content.res.ColorStateList
 import android.media.Image
 import android.text.Html
 import android.widget.ImageView
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
+import com.google.android.material.chip.Chip
 import com.stfalcon.imageviewer.StfalconImageViewer
 import dagger.hilt.android.AndroidEntryPoint
+import de.nanogiants.a5garapp.R
 import de.nanogiants.a5garapp.activities.poidetail.adapters.POIPhotoAdapter
 import de.nanogiants.a5garapp.activities.poidetail.adapters.POIReviewAdapter
 
@@ -22,6 +26,7 @@ import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import timber.log.Timber
+import java.util.Locale
 import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
@@ -88,5 +93,17 @@ class POIDetailActivity : BaseActivity() {
     binding.reviewLabelTextView.text = "Reviews (${poi.reviews.size})"
     binding.ratingTextView.text = "${poi.reviews.size} Reviews"
     binding.poiRatingBar.rating = poi.rating
+
+    poi.tags.forEach {
+      val chip = Chip(this@POIDetailActivity)
+      chip.text = it.name.capitalize(Locale.getDefault())
+      chip.setTextAppearanceResource(R.style.TagChipTextStyle)
+      chip.setChipBackgroundColorResource(R.color.white)
+
+      chip.isClickable = false
+      chip.isCheckable = false
+
+      binding.tagChipGroup.addView(chip)
+    }
   }
 }
