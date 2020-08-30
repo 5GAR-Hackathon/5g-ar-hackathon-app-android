@@ -4,12 +4,13 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
+import android.widget.ImageView.ScaleType
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.bumptech.glide.Glide
+import coil.load
 import com.google.android.material.chip.Chip
 import com.stfalcon.imageviewer.StfalconImageViewer
 import dagger.hilt.android.AndroidEntryPoint
@@ -66,21 +67,22 @@ class POIDetailActivity : BaseActivity() {
     binding.poiRatingBar.rating = 4f
     binding.descriptionTextView.text = poi.description
 
-    Glide.with(binding.poiBackgroundImageView)
-      .load(if (poi.imageUrls.isEmpty()) "https://www.aekno.de/fileadmin/_processed_/1/6/csm_ks-duesseldorf-01_a8b7d2779a.jpg" else poi.imageUrls[0])
-      .centerCrop()
-      .into(binding.poiBackgroundImageView)
+    binding.poiBackgroundImageView.load(
+      if (poi.imageUrls.isEmpty()) {
+        "https://www.aekno.de/fileadmin/_processed_/1/6/csm_ks-duesseldorf-01_a8b7d2779a.jpg"
+      } else {
+        poi.imageUrls[0]
+      }
+    )
 
     poiPhotoLayoutManager = GridLayoutManager(this, 4)
 
     poiPhotoAdapter = POIPhotoAdapter()
     poiPhotoAdapter.addAll(poi.imageUrls)
-    poiPhotoAdapter.onPhotoClicked = { imageUrl: String, index: Int, imageView: ImageView, ->
-      StfalconImageViewer.Builder<String>(this@POIDetailActivity, poi.imageUrls) { view, image ->
-        Glide.with(view)
-          .load(image)
-          .centerInside()
-          .into(view)
+    poiPhotoAdapter.onPhotoClicked = { imageUrl: String, index: Int, imageView: ImageView ->
+      StfalconImageViewer.Builder(this@POIDetailActivity, poi.imageUrls) { view, image ->
+        view.scaleType = ScaleType.CENTER_INSIDE
+        view.load(image)
       }
         .withTransitionFrom(imageView)
         .withHiddenStatusBar(false)

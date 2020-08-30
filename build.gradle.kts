@@ -1,10 +1,8 @@
 buildscript {
-  val kotlin_version by extra("1.3.72")
   repositories {
     google()
     gradlePluginPortal()
     mavenCentral()
-    maven("https://jitpack.io")
     maven("http://developer.huawei.com/repo/")
   }
   dependencies {

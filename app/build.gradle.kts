@@ -4,7 +4,6 @@ plugins {
   kotlin("kapt")
   id("dagger.hilt.android.plugin")
   id("com.huawei.agconnect")
-  id("kotlin-android")
 }
 
 android {
@@ -22,9 +21,9 @@ android {
   signingConfigs {
     getByName("debug") {
       storeFile = file("../debug.keystore")
-      storePassword = findProperty("5gar-storepass") as String?
-      keyAlias = findProperty("5gar-keyalias") as String?
-      keyPassword = findProperty("5gar-keypass") as String?
+      storePassword = findProperty("5gar-storepass") as String? ?: "android"
+      keyAlias = findProperty("5gar-keyalias") as String? ?: "androiddebug"
+      keyPassword = findProperty("5gar-keypass") as String? ?: "android"
     }
   }
   buildTypes {
@@ -42,6 +41,7 @@ android {
   }
   kotlinOptions {
     jvmTarget = JavaVersion.VERSION_1_8.toString()
+    freeCompilerArgs = listOf("-Xjvm-default=all")
   }
   buildFeatures {
     viewBinding = true
@@ -71,12 +71,11 @@ dependencies {
   implementation("androidx.fragment:fragment:1.3.0-alpha08")
   implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.0-alpha07")
   implementation("androidx.recyclerview:recyclerview:1.2.0-alpha05")
-  implementation("androidx.constraintlayout:constraintlayout:2.0.0")
+  implementation("androidx.constraintlayout:constraintlayout:2.0.1")
 
   // UI
   implementation("com.google.android.material:material:1.3.0-alpha02")
-  implementation("com.github.bumptech.glide:glide:4.9.0")
-  kapt("com.github.bumptech.glide:compiler:4.9.0")
+  implementation("io.coil-kt:coil:1.0.0-rc1")
   implementation("me.zhanghai.android.materialratingbar:library:1.4.0")
   implementation("com.github.stfalcon:stfalcon-imageviewer:1.0.1")
 
@@ -85,10 +84,8 @@ dependencies {
   implementation("io.github.serpro69:kotlin-faker:1.4.1")
 
   // Web
-  implementation("com.squareup.moshi:moshi:1.9.3")
-  implementation("com.squareup.moshi:moshi-kotlin:1.9.3")
-  implementation("org.jetbrains.kotlin:kotlin-stdlib:${rootProject.extra["kotlin_version"]}")
-  kapt("com.squareup.moshi:moshi-kotlin-codegen:1.9.3")
+  implementation("com.squareup.moshi:moshi:1.10.0")
+  kapt("com.squareup.moshi:moshi-kotlin-codegen:1.10.0")
   implementation("com.squareup.okhttp3:okhttp:4.8.1")
   implementation("com.squareup.okhttp3:logging-interceptor:4.8.1")
   implementation("com.squareup.retrofit2:retrofit:2.9.0")

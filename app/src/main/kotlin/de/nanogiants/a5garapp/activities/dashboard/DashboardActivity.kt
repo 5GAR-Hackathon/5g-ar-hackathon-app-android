@@ -6,7 +6,6 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
-import dagger.BindsOptionalOf
 import dagger.hilt.android.AndroidEntryPoint
 import de.nanogiants.a5garapp.activities.dashboard.adapters.DashboardPOIAdapter
 import de.nanogiants.a5garapp.activities.poidetail.POIDetailActivity
