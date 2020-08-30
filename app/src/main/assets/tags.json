@@ -1,0 +1,71 @@
+[
+  {
+    "id": 1,
+    "name": "restaurant"
+  },
+  {
+    "id": 2,
+    "name": "place"
+  },
+  {
+    "id": 3,
+    "name": "museum"
+  },
+  {
+    "id": 4,
+    "name": "art"
+  },
+  {
+    "id": 5,
+    "name": "concert"
+  },
+  {
+    "id": 6,
+    "name": "kiosk"
+  },
+  {
+    "id": 7,
+    "name": "bar"
+  },
+  {
+    "id": 8,
+    "name": "zoo"
+  },
+  {
+    "id": 9,
+    "name": "music"
+  },
+  {
+    "id": 10,
+    "name": "water"
+  },
+  {
+    "id": 11,
+    "name": "theater"
+  },
+  {
+    "id": 12,
+    "name": "startup"
+  },
+  {
+    "id": 13,
+    "name": "business"
+  },
+  {
+    "id": 14,
+    "name": "lookout"
+  },
+  {
+    "id": 15,
+    "name": "architecture"
+  },
+  {
+    "id": 16,
+    "name": "hotel"
+  },
+  {
+    "id": 17,
+    "name": "historic"
+  }
+
+]

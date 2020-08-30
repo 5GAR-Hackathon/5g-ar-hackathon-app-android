@@ -1,5 +1,6 @@
 package de.nanogiants.a5garapp.di
 
+import android.content.Context
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -67,8 +68,10 @@ object BackendStaticModule {
   }
 
   @Provides
-  fun providePOIDatasource(retrofit: Retrofit): POIDatasource = retrofit.create(POIDatasource::class.java)
+  fun providePOIDatasource(retrofit: Retrofit): POIDatasource =
+    retrofit.create(POIDatasource::class.java)
 
   @Provides
-  fun provideTagDatasource(retrofit: Retrofit): TagDatasource = retrofit.create(TagDatasource::class.java)
+  fun provideTagDatasource(retrofit: Retrofit): TagDatasource =
+    retrofit.create(TagDatasource::class.java)
 }

@@ -13,6 +13,7 @@ import de.nanogiants.a5garapp.base.BaseActivity
 import de.nanogiants.a5garapp.databinding.ActivityDashboardBinding
 import de.nanogiants.a5garapp.model.datastore.POIDatastore
 import de.nanogiants.a5garapp.model.entities.domain.POI
+import de.nanogiants.a5garapp.utils.JSONReader
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
@@ -59,12 +60,13 @@ class DashboardActivity : BaseActivity() {
 
     lifecycleScope.launch {
       try {
-        withContext(Dispatchers.IO) { poiDatastore.getAllPOIs() }.let {
+        withContext(Dispatchers.IO) { JSONReader.getPOIsFromAssets(this@DashboardActivity) }.let {
           Timber.d("Loaded all $it")
           poiAdapter.addAll(it)
         }
       } catch (e: Exception) {
         Timber.d("There was an error $e")
+        Timber.e(e)
       }
     }
   }

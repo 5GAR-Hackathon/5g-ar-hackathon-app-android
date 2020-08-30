@@ -1,6 +1,7 @@
 package de.nanogiants.a5garapp.activities.poidetail
 
 import android.media.Image
+import android.text.Html
 import android.widget.ImageView
 import androidx.recyclerview.widget.GridLayoutManager
 import com.bumptech.glide.Glide
@@ -27,6 +28,7 @@ class POIDetailActivity : BaseActivity() {
 
     binding.toolbar.title = poi.name
     binding.poiRatingBar.rating = 4f
+    binding.descriptionTextView.text = Html.fromHtml(poi.description)
 
     Glide.with(binding.poiBackgroundImageView)
       .load(if (poi.imageUrls.isEmpty()) "https://www.aekno.de/fileadmin/_processed_/1/6/csm_ks-duesseldorf-01_a8b7d2779a.jpg" else poi.imageUrls[0])

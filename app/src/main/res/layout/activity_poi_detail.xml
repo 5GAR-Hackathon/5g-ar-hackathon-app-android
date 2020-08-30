@@ -101,6 +101,8 @@
           app:layout_constraintStart_toEndOf="@+id/poiRatingBar"
           app:layout_constraintTop_toTopOf="@+id/poiRatingBar"
           />
+
+
       <TextView
           android:id="@+id/descriptionTextView"
           android:layout_width="0dp"
@@ -112,6 +114,7 @@
           android:textAppearance="@style/TextAppearance.AppCompat.Body1"
           android:textColor="#000000"
           app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintHorizontal_bias="0.0"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/poiRatingBar"
           />
