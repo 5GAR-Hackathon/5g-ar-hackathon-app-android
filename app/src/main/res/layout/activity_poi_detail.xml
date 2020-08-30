@@ -36,6 +36,13 @@
           tools:src="@tools:sample/backgrounds/scenic"
           />
 
+      <View
+          android:id="@+id/textView2"
+          android:layout_width="match_parent"
+          android:layout_height="match_parent"
+          android:background="@drawable/bg_toolbar_text_guard"
+          android:text="TextView"
+          />
       <com.google.android.material.appbar.MaterialToolbar
           android:id="@+id/toolbar"
           android:layout_width="match_parent"

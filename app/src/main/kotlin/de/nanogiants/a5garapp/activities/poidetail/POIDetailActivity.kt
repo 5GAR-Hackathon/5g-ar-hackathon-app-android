@@ -2,8 +2,12 @@ package de.nanogiants.a5garapp.activities.poidetail
 
 import android.content.res.ColorStateList
 import android.media.Image
+import android.os.Bundle
 import android.text.Html
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -45,6 +49,11 @@ class POIDetailActivity : BaseActivity() {
 
   @Inject
   lateinit var reviewDatastore: ReviewDatastore
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setSupportActionBar(binding.toolbar)
+  }
 
   override fun initView() {
     val poi = intent.getSerializableExtra("POI") as POI
@@ -104,6 +113,26 @@ class POIDetailActivity : BaseActivity() {
       chip.isCheckable = false
 
       binding.tagChipGroup.addView(chip)
+    }
+  }
+
+  override fun onCreateOptionsMenu(menu: Menu): Boolean {
+    val inflater = menuInflater
+    inflater.inflate(R.menu.poi_detail, menu)
+    return true
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    return when (item.itemId) {
+      R.id.add_to_tour -> {
+        Toast.makeText(this, "click on tour", Toast.LENGTH_LONG).show()
+        true
+      }
+      R.id.bookmark -> {
+        Toast.makeText(this, "click on bookmark", Toast.LENGTH_LONG).show()
+        return true
+      }
+      else -> super.onOptionsItemSelected(item)
     }
   }
 }
