@@ -19,7 +19,6 @@ import de.nanogiants.a5garapp.model.transformer.POIWebTransformerImpl
 import de.nanogiants.a5garapp.model.transformer.ReviewWebTransformerImpl
 import de.nanogiants.a5garapp.model.transformer.TagWebTransformerImpl
 import timber.log.Timber
-import java.lang.reflect.Type
 
 class JSONReader {
   companion object {
@@ -68,26 +67,18 @@ class JSONReader {
       return (adapter.fromJson(myjson) ?: listOf()).map { reviewTransformer.toModel(it) }
     }
 
-    @JvmStatic
     fun poiListToJSON(pois: List<POI>): String {
-      val moshi = Moshi.Builder()
-        .add(KotlinJsonAdapterFactory())
-        .build()
 
       val listType = Types.newParameterizedType(List::class.java, POI::class.java)
-      val adapter: JsonAdapter<List<POI>> = moshi.adapter(listType)
+      val adapter: JsonAdapter<List<POI>> = Moshi.Builder().build().adapter(listType)
 
       return adapter.toJson(pois)
     }
 
-    @JvmStatic
     fun jsonToPOIList(json: String): List<POI> {
-      val moshi = Moshi.Builder()
-        .add(KotlinJsonAdapterFactory())
-        .build()
 
       val listType = Types.newParameterizedType(List::class.java, POI::class.java)
-      val adapter: JsonAdapter<List<POI>> = moshi.adapter(listType)
+      val adapter: JsonAdapter<List<POI>> = Moshi.Builder().build().adapter(listType)
 
       return adapter.fromJson(json) ?: listOf()
     }
