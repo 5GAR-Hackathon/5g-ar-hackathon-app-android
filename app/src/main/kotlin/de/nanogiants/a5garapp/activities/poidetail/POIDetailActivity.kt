@@ -54,7 +54,7 @@ class POIDetailActivity : BaseActivity() {
       .centerCrop()
       .into(binding.poiBackgroundImageView)
 
-    poiPhotoLayoutManager = GridLayoutManager(this, 3)
+    poiPhotoLayoutManager = GridLayoutManager(this, 4)
 
     poiPhotoAdapter = POIPhotoAdapter()
     poiPhotoAdapter.addAll(poi.imageUrls)
