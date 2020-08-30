@@ -28,7 +28,7 @@ class POIDetailActivity : BaseActivity() {
 
     binding.toolbar.title = poi.name
     binding.poiRatingBar.rating = 4f
-    binding.descriptionTextView.text = Html.fromHtml(poi.description)
+    binding.descriptionTextView.text = poi.description
 
     Glide.with(binding.poiBackgroundImageView)
       .load(if (poi.imageUrls.isEmpty()) "https://www.aekno.de/fileadmin/_processed_/1/6/csm_ks-duesseldorf-01_a8b7d2779a.jpg" else poi.imageUrls[0])
@@ -43,7 +43,7 @@ class POIDetailActivity : BaseActivity() {
       StfalconImageViewer.Builder<String>(this@POIDetailActivity, poi.imageUrls) { view, image ->
         Glide.with(view)
           .load(image)
-          .centerCrop()
+          .centerInside()
           .into(view)
       }
         .withTransitionFrom(imageView)
