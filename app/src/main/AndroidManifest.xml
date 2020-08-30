@@ -16,7 +16,8 @@
       android:theme="@style/Theme.5GARApp">
     <activity
         android:name=".activities.poidetail.POIDetailActivity"
-        android:theme="@style/Theme.5GARApp.NoActionBar" />
+        android:theme="@style/Theme.5GARApp.TranslucentActionBar" />
+
     <activity android:name=".activities.dashboard.DashboardActivity" />
     <activity
         android:name=".activities.main.MainActivity"

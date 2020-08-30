@@ -5,6 +5,7 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -131,17 +132,18 @@ class POIDetailActivity : BaseActivity() {
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
     return when (item.itemId) {
       R.id.add_to_tour -> {
-        Toast.makeText(this, "click on tour", Toast.LENGTH_LONG).show()
-
         true
       }
       R.id.bookmark -> {
-        Toast.makeText(this, "click on bookmark", Toast.LENGTH_LONG).show()
         lifecycleScope.launch {
           sharedPreferencesController.bookmarkPOI(poi)
           updateBookmarkOptionsIcon()
         }
         return true
+      }
+      android.R.id.home -> {
+        ActivityCompat.finishAfterTransition(this);
+        true
       }
       else -> super.onOptionsItemSelected(item)
     }
