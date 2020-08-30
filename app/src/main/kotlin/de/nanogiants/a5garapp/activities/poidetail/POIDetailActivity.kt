@@ -81,7 +81,7 @@ class POIDetailActivity : BaseActivity() {
     poiPhotoAdapter.addAll(poi.imageUrls)
     poiPhotoAdapter.onPhotoClicked = { imageUrl: String, index: Int, imageView: ImageView ->
       StfalconImageViewer.Builder(this@POIDetailActivity, poi.imageUrls) { view, image ->
-        view.scaleType = ScaleType.CENTER_INSIDE
+        view.scaleType = ScaleType.FIT_CENTER
         view.load(image)
       }
         .withTransitionFrom(imageView)
