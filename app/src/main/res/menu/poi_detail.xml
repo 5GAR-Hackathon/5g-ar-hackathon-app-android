@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:app1="http://schemas.android.com/apk/res-auto">
+  <item
+      android:id="@+id/add_to_tour"
+      android:icon="@drawable/ic_compass_white_outline"
+      android:orderInCategory="99"
+      android:title="Tour"
+      app:showAsAction="always" />
+  <item
+      android:id="@+id/bookmark"
+      android:icon="@drawable/ic_bookmark_white_outline"
+      android:orderInCategory="100"
+      android:title="Bookmark"
+      app1:showAsAction="always" />
+</menu>
