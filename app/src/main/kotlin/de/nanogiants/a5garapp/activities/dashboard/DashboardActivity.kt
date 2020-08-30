@@ -6,6 +6,7 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
+import dagger.BindsOptionalOf
 import dagger.hilt.android.AndroidEntryPoint
 import de.nanogiants.a5garapp.activities.dashboard.adapters.DashboardPOIAdapter
 import de.nanogiants.a5garapp.activities.poidetail.POIDetailActivity
@@ -37,8 +38,7 @@ class DashboardActivity : BaseActivity() {
   @Inject
   lateinit var poiDatastore: POIDatastore
 
-  // @Inject
-  // lateinit var tagDatastore: TagDatastore
+  val loadFromWeb: Boolean = false
 
   override fun initView() {
     poiLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
@@ -60,9 +60,16 @@ class DashboardActivity : BaseActivity() {
 
     lifecycleScope.launch {
       try {
-        withContext(Dispatchers.IO) { JSONReader.getPOIsFromAssets(this@DashboardActivity) }.let {
-          Timber.d("Loaded all $it")
-          poiAdapter.addAll(it)
+        if (loadFromWeb) {
+          withContext(Dispatchers.IO) { poiDatastore.getAllPOIs() }.let {
+            Timber.d("Loaded all $it")
+            poiAdapter.addAll(it)
+          }
+        } else {
+          withContext(Dispatchers.IO) { JSONReader.getPOIsFromAssets(this@DashboardActivity) }.let {
+            Timber.d("Loaded all $it")
+            poiAdapter.addAll(it)
+          }
         }
       } catch (e: Exception) {
         Timber.d("There was an error $e")
