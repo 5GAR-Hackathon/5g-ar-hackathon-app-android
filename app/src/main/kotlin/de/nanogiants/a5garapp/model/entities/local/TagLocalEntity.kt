@@ -5,9 +5,7 @@
 
 package de.nanogiants.a5garapp.model.entities.local
 
-import android.accounts.AuthenticatorDescription
 import com.squareup.moshi.JsonClass
-
 
 @JsonClass(generateAdapter = true)
 data class TagLocalEntity(

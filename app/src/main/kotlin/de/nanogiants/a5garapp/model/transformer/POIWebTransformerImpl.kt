@@ -8,7 +8,6 @@ import de.nanogiants.a5garapp.model.entities.local.CoordinatesLocalEntity
 import de.nanogiants.a5garapp.model.entities.local.POILocalEntity
 import de.nanogiants.a5garapp.model.entities.web.CoordinatesWebEntity
 import de.nanogiants.a5garapp.model.entities.web.POIWebEntity
-import java.util.Arrays
 import javax.inject.Inject
 
 class POIWebTransformerImpl @Inject constructor() : POIWebTransformer {

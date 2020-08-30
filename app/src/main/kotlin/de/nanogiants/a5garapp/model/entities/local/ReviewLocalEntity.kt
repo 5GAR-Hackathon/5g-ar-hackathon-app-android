@@ -5,7 +5,9 @@
 
 package de.nanogiants.a5garapp.model.entities.local
 
+import com.squareup.moshi.JsonClass
 
+@JsonClass(generateAdapter = true)
 data class ReviewLocalEntity(
   val poiId: Int,
   val username: String,

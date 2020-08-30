@@ -1,6 +1,5 @@
 package de.nanogiants.a5garapp.di
 
-import android.content.Context
 import dagger.Binds
 import dagger.Module
 import dagger.Provides

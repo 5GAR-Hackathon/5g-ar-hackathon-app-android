@@ -6,7 +6,7 @@
 package de.nanogiants.a5garapp.activities.dashboard.adapters
 
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import coil.load
 import de.nanogiants.a5garapp.databinding.ItemDashboardPoiBinding
 import de.nanogiants.a5garapp.model.entities.domain.POI
 import java.util.Locale
@@ -20,9 +20,12 @@ class DashboardPOIViewholder(val viewBinding: ItemDashboardPoiBinding) :
     viewBinding.tagsTextView.text =
       item.tags.map { it.name.capitalize(Locale.getDefault()) }.joinToString(", ")
 
-    Glide.with(viewBinding.backgroundImageView)
-      .load(if (item.imageUrls.isEmpty()) "https://www.aekno.de/fileadmin/_processed_/1/6/csm_ks-duesseldorf-01_a8b7d2779a.jpg" else item.imageUrls[0])
-      .centerCrop()
-      .into(viewBinding.backgroundImageView)
+    viewBinding.backgroundImageView.load(
+      if (item.imageUrls.isEmpty()) {
+        "https://www.aekno.de/fileadmin/_processed_/1/6/csm_ks-duesseldorf-01_a8b7d2779a.jpg"
+      } else {
+        item.imageUrls[0]
+      }
+    )
   }
 }
