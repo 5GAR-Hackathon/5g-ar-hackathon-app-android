@@ -15,6 +15,7 @@ import java.util.Locale
 class DashboardPOIViewholder(val viewBinding: ItemDashboardPoiBinding) :
   RecyclerView.ViewHolder(viewBinding.root) {
   fun bind(item: POI) {
+    viewBinding.poiReviewRatingBar.rating = item.rating
     viewBinding.nameTextView.text = item.name
     viewBinding.tagsTextView.text =
       item.tags.map { it.name.capitalize(Locale.getDefault()) }.joinToString(", ")

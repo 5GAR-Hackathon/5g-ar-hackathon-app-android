@@ -82,6 +82,7 @@ dependencies {
 
   // Misc
   implementation("com.jakewharton.timber:timber:4.7.1")
+  implementation("io.github.serpro69:kotlin-faker:1.4.1")
 
   // Web
   implementation("com.squareup.moshi:moshi:1.9.3")

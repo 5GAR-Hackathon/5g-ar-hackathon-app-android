@@ -11,6 +11,8 @@ import de.nanogiants.a5garapp.model.datasource.api.POIDatasource
 import de.nanogiants.a5garapp.model.datasource.api.TagDatasource
 import de.nanogiants.a5garapp.model.datastore.POIDatastore
 import de.nanogiants.a5garapp.model.datastore.POIDatastoreImpl
+import de.nanogiants.a5garapp.model.datastore.ReviewDatastore
+import de.nanogiants.a5garapp.model.datastore.ReviewDatastoreImpl
 import de.nanogiants.a5garapp.model.datastore.TagDatastore
 import de.nanogiants.a5garapp.model.datastore.TagDatastoreImpl
 import de.nanogiants.a5garapp.model.transformer.POIWebTransformer
@@ -35,6 +37,9 @@ abstract class BackendModule {
 
   @Binds
   abstract fun provideTagDataStore(tagDatastoreImpl: TagDatastoreImpl): TagDatastore
+
+  @Binds
+  abstract fun provideReviewDataStore(reviewDatastoreImpl: ReviewDatastoreImpl): ReviewDatastore
 
   @Binds
   abstract fun providePOIWebTransformer(poiWebTransformerImpl: POIWebTransformerImpl): POIWebTransformer

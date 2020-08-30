@@ -3,16 +3,29 @@ package de.nanogiants.a5garapp.activities.poidetail
 import android.media.Image
 import android.text.Html
 import android.widget.ImageView
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.stfalcon.imageviewer.StfalconImageViewer
+import dagger.hilt.android.AndroidEntryPoint
 import de.nanogiants.a5garapp.activities.poidetail.adapters.POIPhotoAdapter
+import de.nanogiants.a5garapp.activities.poidetail.adapters.POIReviewAdapter
 
 import de.nanogiants.a5garapp.base.BaseActivity
 import de.nanogiants.a5garapp.databinding.ActivityPoiDetailBinding
+import de.nanogiants.a5garapp.model.datastore.ReviewDatastore
 import de.nanogiants.a5garapp.model.entities.domain.POI
+import de.nanogiants.a5garapp.utils.JSONReader
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import timber.log.Timber
+import javax.inject.Inject
 
+@ExperimentalCoroutinesApi
+@AndroidEntryPoint
 class POIDetailActivity : BaseActivity() {
 
   override val binding: ActivityPoiDetailBinding by viewBinding(ActivityPoiDetailBinding::inflate)
@@ -21,6 +34,12 @@ class POIDetailActivity : BaseActivity() {
 
   lateinit var poiPhotoLayoutManager: GridLayoutManager
 
+  lateinit var poiReviewAdapter: POIReviewAdapter
+
+  lateinit var poiReviewLayoutManager: LinearLayoutManager
+
+  @Inject
+  lateinit var reviewDatastore: ReviewDatastore
 
   override fun initView() {
     val poi = intent.getSerializableExtra("POI") as POI
@@ -56,5 +75,18 @@ class POIDetailActivity : BaseActivity() {
       layoutManager = poiPhotoLayoutManager
       adapter = poiPhotoAdapter
     }
+
+    poiReviewLayoutManager = LinearLayoutManager(this)
+    poiReviewAdapter = POIReviewAdapter()
+    poiReviewAdapter.addAll(poi.reviews)
+
+    binding.reviewRecyclerView.apply {
+      layoutManager = poiReviewLayoutManager
+      adapter = poiReviewAdapter
+    }
+
+    binding.reviewLabelTextView.text = "Reviews (${poi.reviews.size})"
+    binding.ratingTextView.text = "${poi.reviews.size} Reviews"
+    binding.poiRatingBar.rating = poi.rating
   }
 }

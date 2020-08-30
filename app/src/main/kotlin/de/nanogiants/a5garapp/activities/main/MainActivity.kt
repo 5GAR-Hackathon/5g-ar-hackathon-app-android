@@ -23,6 +23,7 @@ import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import timber.log.Timber
 import javax.inject.Inject
 
 @SuppressLint("SetTextI18n")
@@ -83,6 +84,7 @@ class MainActivity : BaseActivity() {
         }
       } catch (e: Exception) {
         binding.backendPois.text = "Error loading data"
+        Timber.e(e)
       }
       try {
         withContext(Dispatchers.IO) { tagDatastore.getAllTags() }.let {

@@ -8,5 +8,7 @@ data class POI(
   val description: String,
   val tags: List<Tag>,
   val coordinates: Coordinates,
-  val imageUrls: List<String>
+  val imageUrls: List<String>,
+  val reviews: List<Review>,
+  val rating: Float
 ) : Serializable
