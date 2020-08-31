@@ -14,10 +14,10 @@
       android:label="@string/app_name"
       android:supportsRtl="false"
       android:theme="@style/Theme.5GARApp">
+    <activity android:name=".activities.favorites.FavoritesActivity"></activity>
     <activity
         android:name=".activities.poidetail.POIDetailActivity"
         android:theme="@style/Theme.5GARApp.TranslucentActionBar" />
-
     <activity android:name=".activities.dashboard.DashboardActivity" />
     <activity
         android:name=".activities.main.MainActivity"

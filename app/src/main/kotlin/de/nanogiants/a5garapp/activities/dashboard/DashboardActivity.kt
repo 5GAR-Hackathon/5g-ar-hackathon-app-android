@@ -7,7 +7,9 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
 import dagger.hilt.android.AndroidEntryPoint
+import de.nanogiants.a5garapp.R
 import de.nanogiants.a5garapp.activities.dashboard.adapters.DashboardPOIAdapter
+import de.nanogiants.a5garapp.activities.favorites.FavoritesActivity
 import de.nanogiants.a5garapp.activities.poidetail.POIDetailActivity
 import de.nanogiants.a5garapp.base.BaseActivity
 import de.nanogiants.a5garapp.databinding.ActivityDashboardBinding
@@ -52,6 +54,21 @@ class DashboardActivity : BaseActivity() {
 
     poiSnapHelper = LinearSnapHelper()
     poiSnapHelper.attachToRecyclerView(binding.dashboardPoiRecyclerview)
+
+    binding.bottomNavigationView.selectedItemId = R.id.places
+    binding.bottomNavigationView.setOnNavigationItemSelectedListener {
+      when (it.itemId) {
+        R.id.favorites -> {
+          val intent = Intent(this, FavoritesActivity::class.java)
+          intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+
+          startActivity(intent)
+          overridePendingTransition(0, 0)
+          true
+        }
+        else -> false
+      }
+    }
   }
 
   override fun onResume() {
