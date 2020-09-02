@@ -6,58 +6,48 @@
     android:layout_height="wrap_content"
     >
 
-  <androidx.cardview.widget.CardView
+  <androidx.constraintlayout.widget.ConstraintLayout
       android:id="@+id/rootView"
       android:layout_width="0dp"
       android:layout_height="wrap_content"
-      android:layout_marginBottom="8dp"
-      android:layout_marginEnd="16dp"
-      android:layout_marginStart="16dp"
-      android:layout_marginTop="8dp"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:cardCornerRadius="6dp"
-      app:cardElevation="6dp"
+      app:cardCornerRadius="0dp"
+      app:cardElevation="0dp"
       >
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:id="@+id/constraintLayout2"
+        android:layout_width="0dp"
+        android:layout_height="96dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         >
 
-      <androidx.cardview.widget.CardView
-          android:id="@+id/cardView"
+      <ImageView
+          android:id="@+id/poiImageView"
           android:layout_width="96dp"
           android:layout_height="96dp"
-          android:layout_marginBottom="8dp"
-          android:layout_marginStart="8dp"
-          android:layout_marginTop="8dp"
+          android:scaleType="centerCrop"
+          android:transitionName="poiBackgroundImage"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
-          app:cardElevation="0dp"
-          app:cardCornerRadius="6dp"
-          >
-        <ImageView
-            android:id="@+id/poiImageView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scaleType="centerCrop"
-            android:transitionName="poiBackgroundImage"
-            tools:srcCompat="@tools:sample/backgrounds/scenic"
-            app:srcCompat="@drawable/agustin_cartwright"
-            />
-      </androidx.cardview.widget.CardView>
+          tools:srcCompat="@tools:sample/backgrounds/scenic"
+          app:srcCompat="@drawable/agustin_cartwright"
+          />
       <TextView
           android:id="@+id/poiNameTextView"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginStart="16dp"
+          android:layout_marginStart="8dp"
+          android:layout_marginTop="8dp"
           android:text="Kö Bogen"
           android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-          app:layout_constraintStart_toEndOf="@+id/cardView"
-          app:layout_constraintTop_toTopOf="@+id/cardView"
+          app:layout_constraintStart_toEndOf="@+id/poiImageView"
+          app:layout_constraintTop_toTopOf="parent"
           />
       <TextView
           android:id="@+id/poiTagTextView"
@@ -72,7 +62,7 @@
 
       <me.zhanghai.android.materialratingbar.MaterialRatingBar
           android:id="@+id/poiRatingBar"
-          android:layout_width="0dp"
+          android:layout_width="wrap_content"
           android:layout_height="16dp"
           android:layout_marginBottom="8dp"
           android:isIndicator="true"
@@ -84,6 +74,15 @@
           app:layout_constraintStart_toStartOf="@+id/poiTagTextView"
           style="@style/Widget.MaterialRatingBar.RatingBar"
           />
+      <View
+          android:id="@+id/view2"
+          android:layout_width="0dp"
+          android:layout_height="1dp"
+          android:background="@color/gray"
+          app:layout_constraintBottom_toBottomOf="parent"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toEndOf="@+id/poiImageView"
+          />
       <androidx.constraintlayout.widget.Guideline
           android:id="@+id/guideline2"
           android:layout_width="wrap_content"
@@ -94,5 +93,5 @@
           app:layout_constraintTop_toTopOf="parent"
           />
     </androidx.constraintlayout.widget.ConstraintLayout>
-  </androidx.cardview.widget.CardView>
+  </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
