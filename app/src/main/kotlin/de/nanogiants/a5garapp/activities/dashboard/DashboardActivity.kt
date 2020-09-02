@@ -1,7 +1,11 @@
 package de.nanogiants.a5garapp.activities.dashboard
 
 import android.content.Intent
+import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.view.View
+import androidx.core.app.ActivityCompat
 import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -10,6 +14,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import de.nanogiants.a5garapp.R
 import de.nanogiants.a5garapp.activities.dashboard.adapters.DashboardPOIAdapter
 import de.nanogiants.a5garapp.activities.favorites.FavoritesActivity
+import de.nanogiants.a5garapp.activities.filter.FilterActivity
 import de.nanogiants.a5garapp.activities.poidetail.POIDetailActivity
 import de.nanogiants.a5garapp.base.BaseActivity
 import de.nanogiants.a5garapp.databinding.ActivityDashboardBinding
@@ -40,6 +45,11 @@ class DashboardActivity : BaseActivity() {
   lateinit var poiDatastore: POIDatastore
 
   val loadFromWeb: Boolean = false
+
+  override fun onCreate(savedInstanceState: Bundle?) {
+    super.onCreate(savedInstanceState)
+    setSupportActionBar(binding.toolbar)
+  }
 
   override fun initView() {
     binding.toolbar.title = "Places"
@@ -112,5 +122,23 @@ class DashboardActivity : BaseActivity() {
     )
 
     startActivity(intent, options.toBundle())
+  }
+
+  override fun onCreateOptionsMenu(menu: Menu): Boolean {
+    val inflater = menuInflater
+    inflater.inflate(R.menu.dashboard, menu)
+    return true
+  }
+
+  override fun onOptionsItemSelected(item: MenuItem): Boolean {
+    return when (item.itemId) {
+      R.id.filter -> {
+        val intent = Intent(this, FilterActivity::class.java)
+        startActivity(intent)
+        overridePendingTransition(R.anim.enter_from_bottom, R.anim.nothing);
+        true
+      }
+      else -> super.onOptionsItemSelected(item)
+    }
   }
 }
