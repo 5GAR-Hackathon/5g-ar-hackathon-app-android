@@ -60,7 +60,7 @@ class DashboardActivity : BaseActivity() {
       when (it.itemId) {
         R.id.favorites -> {
           val intent = Intent(this, FavoritesActivity::class.java)
-          intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+          // intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
 
           startActivity(intent)
           overridePendingTransition(0, 0)
@@ -79,11 +79,13 @@ class DashboardActivity : BaseActivity() {
         if (loadFromWeb) {
           withContext(Dispatchers.IO) { poiDatastore.getAllPOIs() }.let {
             Timber.d("Loaded all $it")
+            poiAdapter.clear()
             poiAdapter.addAll(it)
           }
         } else {
           withContext(Dispatchers.IO) { JSONReader.getPOIsFromAssets(this@DashboardActivity) }.let {
             Timber.d("Loaded all $it")
+            poiAdapter.clear()
             poiAdapter.addAll(it)
           }
         }
@@ -99,6 +101,7 @@ class DashboardActivity : BaseActivity() {
 
     val intent = Intent(this, POIDetailActivity::class.java)
     intent.putExtra("POI", poi)
+    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
 
     val options = ActivityOptionsCompat.makeSceneTransitionAnimation(
       this@DashboardActivity,

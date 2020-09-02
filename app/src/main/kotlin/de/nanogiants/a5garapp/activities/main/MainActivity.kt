@@ -72,7 +72,7 @@ class MainActivity : BaseActivity() {
 
     binding.startDashboard.setOnClickListener {
       val intent = Intent(this, DashboardActivity::class.java)
-      intent.setFlags(Intent.FLAG_ACTIVITY_NO_HISTORY)
+      // intent.flags = Intent.FLAG_ACTIVITY_NO_HISTORY
 
       startActivity(intent)
     }

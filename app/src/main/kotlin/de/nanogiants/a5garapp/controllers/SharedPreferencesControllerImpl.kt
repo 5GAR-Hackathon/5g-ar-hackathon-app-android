@@ -22,7 +22,7 @@ class SharedPreferencesControllerImpl @Inject constructor() : SharedPreferencesC
     var poiList = getBookmarkedPOIs()
 
     if (isPOIBookmarked(poi)) {
-      poiList = poiList.filter { it -> poi.id == it.id }
+      poiList = poiList.filter { it -> poi.id != it.id }
     } else {
       val tempList = mutableListOf(poi)
       tempList.addAll(
