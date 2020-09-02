@@ -46,7 +46,6 @@
             android:scaleType="centerCrop"
             android:transitionName="poiBackgroundImage"
             tools:srcCompat="@tools:sample/backgrounds/scenic"
-            app:srcCompat="@drawable/agustin_cartwright"
             />
       </androidx.cardview.widget.CardView>
       <TextView

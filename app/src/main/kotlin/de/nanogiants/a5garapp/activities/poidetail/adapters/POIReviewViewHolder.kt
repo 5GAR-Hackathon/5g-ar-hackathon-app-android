@@ -17,7 +17,7 @@ class POIReviewViewHolder(val viewBinding: ItemReviewBinding) :
   fun bind(item: Review) {
     viewBinding.contentTextView.text = item.content
     viewBinding.userNameTextView.text =
-      item.userName.split('_').map { it.capitalize(Locale.getDefault()) }.joinToString(" ")
+      item.userName.split('_').joinToString(" ") { it.capitalize(Locale.getDefault()) }
     viewBinding.createdAtTextView.text = item.createdAt
     viewBinding.reviewLikeCountTextView.text = item.likeCount.toString()
     viewBinding.poiReviewRatingBar.rating = item.rating

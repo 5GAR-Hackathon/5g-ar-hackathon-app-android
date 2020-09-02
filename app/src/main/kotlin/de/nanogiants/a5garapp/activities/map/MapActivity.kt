@@ -24,7 +24,7 @@ class MapActivity : BaseActivity(), OnMapReadyCallback {
     huaweiMapOptions.zoomGesturesEnabled(true)
     mapFragment = MapFragment.newInstance(huaweiMapOptions)
 
-    val fragmentManager: FragmentManager = getFragmentManager()
+    val fragmentManager: FragmentManager = fragmentManager
     fragmentManager.beginTransaction().apply {
       add(R.id.fragment_container, mapFragment)
     }.commit()

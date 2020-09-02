@@ -15,7 +15,6 @@ import de.nanogiants.a5garapp.base.BaseActivity
 import de.nanogiants.a5garapp.controllers.SharedPreferencesController
 import de.nanogiants.a5garapp.databinding.ActivityFavoritesBinding
 import de.nanogiants.a5garapp.model.entities.domain.POI
-import de.nanogiants.a5garapp.utils.JSONReader
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch

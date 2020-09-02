@@ -39,9 +39,9 @@ class FavoritesAdapter : RecyclerView.Adapter<FavoritesViewHolder>() {
   )
 
   override fun onBindViewHolder(holder: FavoritesViewHolder, position: Int) {
-    holder.bind(items.get(position))
+    holder.bind(items[position])
     holder.viewBinding.rootView.setOnClickListener {
-      onPOIClicked(items.get(position), holder.viewBinding.poiImageView)
+      onPOIClicked(items[position], holder.viewBinding.poiImageView)
     }
 
   }
