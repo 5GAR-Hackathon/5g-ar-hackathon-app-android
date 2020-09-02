@@ -18,7 +18,7 @@ class DashboardPOIViewholder(val viewBinding: ItemDashboardPoiBinding) :
     viewBinding.poiReviewRatingBar.rating = item.rating
     viewBinding.nameTextView.text = item.name
     viewBinding.tagsTextView.text =
-      item.tags.map { it.name.capitalize(Locale.getDefault()) }.joinToString(", ")
+      item.tags.joinToString(", ") { it.name.capitalize(Locale.getDefault()) }
 
     viewBinding.backgroundImageView.load(
       if (item.imageUrls.isEmpty()) {

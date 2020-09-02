@@ -9,10 +9,8 @@
 
   <application
       android:name=".HackathonApp"
-      android:allowBackup="false"
       android:icon="@mipmap/ic_launcher"
       android:label="@string/app_name"
-      android:supportsRtl="false"
       android:theme="@style/Theme.5GARApp">
     <activity android:name=".activities.favorites.FavoritesActivity"></activity>
     <activity

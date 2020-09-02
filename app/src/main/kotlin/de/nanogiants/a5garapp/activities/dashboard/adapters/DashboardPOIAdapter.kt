@@ -16,7 +16,7 @@ import de.nanogiants.a5garapp.model.entities.domain.POI
 class DashboardPOIAdapter : RecyclerView.Adapter<DashboardPOIViewholder>() {
 
   private var items: MutableList<POI> = mutableListOf()
-  var onPOIClicked: ((POI, View) -> Unit) = { poi: POI, view: View -> }
+  var onPOIClicked: ((POI, View) -> Unit) = { _: POI, _: View -> }
 
   override fun getItemCount() = items.size
 
@@ -39,9 +39,9 @@ class DashboardPOIAdapter : RecyclerView.Adapter<DashboardPOIViewholder>() {
   )
 
   override fun onBindViewHolder(holder: DashboardPOIViewholder, position: Int) {
-    holder.bind(items.get(position))
+    holder.bind(items[position])
     holder.viewBinding.rootView.setOnClickListener {
-      onPOIClicked(items.get(position), holder.viewBinding.backgroundImageView)
+      onPOIClicked(items[position], holder.viewBinding.backgroundImageView)
     }
 
   }

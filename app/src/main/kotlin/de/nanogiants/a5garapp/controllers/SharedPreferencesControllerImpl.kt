@@ -1,7 +1,6 @@
 package de.nanogiants.a5garapp.controllers
 
 import android.content.SharedPreferences
-import de.nanogiants.a5garapp.base.BaseActivity
 import de.nanogiants.a5garapp.model.entities.domain.POI
 import de.nanogiants.a5garapp.utils.JSONReader
 import kotlinx.coroutines.ExperimentalCoroutinesApi

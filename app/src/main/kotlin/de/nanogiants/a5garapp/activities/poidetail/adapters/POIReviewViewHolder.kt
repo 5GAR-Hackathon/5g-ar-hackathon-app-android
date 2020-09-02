@@ -22,8 +22,6 @@ class POIReviewViewHolder(val viewBinding: ItemReviewBinding) :
     viewBinding.reviewLikeCountTextView.text = item.likeCount.toString()
     viewBinding.poiReviewRatingBar.rating = item.rating
 
-    val context = viewBinding.userImageView.context
-    val id = context.resources.getIdentifier(item.userName, "drawable", context.packageName)
-    viewBinding.userImageView.setImageDrawable(context.getDrawable(id))
+    viewBinding.userImageView.hash = item.userName.hashCode()
   }
 }

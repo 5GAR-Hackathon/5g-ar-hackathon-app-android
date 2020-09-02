@@ -13,7 +13,7 @@ class ReviewDatastoreImpl @Inject constructor() : ReviewDatastore {
     val faker = Faker()
     val count = Random.nextInt(1, 9)
 
-    return Array(count) { index ->
+    return Array(count) {
       val username = getUsername()
       val content = faker.backToTheFuture.quotes()
 
