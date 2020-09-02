@@ -7,6 +7,21 @@
     tools:context=".activities.dashboard.DashboardActivity"
     >
 
+  <com.google.android.material.appbar.MaterialToolbar
+      android:id="@+id/toolbar"
+      android:layout_width="match_parent"
+      android:layout_height="?attr/actionBarSize"
+      android:background="@color/primary"
+      android:elevation="6dp"
+      app:layout_collapseMode="pin"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent"
+      app:popupTheme="@style/Theme.5GARApp.PopupOverlay"
+      app:title="Places"
+      app:titleTextColor="@color/white"
+      />
+
   <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/dashboard_poi_recyclerview"
       android:layout_width="match_parent"
@@ -14,7 +29,7 @@
       app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
-      app:layout_constraintTop_toTopOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/toolbar"
       />
 
   <com.google.android.material.bottomnavigation.BottomNavigationView

@@ -37,6 +37,8 @@ class FavoritesActivity : BaseActivity() {
   lateinit var sharedPreferencesController: SharedPreferencesController
 
   override fun initView() {
+    binding.toolbar.title = "Favorites"
+
     favoritesLayoutManager = LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false)
 
     favoritesAdapter = FavoritesAdapter()

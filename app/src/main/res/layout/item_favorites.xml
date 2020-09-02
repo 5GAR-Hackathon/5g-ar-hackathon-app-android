@@ -14,8 +14,6 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      app:cardCornerRadius="0dp"
-      app:cardElevation="0dp"
       >
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"

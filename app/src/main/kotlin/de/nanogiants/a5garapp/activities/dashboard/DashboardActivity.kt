@@ -42,6 +42,8 @@ class DashboardActivity : BaseActivity() {
   val loadFromWeb: Boolean = false
 
   override fun initView() {
+    binding.toolbar.title = "Places"
+
     poiLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
     poiAdapter = DashboardPOIAdapter()

@@ -77,6 +77,7 @@
           android:layout_marginBottom="64dp"
           android:text="TextView"
           android:textColor="#FFFFFF"
+          android:textStyle="bold"
           app:layout_constraintBottom_toBottomOf="parent"
           app:layout_constraintStart_toStartOf="@+id/nameTextView"
           />
@@ -94,6 +95,19 @@
           app:layout_constraintBottom_toTopOf="@+id/tagsTextView"
           app:layout_constraintStart_toStartOf="@+id/tagsTextView"
           style="@style/Widget.MaterialRatingBar.RatingBar"
+          />
+      <TextView
+          android:id="@+id/textView3"
+          android:layout_width="wrap_content"
+          android:layout_height="0dp"
+          android:layout_marginStart="8dp"
+          android:gravity="center_vertical"
+          android:text="7 Reviews"
+          android:textAppearance="@style/TextAppearance.AppCompat.Small"
+          android:textColor="@color/white"
+          app:layout_constraintBottom_toBottomOf="@+id/poiReviewRatingBar"
+          app:layout_constraintStart_toEndOf="@+id/poiReviewRatingBar"
+          app:layout_constraintTop_toTopOf="@+id/poiReviewRatingBar"
           />
     </androidx.constraintlayout.widget.ConstraintLayout>
   </androidx.cardview.widget.CardView>
