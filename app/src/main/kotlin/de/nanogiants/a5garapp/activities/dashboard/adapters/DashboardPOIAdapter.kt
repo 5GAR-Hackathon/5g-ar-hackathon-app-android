@@ -30,6 +30,10 @@ class DashboardPOIAdapter : RecyclerView.Adapter<DashboardPOIViewholder>() {
     notifyDataSetChanged()
   }
 
+  fun get(position: Int): POI = items.get(position)
+
+  fun getAll(): List<POI> = items
+
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = DashboardPOIViewholder(
     ItemDashboardPoiBinding.inflate(
       LayoutInflater.from(parent.context),
