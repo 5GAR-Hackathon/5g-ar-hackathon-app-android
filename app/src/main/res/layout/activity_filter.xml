@@ -20,7 +20,8 @@
       app:popupTheme="@style/Theme.5GARApp.PopupOverlay"
       app:titleTextColor="@color/white"
       app:title="Filter"
-      app:navigationIcon="@drawable/baseline_arrow_back_white_24"
+
+      app:navigationIcon="@drawable/abc_vector_test"
       />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

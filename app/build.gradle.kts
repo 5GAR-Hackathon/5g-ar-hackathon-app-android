@@ -4,7 +4,6 @@ plugins {
   kotlin("kapt")
   id("dagger.hilt.android.plugin")
   id("com.huawei.agconnect")
-  id("kotlin-android")
 }
 
 android {
@@ -83,10 +82,10 @@ dependencies {
   // Misc
   implementation("com.jakewharton.timber:timber:4.7.1")
   implementation("io.github.serpro69:kotlin-faker:1.4.1")
+  implementation("com.github.lelloman:android-identicons:v11")
 
   // Web
   implementation("com.squareup.moshi:moshi:1.10.0")
-  implementation("org.jetbrains.kotlin:kotlin-stdlib:${rootProject.extra["kotlin_version"]}")
   kapt("com.squareup.moshi:moshi-kotlin-codegen:1.10.0")
   implementation("com.squareup.okhttp3:okhttp:4.8.1")
   implementation("com.squareup.okhttp3:logging-interceptor:4.8.1")
@@ -107,5 +106,3 @@ dependencies {
 kapt {
   correctErrorTypes = true
 }
-
-apply(plugin = "com.huawei.agconnect")

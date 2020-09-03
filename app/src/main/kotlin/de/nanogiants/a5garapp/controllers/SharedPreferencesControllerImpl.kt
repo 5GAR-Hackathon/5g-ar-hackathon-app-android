@@ -1,7 +1,6 @@
 package de.nanogiants.a5garapp.controllers
 
 import android.content.SharedPreferences
-import de.nanogiants.a5garapp.base.BaseActivity
 import de.nanogiants.a5garapp.model.entities.domain.POI
 import de.nanogiants.a5garapp.utils.JSONReader
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -21,15 +20,15 @@ class SharedPreferencesControllerImpl @Inject constructor() : SharedPreferencesC
   override suspend fun bookmarkPOI(poi: POI) {
     var poiList = getBookmarkedPOIs()
 
-    if (isPOIBookmarked(poi)) {
-      poiList = poiList.filter { it -> poi.id != it.id }
+    poiList = if (isPOIBookmarked(poi)) {
+      poiList.filter { poi.id != it.id }
     } else {
       val tempList = mutableListOf(poi)
       tempList.addAll(
         poiList
       )
 
-      poiList = tempList.toList()
+      tempList.toList()
     }
 
     sharedPreferences.edit().putString("pois", JSONReader.poiListToJSON(poiList)).apply()
@@ -37,6 +36,6 @@ class SharedPreferencesControllerImpl @Inject constructor() : SharedPreferencesC
 
   override suspend fun isPOIBookmarked(poi: POI): Boolean {
     val poiList = getBookmarkedPOIs()
-    return poiList.any { it -> poi.id == it.id }
+    return poiList.any { poi.id == it.id }
   }
 }

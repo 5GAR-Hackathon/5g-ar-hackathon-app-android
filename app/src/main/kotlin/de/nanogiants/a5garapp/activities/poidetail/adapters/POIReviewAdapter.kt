@@ -32,6 +32,6 @@ class POIReviewAdapter : RecyclerView.Adapter<POIReviewViewHolder>() {
   )
 
   override fun onBindViewHolder(holder: POIReviewViewHolder, position: Int) {
-    holder.bind(items.get(position))
+    holder.bind(items[position])
   }
 }

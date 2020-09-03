@@ -17,7 +17,7 @@ class POIWebTransformerImpl @Inject constructor() : POIWebTransformer {
       POI(
         id = id,
         name = name,
-        tags = tags.filter { it -> entity.tags.contains(it.id) },
+        tags = tags.filter { entity.tags.contains(it.id) },
         description = "",
         coordinates = toModel(coordinates),
         imageUrls = listOf(
@@ -39,7 +39,7 @@ class POIWebTransformerImpl @Inject constructor() : POIWebTransformer {
       POI(
         id = id,
         name = name,
-        tags = tags.filter { it -> entity.tags.contains(it.id) },
+        tags = tags.filter { entity.tags.contains(it.id) },
         description = entity.description,
         coordinates = toModel(coordinates),
         imageUrls = entity.images,

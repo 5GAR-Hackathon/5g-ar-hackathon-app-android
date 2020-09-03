@@ -5,7 +5,6 @@ import android.view.Menu
 import android.view.MenuItem
 import android.widget.ImageView
 import android.widget.ImageView.ScaleType
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -15,7 +14,6 @@ import com.google.android.material.chip.Chip
 import com.stfalcon.imageviewer.StfalconImageViewer
 import dagger.hilt.android.AndroidEntryPoint
 import de.nanogiants.a5garapp.R
-import de.nanogiants.a5garapp.R.id
 import de.nanogiants.a5garapp.activities.poidetail.adapters.POIPhotoAdapter
 import de.nanogiants.a5garapp.activities.poidetail.adapters.POIReviewAdapter
 import de.nanogiants.a5garapp.base.BaseActivity
@@ -79,7 +77,7 @@ class POIDetailActivity : BaseActivity() {
 
     poiPhotoAdapter = POIPhotoAdapter()
     poiPhotoAdapter.addAll(poi.imageUrls)
-    poiPhotoAdapter.onPhotoClicked = { imageUrl: String, index: Int, imageView: ImageView ->
+    poiPhotoAdapter.onPhotoClicked = { _: String, index: Int, imageView: ImageView ->
       StfalconImageViewer.Builder(this@POIDetailActivity, poi.imageUrls) { view, image ->
         view.scaleType = ScaleType.FIT_CENTER
         view.load(image)
@@ -144,7 +142,7 @@ class POIDetailActivity : BaseActivity() {
         return true
       }
       android.R.id.home -> {
-        ActivityCompat.finishAfterTransition(this);
+        ActivityCompat.finishAfterTransition(this)
         true
       }
       else -> super.onOptionsItemSelected(item)

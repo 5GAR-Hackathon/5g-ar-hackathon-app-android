@@ -34,7 +34,6 @@
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toTopOf="parent"
           tools:srcCompat="@tools:sample/backgrounds/scenic"
-          app:srcCompat="@drawable/agustin_cartwright"
           />
       <TextView
           android:id="@+id/poiNameTextView"

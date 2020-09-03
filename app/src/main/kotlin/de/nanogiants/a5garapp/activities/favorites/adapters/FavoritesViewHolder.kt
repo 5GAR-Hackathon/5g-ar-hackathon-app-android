@@ -18,7 +18,7 @@ class FavoritesViewHolder(val viewBinding: ItemFavoritesBinding) :
   fun bind(item: POI) {
     viewBinding.poiNameTextView.text = item.name
     viewBinding.poiTagTextView.text =
-      item.tags.map { it.name.capitalize(Locale.getDefault()) }.joinToString(", ")
+      item.tags.joinToString(", ") { it.name.capitalize(Locale.getDefault()) }
     viewBinding.poiRatingBar.rating = item.rating
 
     viewBinding.poiImageView.load(
