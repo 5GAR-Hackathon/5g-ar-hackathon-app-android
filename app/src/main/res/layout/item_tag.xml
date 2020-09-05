@@ -7,25 +7,46 @@
     android:layout_height="wrap_content"
     >
 
-  <TextView
-      android:id="@+id/chipTagTextView"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
+  <androidx.constraintlayout.widget.ConstraintLayout
+      android:id="@+id/chipRootView"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
       android:layout_marginBottom="8dp"
       android:layout_marginEnd="8dp"
       android:layout_marginStart="8dp"
       android:layout_marginTop="8dp"
       android:background="@drawable/bg_chip_selector"
-      android:paddingBottom="8dp"
-      android:paddingEnd="16dp"
-      android:paddingStart="16dp"
-      android:paddingTop="8dp"
-      android:text="textview"
-      android:textAppearance="@style/TextAppearance.AppCompat.Body2"
-      android:textColor="@color/color_chip_text_selector"
       app:layout_constraintBottom_toBottomOf="parent"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toTopOf="parent"
-      />
+      >
+
+    <ImageView
+        android:id="@+id/tagIconImageView"
+        android:layout_width="16dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="16dp"
+        app:layout_constraintBottom_toBottomOf="@+id/chipTagTextView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/chipTagTextView"
+        app:srcCompat="@drawable/ic_compass_outline"
+        />
+    <TextView
+        android:id="@+id/chipTagTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginStart="8dp"
+        android:paddingBottom="8dp"
+        android:paddingTop="8dp"
+        android:text="textview"
+        android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:textColor="@color/color_chip_text_selector"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/tagIconImageView"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+  </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
