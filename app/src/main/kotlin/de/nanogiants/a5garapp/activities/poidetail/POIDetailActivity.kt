@@ -1,5 +1,6 @@
 package de.nanogiants.a5garapp.activities.poidetail
 
+import android.app.FragmentManager
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -11,6 +12,9 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
 import com.google.android.material.chip.Chip
+import com.huawei.hms.maps.HuaweiMap
+import com.huawei.hms.maps.HuaweiMapOptions
+import com.huawei.hms.maps.OnMapReadyCallback
 import com.stfalcon.imageviewer.StfalconImageViewer
 import dagger.hilt.android.AndroidEntryPoint
 import de.nanogiants.a5garapp.R
@@ -21,6 +25,7 @@ import de.nanogiants.a5garapp.controllers.SharedPreferencesController
 import de.nanogiants.a5garapp.databinding.ActivityPoiDetailBinding
 import de.nanogiants.a5garapp.model.datastore.ReviewDatastore
 import de.nanogiants.a5garapp.model.entities.domain.POI
+import de.nanogiants.a5garapp.views.POIMapFragment
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import timber.log.Timber
@@ -29,7 +34,7 @@ import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class POIDetailActivity : BaseActivity() {
+class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
 
   override val binding: ActivityPoiDetailBinding by viewBinding(ActivityPoiDetailBinding::inflate)
 
@@ -48,6 +53,8 @@ class POIDetailActivity : BaseActivity() {
   lateinit var sharedPreferencesController: SharedPreferencesController
 
   lateinit var poi: POI
+
+  lateinit var mapFragment: POIMapFragment
 
   lateinit
   var optionsMenu: Menu
@@ -117,6 +124,19 @@ class POIDetailActivity : BaseActivity() {
 
       binding.tagChipGroup.addView(chip)
     }
+
+    val huaweiMapOptions = HuaweiMapOptions()
+    huaweiMapOptions.compassEnabled(true)
+    huaweiMapOptions.zoomGesturesEnabled(true)
+
+    mapFragment = POIMapFragment.newInstance(huaweiMapOptions)
+
+    val fragmentManager: FragmentManager = fragmentManager
+    fragmentManager.beginTransaction().apply {
+      add(R.id.mapFragmentContainer, mapFragment)
+    }.commit()
+
+    mapFragment.getMapAsync(this)
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -154,5 +174,13 @@ class POIDetailActivity : BaseActivity() {
     lifecycleScope.launch {
       menuItem.setIcon(if (sharedPreferencesController.isPOIBookmarked(poi)) R.drawable.ic_bookmark_white else R.drawable.ic_bookmark_white_outline)
     }
+  }
+
+  override fun onMapReady(map: HuaweiMap) {
+    mapFragment.setMap(map)
+    mapFragment.enableInteractiveMap(false)
+
+    mapFragment.clearPOIs()
+    mapFragment.addPOI(poi)
   }
 }

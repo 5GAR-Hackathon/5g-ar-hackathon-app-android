@@ -43,15 +43,30 @@ class POIMapFragment : MapFragment() {
     }
   }
 
-  fun setPOIs(pois: List<POI>, autoCenter: Boolean = true) {
+  fun clearPOIs() {
     markers.map { it.remove() }
     markers = mutableListOf()
+  }
 
+  fun setPOIs(pois: List<POI>, autoCenter: Boolean = true) {
     pois.map { poi -> markers.add(addMarker(poi)) }
 
     if (autoCenter && pois.size > 0) {
       centerMapOnPOI(pois[0])
     }
+  }
+
+  fun addPOI(poi: POI, autoCenter: Boolean = true) {
+    markers.add(addMarker(poi))
+
+    if (autoCenter) {
+      centerMapOnPOI(poi)
+    }
+  }
+
+  fun enableInteractiveMap(enable: Boolean) {
+    huaweiMap?.uiSettings?.setAllGesturesEnabled(enable)
+    huaweiMap?.uiSettings?.isMyLocationButtonEnabled = false
   }
 
   fun centerMapOnPOI(poi: POI) {

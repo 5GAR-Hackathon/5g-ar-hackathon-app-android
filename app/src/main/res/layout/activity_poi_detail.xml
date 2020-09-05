@@ -136,6 +136,19 @@
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/tagChipGroup"
           />
+
+
+      <FrameLayout
+          android:id="@+id/mapFragmentContainer"
+          android:layout_width="0dp"
+          android:layout_height="0dp"
+          android:layout_marginTop="32dp"
+          app:layout_constraintDimensionRatio="H,1:0.618"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/descriptionTextView"
+          />
+
       <TextView
           android:id="@+id/photosLabelTextView"
           android:layout_width="0dp"
@@ -146,7 +159,7 @@
           android:textColor="#000000"
           app:layout_constraintEnd_toEndOf="@+id/descriptionTextView"
           app:layout_constraintStart_toStartOf="@+id/descriptionTextView"
-          app:layout_constraintTop_toBottomOf="@+id/descriptionTextView"
+          app:layout_constraintTop_toBottomOf="@+id/mapFragmentContainer"
           />
       <androidx.recyclerview.widget.RecyclerView
           android:id="@+id/photoRecyclerView"

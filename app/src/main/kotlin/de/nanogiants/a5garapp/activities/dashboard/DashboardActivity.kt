@@ -10,19 +10,9 @@ import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.LinearSnapHelper
-import com.huawei.hms.maps.CameraUpdate
-import com.huawei.hms.maps.CameraUpdateFactory
 import com.huawei.hms.maps.HuaweiMap
 import com.huawei.hms.maps.HuaweiMapOptions
-import com.huawei.hms.maps.MapFragment
 import com.huawei.hms.maps.OnMapReadyCallback
-import com.huawei.hms.maps.common.util.DistanceCalculator
-import com.huawei.hms.maps.model.BitmapDescriptorFactory
-import com.huawei.hms.maps.model.CameraPosition
-import com.huawei.hms.maps.model.LatLng
-import com.huawei.hms.maps.model.MapStyleOptions
-import com.huawei.hms.maps.model.Marker
-import com.huawei.hms.maps.model.MarkerOptions
 import dagger.hilt.android.AndroidEntryPoint
 import de.nanogiants.a5garapp.R
 import de.nanogiants.a5garapp.activities.dashboard.adapters.DashboardPOIAdapter
@@ -86,7 +76,11 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
     poiSnapHelper.attachToRecyclerView(binding.dashboardPoiRecyclerview)
 
     val snapOnScrollListener =
-      SnapOnScrollListener(poiSnapHelper, SnapOnScrollListener.Behavior.NOTIFY_ON_SCROLL_STATE_IDLE, this)
+      SnapOnScrollListener(
+        poiSnapHelper,
+        SnapOnScrollListener.Behavior.NOTIFY_ON_SCROLL_STATE_IDLE,
+        this
+      )
     binding.dashboardPoiRecyclerview.addOnScrollListener(snapOnScrollListener)
 
     binding.bottomNavigationView.selectedItemId = R.id.places
@@ -163,6 +157,7 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
             poiAdapter.clear()
             poiAdapter.addAll(it)
 
+            mapFragment.clearPOIs()
             mapFragment.setPOIs(it)
           }
         } else {
@@ -171,6 +166,7 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
             poiAdapter.clear()
             poiAdapter.addAll(it)
 
+            mapFragment.clearPOIs()
             mapFragment.setPOIs(it)
           }
         }
