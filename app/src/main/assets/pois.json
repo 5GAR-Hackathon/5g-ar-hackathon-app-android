@@ -13,6 +13,20 @@
     "images": [
       "https://img.fotocommunity.com/duesseldorfer-koenigsallee-37b92bdf-e788-4bbe-9834-dca8c1cfa763.jpg?width=1000",
       "https://th.bing.com/th/id/OIP.sAXcSE01vEDdn1YSGFKgkAHaFj?w=243&h=182&c=7&o=5&pid=1.7"
+    ],
+    "openingHours": [
+      {
+        "day": "Monday - Friday",
+        "hours": "08:00 - 20:00"
+      },
+      {
+        "day": "Saturday",
+        "hours": "Closed"
+      },
+      {
+        "day": "Sunday",
+        "hours": "Closed"
+      }
     ]
   },
   {
@@ -31,6 +45,36 @@
       "https://static.duesseldorf-tonight.de/thumbs/img/News/91/80/99/p/p_pano/das-museum-kunstpalast-bekommt-einen-neuen-namen-998091.jpg",
       "https://th.bing.com/th/id/OIP.X6_G5bYwWnJBNqFHfhXfvgHaE3?w=266&h=180&c=7&o=5&pid=1.7",
       "https://th.bing.com/th/id/OIP.vpLmtz5_IO8p5YjlqTI52gHaFj?w=233&h=180&c=7&o=5&pid=1.7"
+    ],
+    "openingHours": [
+      {
+        "day": "Monday",
+        "hours": "08:00 - 18:00"
+      },
+      {
+        "day": "Tuesday",
+        "hours": "08:00 - 18:00"
+      },
+      {
+        "day": "Wednesday",
+        "hours": "08:00 - 14:00"
+      },
+      {
+        "day": "Thursday",
+        "hours": "08:00 - 22:00"
+      },
+      {
+        "day": "Friday",
+        "hours": "08:00 - 22:00"
+      },
+      {
+        "day": "Saturday",
+        "hours": "Closed"
+      },
+      {
+        "day": "Sunday",
+        "hours": "Closed"
+      }
     ]
   },
   {

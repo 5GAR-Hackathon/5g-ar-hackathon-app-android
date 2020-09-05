@@ -4,6 +4,7 @@ import android.app.FragmentManager
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import android.widget.ImageView
 import android.widget.ImageView.ScaleType
 import androidx.core.app.ActivityCompat
@@ -18,6 +19,7 @@ import com.huawei.hms.maps.OnMapReadyCallback
 import com.stfalcon.imageviewer.StfalconImageViewer
 import dagger.hilt.android.AndroidEntryPoint
 import de.nanogiants.a5garapp.R
+import de.nanogiants.a5garapp.activities.poidetail.adapters.POIOpeningHoursAdapter
 import de.nanogiants.a5garapp.activities.poidetail.adapters.POIPhotoAdapter
 import de.nanogiants.a5garapp.activities.poidetail.adapters.POIReviewAdapter
 import de.nanogiants.a5garapp.base.BaseActivity
@@ -45,6 +47,10 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
   lateinit var poiReviewAdapter: POIReviewAdapter
 
   lateinit var poiReviewLayoutManager: LinearLayoutManager
+
+  lateinit var poiOpeningHoursAdapter: POIOpeningHoursAdapter
+
+  lateinit var poiOpeningHoursLayoutManager: LinearLayoutManager
 
   @Inject
   lateinit var reviewDatastore: ReviewDatastore
@@ -112,6 +118,19 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
     binding.reviewLabelTextView.text = "Reviews (${poi.reviews.size})"
     binding.ratingTextView.text = "${poi.reviews.size} Reviews"
     binding.poiRatingBar.rating = poi.rating
+
+    poiOpeningHoursLayoutManager = LinearLayoutManager(this)
+    poiOpeningHoursAdapter = POIOpeningHoursAdapter()
+    poiOpeningHoursAdapter.addAll(poi.openingHours)
+
+    binding.openingHoursConstraintLayout.visibility =
+      if (poi.openingHours.isEmpty()) View.GONE else View.VISIBLE
+    binding.openingHoursRecyclerView.apply {
+      layoutManager = poiOpeningHoursLayoutManager
+      adapter = poiOpeningHoursAdapter
+    }
+
+
 
     poi.tags.forEach {
       val chip = Chip(this@POIDetailActivity)

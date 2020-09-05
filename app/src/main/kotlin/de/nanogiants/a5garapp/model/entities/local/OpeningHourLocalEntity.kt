@@ -8,12 +8,7 @@ package de.nanogiants.a5garapp.model.entities.local
 import com.squareup.moshi.JsonClass
 
 @JsonClass(generateAdapter = true)
-data class POILocalEntity(
-  val id: Int,
-  val name: String,
-  val tags: List<Int>,
-  val description: String,
-  val coordinates: CoordinatesLocalEntity,
-  val images: List<String>,
-  val openingHours: List<OpeningHourLocalEntity>?
+data class OpeningHourLocalEntity(
+  val day: String,
+  val hours: String
 )

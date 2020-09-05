@@ -12,5 +12,6 @@ data class POI(
   val coordinates: Coordinates,
   val imageUrls: List<String>,
   val reviews: List<Review>,
-  val rating: Float
+  val rating: Float,
+  val openingHours: List<OpeningHour>
 ) : Serializable
