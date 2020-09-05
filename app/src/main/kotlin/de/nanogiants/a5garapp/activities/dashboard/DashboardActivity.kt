@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.animation.AnimationUtils
 import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -15,16 +16,19 @@ import com.huawei.hms.maps.HuaweiMapOptions
 import com.huawei.hms.maps.OnMapReadyCallback
 import dagger.hilt.android.AndroidEntryPoint
 import de.nanogiants.a5garapp.R
+import de.nanogiants.a5garapp.R.anim
 import de.nanogiants.a5garapp.activities.dashboard.adapters.DashboardPOIAdapter
+import de.nanogiants.a5garapp.activities.dashboard.adapters.DashboardTagAdapter
 import de.nanogiants.a5garapp.activities.favorites.FavoritesActivity
-import de.nanogiants.a5garapp.activities.filter.FilterActivity
 import de.nanogiants.a5garapp.activities.listeners.OnSnapPositionChangeListener
 import de.nanogiants.a5garapp.activities.listeners.SnapOnScrollListener
 import de.nanogiants.a5garapp.activities.poidetail.POIDetailActivity
 import de.nanogiants.a5garapp.base.BaseActivity
 import de.nanogiants.a5garapp.databinding.ActivityDashboardBinding
 import de.nanogiants.a5garapp.model.datastore.POIDatastore
+import de.nanogiants.a5garapp.model.datastore.TagDatastore
 import de.nanogiants.a5garapp.model.entities.domain.POI
+import de.nanogiants.a5garapp.model.entities.domain.SelectableTag
 import de.nanogiants.a5garapp.utils.JSONReader
 import de.nanogiants.a5garapp.views.POIMapFragment
 import kotlinx.coroutines.Dispatchers
@@ -47,8 +51,15 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
 
   lateinit var poiSnapHelper: LinearSnapHelper
 
+  lateinit var tagAdapter: DashboardTagAdapter
+
+  lateinit var tagLayoutManager: LinearLayoutManager
+
   @Inject
   lateinit var poiDatastore: POIDatastore
+
+  @Inject
+  lateinit var tagDataStore: TagDatastore
 
   val loadFromWeb: Boolean = false
 
@@ -61,6 +72,16 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
 
   override fun initView() {
     binding.toolbar.title = "Places"
+
+    tagLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+    tagAdapter = DashboardTagAdapter()
+    tagAdapter.onTagClicked = this::onTagClicked
+
+    binding.tagRecyclerView.collapse(true)
+    binding.tagRecyclerView.apply {
+      layoutManager = tagLayoutManager
+      adapter = tagAdapter
+    }
 
     poiLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
 
@@ -112,6 +133,30 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
     mapFragment.getMapAsync(this)
   }
 
+  override fun onResume() {
+    super.onResume()
+
+    lifecycleScope.launch {
+      try {
+        if (loadFromWeb) {
+          withContext(Dispatchers.IO) { tagDataStore.getAllTags() }.let {
+            tagAdapter.clear()
+            tagAdapter.addAll(it.map { tag -> SelectableTag(tag.id, tag.name, false) })
+          }
+        } else {
+          withContext(Dispatchers.IO) { JSONReader.getTagsFromAssets(this@DashboardActivity) }.let {
+            Timber.d("Loaded all $it")
+            tagAdapter.clear()
+            tagAdapter.addAll(it.map { tag -> SelectableTag(tag.id, tag.name, false) })
+          }
+        }
+      } catch (e: Exception) {
+        Timber.d("There was an error $e")
+        Timber.e(e)
+      }
+    }
+  }
+
   private fun onPOIClicked(poi: POI, sharedElement: View) {
     Timber.d("Clicked $poi")
 
@@ -137,9 +182,11 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
     return when (item.itemId) {
       R.id.filter -> {
-        val intent = Intent(this, FilterActivity::class.java)
+        /*val intent = Intent(this, FilterActivity::class.java)
         startActivity(intent)
-        overridePendingTransition(R.anim.enter_from_bottom, R.anim.nothing);
+        overridePendingTransition(R.anim.enter_from_bottom, R.anim.nothing);*/
+
+        binding.tagRecyclerView.toggle()
         true
       }
       else -> super.onOptionsItemSelected(item)
@@ -148,26 +195,33 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
 
   override fun onMapReady(map: HuaweiMap) {
     mapFragment.setMap(map)
+    loadPOIsWithTags()
+  }
 
+  private fun loadPOIsWithTags(tagIDs: List<Int> = listOf()) {
     lifecycleScope.launch {
       try {
         if (loadFromWeb) {
           withContext(Dispatchers.IO) { poiDatastore.getAllPOIs() }.let {
-            Timber.d("Loaded all $it")
+            val filteredPOIs =
+              it.filter { poi -> tagIDs.isEmpty() || poi.tags.any { tag -> tagIDs.contains(tag.id) } }
+
             poiAdapter.clear()
-            poiAdapter.addAll(it)
+            poiAdapter.addAll(filteredPOIs)
 
             mapFragment.clearPOIs()
-            mapFragment.setPOIs(it, true, 400.0f)
+            mapFragment.setPOIs(filteredPOIs, true, 400.0f)
           }
         } else {
           withContext(Dispatchers.IO) { JSONReader.getPOIsFromAssets(this@DashboardActivity) }.let {
-            Timber.d("Loaded all $it")
+            val filteredPOIs =
+              it.filter { poi -> tagIDs.isEmpty() || poi.tags.any { tag -> tagIDs.contains(tag.id) } }
+
             poiAdapter.clear()
-            poiAdapter.addAll(it)
+            poiAdapter.addAll(filteredPOIs)
 
             mapFragment.clearPOIs()
-            mapFragment.setPOIs(it, true, 400.0f)
+            mapFragment.setPOIs(filteredPOIs, true, 400.0f)
           }
         }
       } catch (e: Exception) {
@@ -181,4 +235,10 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
     val poi = poiAdapter.get(position)
     mapFragment.centerMapOnPOI(poi, 400.0f)
   }
+
+  private fun onTagClicked(tag: SelectableTag, position: Int) {
+    tagAdapter.selectTag(position, !tag.selected)
+    loadPOIsWithTags(tagAdapter.getAll().filter { it.selected }.map { it.id })
+  }
 }
+

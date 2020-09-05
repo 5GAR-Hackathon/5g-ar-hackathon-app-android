@@ -13,4 +13,6 @@
   <color name="primaryDark">#802C23</color>
   <color name="secondary">#E4FDE1</color>
   <color name="secondaryVariant">#A8F99F</color>
+
+  <color name="transparent">#00ffffff</color>
 </resources>

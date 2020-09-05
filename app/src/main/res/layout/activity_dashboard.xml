@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.dashboard.DashboardActivity"
     android:background="@color/white"
+    tools:context=".activities.dashboard.DashboardActivity"
     >
 
   <com.google.android.material.appbar.MaterialToolbar
@@ -41,8 +41,17 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/toolbar"
-      />
+      ></FrameLayout>
 
+  <de.nanogiants.a5garapp.views.ExpandableRecyclerView
+      android:id="@+id/tagRecyclerView"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:background="@color/white"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toBottomOf="@+id/toolbar"
+      />
   <androidx.recyclerview.widget.RecyclerView
       android:id="@+id/dashboard_poi_recyclerview"
       android:layout_width="match_parent"
