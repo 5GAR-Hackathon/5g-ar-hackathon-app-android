@@ -36,6 +36,7 @@ import de.nanogiants.a5garapp.databinding.ActivityDashboardBinding
 import de.nanogiants.a5garapp.model.datastore.POIDatastore
 import de.nanogiants.a5garapp.model.entities.domain.POI
 import de.nanogiants.a5garapp.utils.JSONReader
+import de.nanogiants.a5garapp.views.POIMapFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
@@ -61,13 +62,7 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
 
   val loadFromWeb: Boolean = false
 
-  private var huaweiMap: HuaweiMap? = null
-
-  lateinit var mapFragment: MapFragment
-
-  var markerDrawn: Boolean = false
-
-  var markers: MutableList<Marker> = mutableListOf()
+  lateinit var mapFragment: POIMapFragment
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -91,7 +86,7 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
     poiSnapHelper.attachToRecyclerView(binding.dashboardPoiRecyclerview)
 
     val snapOnScrollListener =
-      SnapOnScrollListener(poiSnapHelper, SnapOnScrollListener.Behavior.NOTIFY_ON_SCROLL, this)
+      SnapOnScrollListener(poiSnapHelper, SnapOnScrollListener.Behavior.NOTIFY_ON_SCROLL_STATE_IDLE, this)
     binding.dashboardPoiRecyclerview.addOnScrollListener(snapOnScrollListener)
 
     binding.bottomNavigationView.selectedItemId = R.id.places
@@ -112,7 +107,8 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
     val huaweiMapOptions = HuaweiMapOptions()
     huaweiMapOptions.compassEnabled(true)
     huaweiMapOptions.zoomGesturesEnabled(true)
-    mapFragment = MapFragment.newInstance(huaweiMapOptions)
+
+    mapFragment = POIMapFragment.newInstance(huaweiMapOptions)
 
     val fragmentManager: FragmentManager = fragmentManager
     fragmentManager.beginTransaction().apply {
@@ -120,12 +116,6 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
     }.commit()
 
     mapFragment.getMapAsync(this)
-  }
-
-  override fun onResume() {
-    super.onResume()
-
-
   }
 
   private fun onPOIClicked(poi: POI, sharedElement: View) {
@@ -163,25 +153,17 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
   }
 
   override fun onMapReady(map: HuaweiMap) {
-    val styleOptions = MapStyleOptions.loadRawResourceStyle(this, R.raw.mapstyle_night)
-    huaweiMap = map.apply {
-      isMyLocationEnabled = true
-      //uiSettings.isMyLocationButtonEnabled = true
-      // setMapStyle(styleOptions)
-    }
+    mapFragment.setMap(map)
 
     lifecycleScope.launch {
       try {
-        markers.map { it.remove() }
-        markers = mutableListOf()
-
         if (loadFromWeb) {
           withContext(Dispatchers.IO) { poiDatastore.getAllPOIs() }.let {
             Timber.d("Loaded all $it")
             poiAdapter.clear()
             poiAdapter.addAll(it)
 
-            it.map { poi -> markers.add(addMarker(poi)) }
+            mapFragment.setPOIs(it)
           }
         } else {
           withContext(Dispatchers.IO) { JSONReader.getPOIsFromAssets(this@DashboardActivity) }.let {
@@ -189,7 +171,7 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
             poiAdapter.clear()
             poiAdapter.addAll(it)
 
-            it.map { poi -> markers.add(addMarker(poi)) }
+            mapFragment.setPOIs(it)
           }
         }
       } catch (e: Exception) {
@@ -199,39 +181,8 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
     }
   }
 
-  private fun centerMapOnPOI(poi: POI) {
-    val cameraPosition =
-      CameraPosition(LatLng(poi.coordinates.lat, poi.coordinates.lng), 15f, 2.0f, 0.0f)
-    val cameraUpdate: CameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition)
-
-    huaweiMap?.animateCamera(cameraUpdate);
-
-    markers.sortBy {
-      DistanceCalculator.computeDistanceBetween(
-        it.position,
-        LatLng(poi.coordinates.lat, poi.coordinates.lng)
-      )
-    }
-
-    markers.map { it.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin)) }
-    markers[0].setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_secondary))
-  }
-
   override fun onSnapPositionChange(position: Int) {
-    Timber.d("Got to the possition $position")
     val poi = poiAdapter.get(position)
-    centerMapOnPOI(poi)
-  }
-
-  private fun addMarker(poi: POI): Marker {
-    Timber.d("Drawing on map ${huaweiMap == null} $markerDrawn ${poi.id}")
-
-    val options: MarkerOptions = MarkerOptions()
-      .position(LatLng(poi.coordinates.lat, poi.coordinates.lng))
-      .title(poi.name)
-      .snippet(poi.description)
-      .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin))
-
-    return huaweiMap!!.addMarker(options)
+    mapFragment.centerMapOnPOI(poi)
   }
 }
