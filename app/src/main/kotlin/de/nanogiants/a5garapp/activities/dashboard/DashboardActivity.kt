@@ -158,7 +158,7 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
             poiAdapter.addAll(it)
 
             mapFragment.clearPOIs()
-            mapFragment.setPOIs(it)
+            mapFragment.setPOIs(it, true, 400.0f)
           }
         } else {
           withContext(Dispatchers.IO) { JSONReader.getPOIsFromAssets(this@DashboardActivity) }.let {
@@ -167,7 +167,7 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
             poiAdapter.addAll(it)
 
             mapFragment.clearPOIs()
-            mapFragment.setPOIs(it)
+            mapFragment.setPOIs(it, true, 400.0f)
           }
         }
       } catch (e: Exception) {
@@ -179,6 +179,6 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
 
   override fun onSnapPositionChange(position: Int) {
     val poi = poiAdapter.get(position)
-    mapFragment.centerMapOnPOI(poi)
+    mapFragment.centerMapOnPOI(poi, 400.0f)
   }
 }

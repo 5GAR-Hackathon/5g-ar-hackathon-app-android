@@ -17,6 +17,7 @@ class DashboardPOIViewholder(val viewBinding: ItemDashboardPoiBinding) :
   fun bind(item: POI) {
     viewBinding.poiReviewRatingBar.rating = item.rating
     viewBinding.nameTextView.text = item.name
+    viewBinding.reviewTextView.text = "${item.reviews.size} Reviews"
     viewBinding.tagsTextView.text =
       item.tags.joinToString(", ") { it.name.capitalize(Locale.getDefault()) }
 

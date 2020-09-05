@@ -18,6 +18,7 @@ import com.huawei.hms.maps.model.LatLng
 import com.huawei.hms.maps.model.Marker
 import com.huawei.hms.maps.model.MarkerOptions
 import de.nanogiants.a5garapp.R
+import de.nanogiants.a5garapp.model.entities.domain.Coordinates
 import de.nanogiants.a5garapp.model.entities.domain.POI
 
 
@@ -41,6 +42,8 @@ class POIMapFragment : MapFragment() {
     huaweiMap = map.apply {
       isMyLocationEnabled = true
     }
+
+    huaweiMap!!.setInfoWindowAdapter(POIMapWindowAdapter(context))
   }
 
   fun clearPOIs() {
@@ -48,19 +51,19 @@ class POIMapFragment : MapFragment() {
     markers = mutableListOf()
   }
 
-  fun setPOIs(pois: List<POI>, autoCenter: Boolean = true) {
+  fun setPOIs(pois: List<POI>, autoCenter: Boolean = true, offsetToSouthInMeters: Float = 0.0f) {
     pois.map { poi -> markers.add(addMarker(poi)) }
 
     if (autoCenter && pois.size > 0) {
-      centerMapOnPOI(pois[0])
+      centerMapOnPOI(pois[0], offsetToSouthInMeters)
     }
   }
 
-  fun addPOI(poi: POI, autoCenter: Boolean = true) {
+  fun addPOI(poi: POI, autoCenter: Boolean = true, offsetToSouthInMeters: Float = 0.0f) {
     markers.add(addMarker(poi))
 
     if (autoCenter) {
-      centerMapOnPOI(poi)
+      centerMapOnPOI(poi, offsetToSouthInMeters)
     }
   }
 
@@ -69,9 +72,9 @@ class POIMapFragment : MapFragment() {
     huaweiMap?.uiSettings?.isMyLocationButtonEnabled = false
   }
 
-  fun centerMapOnPOI(poi: POI) {
+  fun centerMapOnPOI(poi: POI, offsetToSouthInMeters: Float = 0.0f) {
     val cameraPosition =
-      CameraPosition(LatLng(poi.coordinates.lat, poi.coordinates.lng), 15f, 2.0f, 0.0f)
+      CameraPosition(newCoordinatesWithOffsetToNorth(poi, offsetToSouthInMeters), 15f, 2.0f, 0.0f)
     val cameraUpdate: CameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition)
 
     huaweiMap?.animateCamera(cameraUpdate);
@@ -83,8 +86,18 @@ class POIMapFragment : MapFragment() {
       )
     }
 
-    markers.map { it.setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin)) }
-    markers[0].setIcon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin_secondary))
+
+
+    markers.map { it.alpha = 0.75f }
+    markers[0].alpha = 1f
+  }
+
+  private fun newCoordinatesWithOffsetToNorth(poi: POI, meters: Float): LatLng {
+    val earthRadius = 6378.0
+    val pi = Math.PI;
+    val lat = poi.coordinates.lat - ((meters / 1000) / earthRadius) * (180 / pi)
+
+    return LatLng(lat, poi.coordinates.lng)
   }
 
   private fun addMarker(poi: POI): Marker {
