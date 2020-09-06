@@ -5,7 +5,9 @@
 
 package de.nanogiants.a5garapp.views
 
+import android.graphics.Color
 import android.os.Bundle
+import androidx.core.content.ContextCompat
 import com.huawei.hms.maps.CameraUpdate
 import com.huawei.hms.maps.CameraUpdateFactory
 import com.huawei.hms.maps.HuaweiMap
@@ -14,12 +16,18 @@ import com.huawei.hms.maps.MapFragment
 import com.huawei.hms.maps.common.util.DistanceCalculator
 import com.huawei.hms.maps.model.BitmapDescriptorFactory
 import com.huawei.hms.maps.model.CameraPosition
+import com.huawei.hms.maps.model.JointType
 import com.huawei.hms.maps.model.LatLng
+import com.huawei.hms.maps.model.LatLngBounds
 import com.huawei.hms.maps.model.Marker
 import com.huawei.hms.maps.model.MarkerOptions
+import com.huawei.hms.maps.model.Polyline
+import com.huawei.hms.maps.model.PolylineOptions
 import de.nanogiants.a5garapp.R
+import de.nanogiants.a5garapp.model.datastore.NavigationDatastore
 import de.nanogiants.a5garapp.model.entities.domain.Coordinates
 import de.nanogiants.a5garapp.model.entities.domain.POI
+import timber.log.Timber
 
 
 class POIMapFragment : MapFragment() {
@@ -27,6 +35,14 @@ class POIMapFragment : MapFragment() {
   private var huaweiMap: HuaweiMap? = null
 
   private var markers: MutableList<Marker> = mutableListOf()
+
+  private var navigationLines: MutableList<Polyline> = mutableListOf()
+
+  private var paths: MutableList<MutableList<LatLng>> = mutableListOf()
+
+  lateinit var bounds: LatLngBounds
+
+  lateinit var navigationDatastore: NavigationDatastore
 
   companion object {
     fun newInstance(options: HuaweiMapOptions): POIMapFragment {
@@ -110,7 +126,7 @@ class POIMapFragment : MapFragment() {
     val options: MarkerOptions = MarkerOptions()
       .position(LatLng(poi.coordinates.lat, poi.coordinates.lng))
       .title(poi.name)
-      .icon(BitmapDescriptorFactory.fromResource(id)) // R.drawable.ic_pin
+      .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin)) // R.drawable.ic_pin
 
     return huaweiMap!!.addMarker(options)
   }
@@ -154,5 +170,54 @@ class POIMapFragment : MapFragment() {
     }
 
     return "$name${if (selected) "_selected" else ""}"
+  }
+
+  private fun removeNavigationLines() {
+    navigationLines.forEach { it.remove() }
+    navigationLines.clear()
+
+    paths.clear()
+  }
+
+  suspend fun navigate(from: Coordinates, to: Coordinates) {
+    removeNavigationLines()
+
+    try {
+      val result = navigationDatastore.getWalkingNavigation(from, to)
+
+      if (result.routes.size > 0) {
+        val route = result.routes[0]
+
+        /* parse response */
+
+        bounds = LatLngBounds(
+          LatLng(route.bounds.southwest.lat, route.bounds.southwest.lng),
+          LatLng(route.bounds.northeast.lat, route.bounds.northeast.lng)
+        )
+
+        route.paths.forEach { path ->
+          paths = path.steps.map {
+            it.polyline.map { polyline -> LatLng(polyline.lat, polyline.lng) }.toMutableList()
+          }.toMutableList()
+        }
+
+        /* render route */
+
+        paths.forEach { path ->
+          val options =
+            PolylineOptions().color(ContextCompat.getColor(context, R.color.primary)).width(5f)
+              .jointType(JointType.ROUND)
+          path.forEach { options.add(it) }
+
+          val polyline = huaweiMap!!.addPolyline(options)
+          navigationLines.add(polyline)
+        }
+
+        val cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, 5)
+        huaweiMap!!.moveCamera(cameraUpdate)
+      }
+    } catch (error: Exception) {
+      Timber.e("There was an error $error")
+    }
   }
 }

@@ -6,8 +6,11 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ApplicationComponent
 import de.nanogiants.a5garapp.BuildConfig
+import de.nanogiants.a5garapp.model.datasource.api.NavigationDatasource
 import de.nanogiants.a5garapp.model.datasource.api.POIDatasource
 import de.nanogiants.a5garapp.model.datasource.api.TagDatasource
+import de.nanogiants.a5garapp.model.datastore.NavigationDatastore
+import de.nanogiants.a5garapp.model.datastore.NavigationDatastoreImpl
 import de.nanogiants.a5garapp.model.datastore.POIDatastore
 import de.nanogiants.a5garapp.model.datastore.POIDatastoreImpl
 import de.nanogiants.a5garapp.model.datastore.ReviewDatastore
@@ -25,6 +28,7 @@ import okhttp3.logging.HttpLoggingInterceptor.Logger
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import timber.log.Timber
+import javax.inject.Named
 
 
 @Module(includes = [BackendStaticModule::class])
@@ -39,6 +43,9 @@ abstract class BackendModule {
 
   @Binds
   abstract fun provideReviewDataStore(reviewDatastoreImpl: ReviewDatastoreImpl): ReviewDatastore
+
+  @Binds
+  abstract fun provideNavigationDataStore(navigationDatastoreImpl: NavigationDatastoreImpl): NavigationDatastore
 
   @Binds
   abstract fun providePOIWebTransformer(poiWebTransformerImpl: POIWebTransformerImpl): POIWebTransformer
@@ -63,6 +70,7 @@ object BackendStaticModule {
   }
 
   @Provides
+  @Named("backend")
   fun provideRetrofit(okHttpClient: OkHttpClient): Retrofit {
     return Retrofit.Builder()
       .baseUrl(BuildConfig.BASE_URL)
@@ -72,10 +80,24 @@ object BackendStaticModule {
   }
 
   @Provides
-  fun providePOIDatasource(retrofit: Retrofit): POIDatasource =
+  @Named("map")
+  fun provideMapRetrofit(okHttpClient: OkHttpClient): Retrofit {
+    return Retrofit.Builder()
+      .baseUrl("https://mapapi.cloud.huawei.com/mapApi/v1/routeService/")
+      .client(okHttpClient)
+      .addConverterFactory(MoshiConverterFactory.create())
+      .build()
+  }
+
+  @Provides
+  fun providePOIDatasource(@Named("backend") retrofit: Retrofit): POIDatasource =
     retrofit.create(POIDatasource::class.java)
 
   @Provides
-  fun provideTagDatasource(retrofit: Retrofit): TagDatasource =
+  fun provideTagDatasource(@Named("backend") retrofit: Retrofit): TagDatasource =
     retrofit.create(TagDatasource::class.java)
+
+  @Provides
+  fun provideNavigationDatasource(@Named("map") retrofit: Retrofit): NavigationDatasource =
+    retrofit.create(NavigationDatasource::class.java)
 }

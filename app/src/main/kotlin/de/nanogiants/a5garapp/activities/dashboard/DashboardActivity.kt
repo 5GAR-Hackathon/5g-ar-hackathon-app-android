@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import com.huawei.hms.maps.HuaweiMap
 import com.huawei.hms.maps.HuaweiMapOptions
 import com.huawei.hms.maps.OnMapReadyCallback
+import com.huawei.hms.maps.model.LatLng
 import dagger.hilt.android.AndroidEntryPoint
 import de.nanogiants.a5garapp.R
 import de.nanogiants.a5garapp.R.anim
@@ -25,8 +26,10 @@ import de.nanogiants.a5garapp.activities.listeners.SnapOnScrollListener
 import de.nanogiants.a5garapp.activities.poidetail.POIDetailActivity
 import de.nanogiants.a5garapp.base.BaseActivity
 import de.nanogiants.a5garapp.databinding.ActivityDashboardBinding
+import de.nanogiants.a5garapp.model.datastore.NavigationDatastore
 import de.nanogiants.a5garapp.model.datastore.POIDatastore
 import de.nanogiants.a5garapp.model.datastore.TagDatastore
+import de.nanogiants.a5garapp.model.entities.domain.Coordinates
 import de.nanogiants.a5garapp.model.entities.domain.POI
 import de.nanogiants.a5garapp.model.entities.domain.SelectableTag
 import de.nanogiants.a5garapp.utils.JSONReader
@@ -60,6 +63,9 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
 
   @Inject
   lateinit var tagDataStore: TagDatastore
+
+  @Inject
+  lateinit var navigationDatastore: NavigationDatastore
 
   val loadFromWeb: Boolean = false
 
@@ -195,6 +201,8 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
 
   override fun onMapReady(map: HuaweiMap) {
     mapFragment.setMap(map)
+    mapFragment.navigationDatastore = navigationDatastore
+
     loadPOIsWithTags()
   }
 
@@ -234,11 +242,27 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
   override fun onSnapPositionChange(position: Int) {
     val poi = poiAdapter.get(position)
     mapFragment.centerMapOnPOI(poi, 400.0f)
+
+    binding.navigateButton.setOnClickListener {
+      Timber.d("Alright. We are going")
+      navigate(poi.coordinates, poiAdapter.get(position + 1).coordinates)
+    }
   }
 
   private fun onTagClicked(tag: SelectableTag, position: Int) {
     tagAdapter.selectTag(position, !tag.selected)
     loadPOIsWithTags(tagAdapter.getAll().filter { it.selected }.map { it.id })
+  }
+
+  private fun navigate(from: Coordinates, to: Coordinates) {
+    lifecycleScope.launch {
+      try {
+        withContext(Dispatchers.IO) { mapFragment.navigate(from, to) }
+      } catch (e: Exception) {
+        Timber.d("There was an error $e")
+        Timber.e(e)
+      }
+    }
   }
 }
 

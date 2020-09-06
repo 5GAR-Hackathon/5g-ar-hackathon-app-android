@@ -56,11 +56,20 @@
       android:id="@+id/dashboard_poi_recyclerview"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
+      app:layout_constraintBottom_toTopOf="@+id/navigateButton"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      ></androidx.recyclerview.widget.RecyclerView>
+
+  <Button
+      android:id="@+id/navigateButton"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:text="Navigate to next POI"
       app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       />
-
   <com.google.android.material.bottomnavigation.BottomNavigationView
       android:id="@+id/bottomNavigationView"
       android:layout_width="0dp"
@@ -76,6 +85,7 @@
       app:labelVisibilityMode="labeled"
       />
   <View
+      android:id="@+id/view3"
       android:layout_width="wrap_content"
       android:layout_height="1dp"
       android:background="@color/gray"
