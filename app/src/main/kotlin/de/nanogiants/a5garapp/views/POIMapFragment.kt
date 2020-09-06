@@ -43,7 +43,7 @@ class POIMapFragment : MapFragment() {
       isMyLocationEnabled = true
     }
 
-    huaweiMap!!.setInfoWindowAdapter(POIMapWindowAdapter(context))
+    // huaweiMap!!.setInfoWindowAdapter(POIMapWindowAdapter(context))
   }
 
   fun clearPOIs() {
@@ -101,12 +101,58 @@ class POIMapFragment : MapFragment() {
   }
 
   private fun addMarker(poi: POI): Marker {
+    val id = context.resources.getIdentifier(
+      getDrawableNameForTag(poi.tags[0].id, false),
+      "drawable",
+      context.packageName
+    )
+
     val options: MarkerOptions = MarkerOptions()
       .position(LatLng(poi.coordinates.lat, poi.coordinates.lng))
       .title(poi.name)
-      .snippet(poi.description)
-      .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin))
+      .icon(BitmapDescriptorFactory.fromResource(id)) // R.drawable.ic_pin
 
     return huaweiMap!!.addMarker(options)
+  }
+
+  private fun getDrawableNameForTag(tagId: Int, selected: Boolean): String {
+    val name = when (tagId) {
+      1 -> "ic_coffee" // restaurant
+
+      2 -> "ic_map_outline" // place
+
+      3 -> "ic_image_outline" // museum
+
+      4 -> "ic_color_palette_outline" // art
+
+      5 -> "ic_speaker" // concert
+
+      6 -> "ic_flag" // kiosk
+
+      7 -> "ic_flag" // bar
+
+      8 -> "ic_flag" // zoo
+
+      9 -> "ic_music_outline" // music
+
+      10 -> "ic_anchor" // water
+
+      11 -> "ic_film_outline" // theater
+
+      12 -> "ic_resource_package" // startup
+
+      13 -> "ic_briefcase_outline" // business
+
+      14 -> "ic_flag" // lookout
+
+      15 -> "ic_home_outline__1_" // architecture
+
+      16 -> "ic_flag" // hotel
+
+      17 -> "ic_flag" // historic
+      else -> ""
+    }
+
+    return "$name${if (selected) "_selected" else ""}"
   }
 }
