@@ -67,16 +67,26 @@ class POIMapFragment : MapFragment() {
     markers = mutableListOf()
   }
 
-  fun setPOIs(pois: List<POI>, autoCenter: Boolean = true, offsetToSouthInMeters: Float = 0.0f) {
-    pois.map { poi -> markers.add(addMarker(poi)) }
+  fun addPOIs(
+    pois: List<POI>,
+    autoCenter: Boolean = true,
+    offsetToSouthInMeters: Float = 0.0f,
+    customMarkers: Boolean = false
+  ) {
+    pois.map { poi -> markers.add(addMarker(poi, customMarkers)) }
 
     if (autoCenter && pois.size > 0) {
       centerMapOnPOI(pois[0], offsetToSouthInMeters)
     }
   }
 
-  fun addPOI(poi: POI, autoCenter: Boolean = true, offsetToSouthInMeters: Float = 0.0f) {
-    markers.add(addMarker(poi))
+  fun addPOI(
+    poi: POI,
+    autoCenter: Boolean = true,
+    offsetToSouthInMeters: Float = 0.0f,
+    customMarkers: Boolean = false
+  ) {
+    markers.add(addMarker(poi, customMarkers))
 
     if (autoCenter) {
       centerMapOnPOI(poi, offsetToSouthInMeters)
@@ -116,7 +126,7 @@ class POIMapFragment : MapFragment() {
     return LatLng(lat, poi.coordinates.lng)
   }
 
-  private fun addMarker(poi: POI): Marker {
+  private fun addMarker(poi: POI, customMarkers: Boolean): Marker {
     val id = context.resources.getIdentifier(
       getDrawableNameForTag(poi.tags[0].id, false),
       "drawable",
@@ -126,7 +136,7 @@ class POIMapFragment : MapFragment() {
     val options: MarkerOptions = MarkerOptions()
       .position(LatLng(poi.coordinates.lat, poi.coordinates.lng))
       .title(poi.name)
-      .icon(BitmapDescriptorFactory.fromResource(R.drawable.ic_pin)) // R.drawable.ic_pin
+      .icon(BitmapDescriptorFactory.fromResource(if (customMarkers) id else R.drawable.ic_pin))
 
     return huaweiMap!!.addMarker(options)
   }
@@ -166,6 +176,8 @@ class POIMapFragment : MapFragment() {
       16 -> "ic_flag" // hotel
 
       17 -> "ic_flag" // historic
+
+      1001 -> "ic_dollar_sign"
       else -> ""
     }
 

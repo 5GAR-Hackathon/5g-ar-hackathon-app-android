@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
-import android.view.animation.AnimationUtils
 import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,10 +13,8 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import com.huawei.hms.maps.HuaweiMap
 import com.huawei.hms.maps.HuaweiMapOptions
 import com.huawei.hms.maps.OnMapReadyCallback
-import com.huawei.hms.maps.model.LatLng
 import dagger.hilt.android.AndroidEntryPoint
 import de.nanogiants.a5garapp.R
-import de.nanogiants.a5garapp.R.anim
 import de.nanogiants.a5garapp.activities.dashboard.adapters.DashboardPOIAdapter
 import de.nanogiants.a5garapp.activities.dashboard.adapters.DashboardTagAdapter
 import de.nanogiants.a5garapp.activities.favorites.FavoritesActivity
@@ -218,7 +215,7 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
             poiAdapter.addAll(filteredPOIs)
 
             mapFragment.clearPOIs()
-            mapFragment.setPOIs(filteredPOIs, true, 400.0f)
+            mapFragment.addPOIs(filteredPOIs, true, 400.0f)
           }
         } else {
           withContext(Dispatchers.IO) { JSONReader.getPOIsFromAssets(this@DashboardActivity) }.let {
@@ -229,7 +226,7 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
             poiAdapter.addAll(filteredPOIs)
 
             mapFragment.clearPOIs()
-            mapFragment.setPOIs(filteredPOIs, true, 400.0f)
+            mapFragment.addPOIs(filteredPOIs, true, 400.0f)
           }
         }
       } catch (e: Exception) {

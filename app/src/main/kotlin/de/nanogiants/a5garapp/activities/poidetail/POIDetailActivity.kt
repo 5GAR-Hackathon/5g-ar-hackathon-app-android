@@ -26,11 +26,13 @@ import de.nanogiants.a5garapp.base.BaseActivity
 import de.nanogiants.a5garapp.controllers.SharedPreferencesController
 import de.nanogiants.a5garapp.databinding.ActivityPoiDetailBinding
 import de.nanogiants.a5garapp.model.datastore.ReviewDatastore
+import de.nanogiants.a5garapp.model.datastore.SiteDatastore
 import de.nanogiants.a5garapp.model.entities.domain.POI
 import de.nanogiants.a5garapp.views.POIMapFragment
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import timber.log.Timber
+import java.lang.Exception
 import java.util.Locale
 import javax.inject.Inject
 
@@ -56,6 +58,9 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
   lateinit var reviewDatastore: ReviewDatastore
 
   @Inject
+  lateinit var siteDatastore: SiteDatastore
+
+  @Inject
   lateinit var sharedPreferencesController: SharedPreferencesController
 
   lateinit var poi: POI
@@ -64,6 +69,7 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
 
   lateinit
   var optionsMenu: Menu
+
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -156,6 +162,8 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
     }.commit()
 
     mapFragment.getMapAsync(this)
+
+    searchNearbyLocations()
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -201,5 +209,22 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
 
     mapFragment.clearPOIs()
     mapFragment.addPOI(poi)
+  }
+
+  private fun searchNearbyLocations() {
+    lifecycleScope.launch {
+      try {
+        val cafePOIs = siteDatastore.getCafeSites(poi.coordinates, 3000)
+        val bankPOIs = siteDatastore.getBankSites(poi.coordinates, 3000)
+
+        mapFragment.addPOIs(
+          pois = cafePOIs + bankPOIs,
+          autoCenter = false,
+          customMarkers = true
+        )
+      } catch (error: Exception) {
+        Timber.e(error)
+      }
+    }
   }
 }

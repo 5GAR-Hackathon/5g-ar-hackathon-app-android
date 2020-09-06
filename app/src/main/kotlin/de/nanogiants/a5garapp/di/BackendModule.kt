@@ -1,5 +1,8 @@
 package de.nanogiants.a5garapp.di
 
+import android.app.Activity
+import android.app.Application
+import android.content.Context
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -15,6 +18,8 @@ import de.nanogiants.a5garapp.model.datastore.POIDatastore
 import de.nanogiants.a5garapp.model.datastore.POIDatastoreImpl
 import de.nanogiants.a5garapp.model.datastore.ReviewDatastore
 import de.nanogiants.a5garapp.model.datastore.ReviewDatastoreImpl
+import de.nanogiants.a5garapp.model.datastore.SiteDatastore
+import de.nanogiants.a5garapp.model.datastore.SiteDatastoreImpl
 import de.nanogiants.a5garapp.model.datastore.TagDatastore
 import de.nanogiants.a5garapp.model.datastore.TagDatastoreImpl
 import de.nanogiants.a5garapp.model.transformer.POIWebTransformer
@@ -46,6 +51,9 @@ abstract class BackendModule {
 
   @Binds
   abstract fun provideNavigationDataStore(navigationDatastoreImpl: NavigationDatastoreImpl): NavigationDatastore
+
+  @Binds
+  abstract fun provideSiteDatastore(siteDatastoreImpl: SiteDatastoreImpl): SiteDatastore
 
   @Binds
   abstract fun providePOIWebTransformer(poiWebTransformerImpl: POIWebTransformerImpl): POIWebTransformer
@@ -100,4 +108,7 @@ object BackendStaticModule {
   @Provides
   fun provideNavigationDatasource(@Named("map") retrofit: Retrofit): NavigationDatasource =
     retrofit.create(NavigationDatasource::class.java)
+
+  @Provides
+  fun provideContext(application: Application): Context = application
 }
