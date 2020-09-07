@@ -100,6 +100,7 @@ dependencies {
   implementation("com.huawei.hms:arenginesdk:2.12.0.1")
   implementation("com.huawei.hms:location:5.0.0.301")
   implementation("com.huawei.hms:maps:5.0.1.300")
+  implementation("com.huawei.hms:site:5.0.1.300")
   implementation("com.huawei.agconnect:agconnect-core:${properties["agcpVersion"]}")
 }
 

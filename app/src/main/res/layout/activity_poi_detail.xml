@@ -156,6 +156,7 @@
           app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toStartOf="parent"
           app:layout_constraintTop_toBottomOf="@+id/mapFragmentContainer"
+          android:visibility="gone"
           >
 
         <TextView
@@ -184,6 +185,45 @@
             />
 
       </androidx.constraintlayout.widget.ConstraintLayout>
+
+      <androidx.constraintlayout.widget.ConstraintLayout
+          android:id="@+id/nearbyConstraintLayout"
+          android:layout_width="match_parent"
+          android:layout_height="wrap_content"
+          android:layout_marginTop="32dp"
+          android:visibility="visible"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintStart_toStartOf="parent"
+          app:layout_constraintTop_toBottomOf="@+id/openingHoursConstraintLayout"
+          >
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:text="Nearby places"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textColor="#000000"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/nearbyRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView4"
+            />
+
+      </androidx.constraintlayout.widget.ConstraintLayout>
+
+
       <TextView
           android:id="@+id/photosLabelTextView"
           android:layout_width="0dp"
@@ -194,7 +234,7 @@
           android:textColor="#000000"
           app:layout_constraintEnd_toEndOf="@+id/descriptionTextView"
           app:layout_constraintStart_toStartOf="@+id/descriptionTextView"
-          app:layout_constraintTop_toBottomOf="@+id/openingHoursConstraintLayout"
+          app:layout_constraintTop_toBottomOf="@+id/nearbyConstraintLayout"
           />
       <androidx.recyclerview.widget.RecyclerView
           android:id="@+id/photoRecyclerView"
