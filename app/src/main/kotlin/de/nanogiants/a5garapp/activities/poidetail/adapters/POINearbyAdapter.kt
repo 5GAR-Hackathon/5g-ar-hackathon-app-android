@@ -21,7 +21,7 @@ import de.nanogiants.a5garapp.model.entities.domain.Review
 class POINearbyAdapter : RecyclerView.Adapter<POINearbyViewHolder>() {
 
   private var items: MutableList<NearbyPOI> = mutableListOf()
-  var onNearbyPOIClicked: ((String) -> Unit) = {}
+  var onNearbyPOIClicked: ((NearbyPOI) -> Unit) = {}
 
   override fun getItemCount() = items.size
 
@@ -45,7 +45,7 @@ class POINearbyAdapter : RecyclerView.Adapter<POINearbyViewHolder>() {
   override fun onBindViewHolder(holder: POINearbyViewHolder, position: Int) {
     holder.bind(items[position])
     holder.viewBinding.rootView.setOnClickListener {
-      onNearbyPOIClicked(items[position].url)
+      onNearbyPOIClicked(items[position])
     }
   }
 }

@@ -30,8 +30,10 @@ import de.nanogiants.a5garapp.activities.poidetail.adapters.POIReviewAdapter
 import de.nanogiants.a5garapp.base.BaseActivity
 import de.nanogiants.a5garapp.controllers.SharedPreferencesController
 import de.nanogiants.a5garapp.databinding.ActivityPoiDetailBinding
+import de.nanogiants.a5garapp.model.datastore.NavigationDatastore
 import de.nanogiants.a5garapp.model.datastore.ReviewDatastore
 import de.nanogiants.a5garapp.model.datastore.SiteDatastore
+import de.nanogiants.a5garapp.model.entities.domain.NearbyPOI
 import de.nanogiants.a5garapp.model.entities.domain.POI
 import de.nanogiants.a5garapp.views.POIMapFragment
 import kotlinx.coroutines.ExperimentalCoroutinesApi
@@ -71,13 +73,15 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
   @Inject
   lateinit var sharedPreferencesController: SharedPreferencesController
 
+  @Inject
+  lateinit var navigationDatastore: NavigationDatastore
+
   lateinit var poi: POI
 
   lateinit var mapFragment: POIMapFragment
 
   lateinit
   var optionsMenu: Menu
-
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -220,6 +224,7 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
 
   override fun onMapReady(map: HuaweiMap) {
     mapFragment.setMap(map)
+    mapFragment.navigationDatastore = navigationDatastore
     mapFragment.enableInteractiveMap(false)
 
     mapFragment.clearPOIs()
@@ -250,11 +255,13 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
     }
   }
 
-  fun onNearbyPOIClicked(url: String) {
-    if (url.isNotBlank()) {
-      val intent = Intent(Intent.ACTION_VIEW)
-      intent.setData(Uri.parse(url))
-      startActivity(intent)
+  fun onNearbyPOIClicked(nearbyPOI: NearbyPOI) {
+    lifecycleScope.launch {
+      try {
+        mapFragment.navigate(poi.coordinates, nearbyPOI.coordinates)
+      } catch (error: Exception) {
+        Timber.e(error)
+      }
     }
   }
 }
