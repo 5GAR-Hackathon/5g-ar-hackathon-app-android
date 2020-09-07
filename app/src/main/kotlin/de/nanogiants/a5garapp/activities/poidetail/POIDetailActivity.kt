@@ -1,6 +1,8 @@
 package de.nanogiants.a5garapp.activities.poidetail
 
 import android.app.FragmentManager
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -35,7 +37,6 @@ import de.nanogiants.a5garapp.views.POIMapFragment
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.lang.Exception
 import java.util.Locale
 import javax.inject.Inject
 
@@ -137,7 +138,7 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
     poiOpeningHoursAdapter.addAll(poi.openingHours)
 
     binding.openingHoursConstraintLayout.visibility = View.GONE
-      // if (poi.openingHours.isEmpty()) View.GONE else View.VISIBLE
+    // if (poi.openingHours.isEmpty()) View.GONE else View.VISIBLE
     binding.openingHoursRecyclerView.apply {
       layoutManager = poiOpeningHoursLayoutManager
       adapter = poiOpeningHoursAdapter
@@ -145,6 +146,7 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
 
     poiNearbyLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
     poiNearbyAdapter = POINearbyAdapter()
+    poiNearbyAdapter.onNearbyPOIClicked = this::onNearbyPOIClicked
 
     binding.nearbyRecyclerView.apply {
       layoutManager = poiNearbyLayoutManager
@@ -247,4 +249,13 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
       }
     }
   }
+
+  fun onNearbyPOIClicked(url: String) {
+    if (url.isNotBlank()) {
+      val intent = Intent(Intent.ACTION_VIEW)
+      intent.setData(Uri.parse(url))
+      startActivity(intent)
+    }
+  }
 }
+

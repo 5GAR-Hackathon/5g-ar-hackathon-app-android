@@ -7,6 +7,7 @@ package de.nanogiants.a5garapp.activities.poidetail.adapters
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import de.nanogiants.a5garapp.databinding.ItemNearbyBinding
 import de.nanogiants.a5garapp.databinding.ItemOpeninghoursBinding
@@ -20,6 +21,7 @@ import de.nanogiants.a5garapp.model.entities.domain.Review
 class POINearbyAdapter : RecyclerView.Adapter<POINearbyViewHolder>() {
 
   private var items: MutableList<NearbyPOI> = mutableListOf()
+  var onNearbyPOIClicked: ((String) -> Unit) = {}
 
   override fun getItemCount() = items.size
 
@@ -42,5 +44,8 @@ class POINearbyAdapter : RecyclerView.Adapter<POINearbyViewHolder>() {
 
   override fun onBindViewHolder(holder: POINearbyViewHolder, position: Int) {
     holder.bind(items[position])
+    holder.viewBinding.rootView.setOnClickListener {
+      onNearbyPOIClicked(items[position].url)
+    }
   }
 }

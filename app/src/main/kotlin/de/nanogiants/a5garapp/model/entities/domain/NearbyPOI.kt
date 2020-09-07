@@ -15,5 +15,6 @@ data class NearbyPOI(
   override val rating: Float,
   override val openingHours: List<OpeningHour>,
   val address: String,
-  val distance: Float
+  val distance: Float,
+  val url: String
 ) : POI(id, name, description, tags, coordinates, imageUrls, reviews, rating, openingHours)

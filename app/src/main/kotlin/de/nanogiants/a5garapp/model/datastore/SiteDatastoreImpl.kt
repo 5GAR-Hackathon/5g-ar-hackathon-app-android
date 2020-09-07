@@ -75,7 +75,8 @@ class SiteDatastoreImpl @Inject constructor(context: Context) : SiteDatastore {
                 rating = it.poi.rating.toFloat(),
                 openingHours = listOf(),
                 address = "${it.address.thoroughfare}, ${it.address.streetNumber}",
-                distance = it.distance.toFloat()
+                distance = it.distance.toFloat(),
+                url = it.poi.websiteUrl ?: ""
               )
             }
 
