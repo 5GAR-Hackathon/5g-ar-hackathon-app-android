@@ -15,4 +15,7 @@
   <color name="secondaryVariant">#A8F99F</color>
 
   <color name="transparent">#00ffffff</color>
+
+  <color name="textColorPrimary">#dd000000</color>
+  <color name="textColorSecondary">#99000000</color>
 </resources>

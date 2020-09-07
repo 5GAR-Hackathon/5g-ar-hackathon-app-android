@@ -4,14 +4,14 @@ import com.squareup.moshi.JsonClass
 import java.io.Serializable
 
 @JsonClass(generateAdapter = true)
-data class POI(
-  val id: Int,
-  val name: String,
-  val description: String,
-  val tags: List<Tag>,
-  val coordinates: Coordinates,
-  val imageUrls: List<String>,
-  val reviews: List<Review>,
-  val rating: Float,
-  val openingHours: List<OpeningHour>
+open class POI(
+  open val id: Int,
+  open val name: String,
+  open val description: String,
+  open val tags: List<Tag>,
+  open val coordinates: Coordinates,
+  open val imageUrls: List<String>,
+  open val reviews: List<Review>,
+  open val rating: Float,
+  open val openingHours: List<OpeningHour>
 ) : Serializable

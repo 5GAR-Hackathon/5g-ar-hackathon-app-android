@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.View.GONE
 import android.widget.ImageView
 import android.widget.ImageView.ScaleType
+import android.widget.ImageView.VISIBLE
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -19,6 +21,7 @@ import com.huawei.hms.maps.OnMapReadyCallback
 import com.stfalcon.imageviewer.StfalconImageViewer
 import dagger.hilt.android.AndroidEntryPoint
 import de.nanogiants.a5garapp.R
+import de.nanogiants.a5garapp.activities.poidetail.adapters.POINearbyAdapter
 import de.nanogiants.a5garapp.activities.poidetail.adapters.POIOpeningHoursAdapter
 import de.nanogiants.a5garapp.activities.poidetail.adapters.POIPhotoAdapter
 import de.nanogiants.a5garapp.activities.poidetail.adapters.POIReviewAdapter
@@ -53,6 +56,10 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
   lateinit var poiOpeningHoursAdapter: POIOpeningHoursAdapter
 
   lateinit var poiOpeningHoursLayoutManager: LinearLayoutManager
+
+  lateinit var poiNearbyAdapter: POINearbyAdapter
+
+  lateinit var poiNearbyLayoutManager: LinearLayoutManager
 
   @Inject
   lateinit var reviewDatastore: ReviewDatastore
@@ -129,14 +136,20 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
     poiOpeningHoursAdapter = POIOpeningHoursAdapter()
     poiOpeningHoursAdapter.addAll(poi.openingHours)
 
-    binding.openingHoursConstraintLayout.visibility =
-      if (poi.openingHours.isEmpty()) View.GONE else View.VISIBLE
+    binding.openingHoursConstraintLayout.visibility = View.GONE
+      // if (poi.openingHours.isEmpty()) View.GONE else View.VISIBLE
     binding.openingHoursRecyclerView.apply {
       layoutManager = poiOpeningHoursLayoutManager
       adapter = poiOpeningHoursAdapter
     }
 
+    poiNearbyLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+    poiNearbyAdapter = POINearbyAdapter()
 
+    binding.nearbyRecyclerView.apply {
+      layoutManager = poiNearbyLayoutManager
+      adapter = poiNearbyAdapter
+    }
 
     poi.tags.forEach {
       val chip = Chip(this@POIDetailActivity)
@@ -217,11 +230,18 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
         val cafePOIs = siteDatastore.getCafeSites(poi.coordinates, 3000)
         val bankPOIs = siteDatastore.getBankSites(poi.coordinates, 3000)
 
+        val pois = (cafePOIs + bankPOIs).sortedBy { it.distance }
+
         mapFragment.addPOIs(
-          pois = cafePOIs + bankPOIs,
+          pois = pois,
           autoCenter = false,
           customMarkers = true
         )
+
+        Timber.d("Got ${pois.size} elements")
+
+        binding.nearbyConstraintLayout.visibility = if (pois.isEmpty()) GONE else VISIBLE
+        poiNearbyAdapter.addAll(pois)
       } catch (error: Exception) {
         Timber.e(error)
       }

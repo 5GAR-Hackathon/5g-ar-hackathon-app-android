@@ -12,6 +12,7 @@ import com.huawei.hms.site.api.model.NearbySearchRequest
 import com.huawei.hms.site.api.model.NearbySearchResponse
 import com.huawei.hms.site.api.model.SearchStatus
 import de.nanogiants.a5garapp.model.entities.domain.Coordinates
+import de.nanogiants.a5garapp.model.entities.domain.NearbyPOI
 import de.nanogiants.a5garapp.model.entities.domain.POI
 import de.nanogiants.a5garapp.model.entities.domain.Tag
 import timber.log.Timber
@@ -31,13 +32,13 @@ class SiteDatastoreImpl @Inject constructor(context: Context) : SiteDatastore {
     location: Coordinates,
     radiusInMeters: Int,
     limit: Int
-  ): List<POI> = getSite(location, radiusInMeters, limit, CAFE, Tag(1, "restaurant"))
+  ): List<NearbyPOI> = getSite(location, radiusInMeters, limit, CAFE, Tag(1001, "cafe"))
 
   override suspend fun getBankSites(
     location: Coordinates,
     radiusInMeters: Int,
     limit: Int
-  ): List<POI> = getSite(location, radiusInMeters, limit, BANK, Tag(1001, "bank"))
+  ): List<NearbyPOI> = getSite(location, radiusInMeters, limit, BANK, Tag(1002, "bank"))
 
   private suspend fun getSite(
     coordinates: Coordinates,
@@ -45,7 +46,7 @@ class SiteDatastoreImpl @Inject constructor(context: Context) : SiteDatastore {
     limit: Int,
     type: HwLocationType,
     tag: Tag
-  ): List<POI> {
+  ): List<NearbyPOI> {
     return suspendCoroutine { cont ->
       val request = NearbySearchRequest()
 
@@ -60,7 +61,10 @@ class SiteDatastoreImpl @Inject constructor(context: Context) : SiteDatastore {
         override fun onSearchResult(response: NearbySearchResponse) {
           if (response.totalCount > 0) {
             val result = response.sites.map {
-              POI(
+
+              Timber.d("heloe ${it.name} ${it.address.thoroughfare}, ${it.address.streetNumber}")
+
+              NearbyPOI(
                 id = -1,
                 name = it.name,
                 description = "",
@@ -69,7 +73,9 @@ class SiteDatastoreImpl @Inject constructor(context: Context) : SiteDatastore {
                 imageUrls = (it.poi.photoUrls ?: arrayOf()).map { it },
                 reviews = listOf(),
                 rating = it.poi.rating.toFloat(),
-                openingHours = listOf()
+                openingHours = listOf(),
+                address = "${it.address.thoroughfare}, ${it.address.streetNumber}",
+                distance = it.distance.toFloat()
               )
             }
 

@@ -143,41 +143,24 @@ class POIMapFragment : MapFragment() {
 
   private fun getDrawableNameForTag(tagId: Int, selected: Boolean): String {
     val name = when (tagId) {
-      1 -> "ic_coffee" // restaurant
-
+      1, 1001 -> "ic_coffee" // restaurant
       2 -> "ic_map_outline" // place
-
       3 -> "ic_image_outline" // museum
-
       4 -> "ic_color_palette_outline" // art
-
       5 -> "ic_speaker" // concert
-
       6 -> "ic_flag" // kiosk
-
       7 -> "ic_flag" // bar
-
       8 -> "ic_flag" // zoo
-
       9 -> "ic_music_outline" // music
-
       10 -> "ic_anchor" // water
-
       11 -> "ic_film_outline" // theater
-
       12 -> "ic_resource_package" // startup
-
       13 -> "ic_briefcase_outline" // business
-
       14 -> "ic_flag" // lookout
-
       15 -> "ic_home_outline__1_" // architecture
-
       16 -> "ic_flag" // hotel
-
       17 -> "ic_flag" // historic
-
-      1001 -> "ic_dollar_sign"
+      1002 -> "ic_dollar_sign"
       else -> ""
     }
 
