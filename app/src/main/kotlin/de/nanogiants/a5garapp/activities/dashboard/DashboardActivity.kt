@@ -2,10 +2,14 @@ package de.nanogiants.a5garapp.activities.dashboard
 
 import android.app.FragmentManager
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.MotionEvent
 import android.view.View
+import android.view.View.OnTouchListener
+import android.widget.RelativeLayout
 import androidx.core.app.ActivityOptionsCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -13,8 +17,11 @@ import androidx.recyclerview.widget.LinearSnapHelper
 import com.huawei.hms.maps.HuaweiMap
 import com.huawei.hms.maps.HuaweiMapOptions
 import com.huawei.hms.maps.OnMapReadyCallback
+import com.huawei.hms.panorama.Panorama
+import com.huawei.hms.panorama.PanoramaInterface
 import dagger.hilt.android.AndroidEntryPoint
 import de.nanogiants.a5garapp.R
+import de.nanogiants.a5garapp.R.id
 import de.nanogiants.a5garapp.activities.dashboard.adapters.DashboardPOIAdapter
 import de.nanogiants.a5garapp.activities.dashboard.adapters.DashboardTagAdapter
 import de.nanogiants.a5garapp.activities.favorites.FavoritesActivity
@@ -41,7 +48,8 @@ import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChangeListener {
+class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChangeListener,
+  OnTouchListener {
 
   override val binding: ActivityDashboardBinding by viewBinding(ActivityDashboardBinding::inflate)
 
@@ -67,6 +75,8 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
   val loadFromWeb: Boolean = false
 
   lateinit var mapFragment: POIMapFragment
+
+  // lateinit var mLocalInstance: PanoramaInterface.PanoramaLocalInterface
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -134,6 +144,24 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
     }.commit()
 
     mapFragment.getMapAsync(this)
+
+
+    val mLocalInstance = Panorama.getInstance().getLocalInstance(this)
+
+    if (mLocalInstance.init() == 0) {
+      val uri = Uri.parse("android.resource://" + packageName + "/" + R.raw.panorama);
+      if (mLocalInstance.setImage(uri, PanoramaInterface.IMAGE_TYPE_SPHERICAL) == 0) {
+        val layout = binding.frameLayout
+        val view = mLocalInstance.view
+        layout.addView(view)
+
+        view.setOnTouchListener(this)
+      } else {
+        Timber.e("erro2")
+      }
+    } else {
+      Timber.e("erro1")
+    }
   }
 
   override fun onResume() {
@@ -260,6 +288,13 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
         Timber.e(e)
       }
     }
+  }
+
+  override fun onTouch(p0: View?, p1: MotionEvent?): Boolean {
+    //if (mLocalInstance != null) {
+    //  mLocalInstance.updateTouchEvent(p1);
+    //}
+    return true;
   }
 }
 
