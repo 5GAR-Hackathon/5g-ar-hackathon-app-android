@@ -78,6 +78,17 @@
         app:layout_constraintTop_toTopOf="@+id/guideline3"
         >
 
+      <ImageView
+          android:id="@+id/ttsButton"
+          android:layout_width="48dp"
+          android:layout_height="48dp"
+          android:layout_marginEnd="8dp"
+          android:layout_marginTop="4dp"
+          android:padding="12dp"
+          app:layout_constraintEnd_toEndOf="parent"
+          app:layout_constraintTop_toTopOf="parent"
+          app:srcCompat="@drawable/ic_play_circle"
+          />
       <me.zhanghai.android.materialratingbar.MaterialRatingBar
           android:id="@+id/poiRatingBar"
           android:layout_width="0dp"
@@ -97,9 +108,8 @@
 
       <TextView
           android:id="@+id/ratingTextView"
-          android:layout_width="0dp"
+          android:layout_width="wrap_content"
           android:layout_height="0dp"
-          android:layout_marginEnd="16dp"
           android:layout_marginStart="8dp"
           android:gravity="center_vertical"
           android:text="24 Reviews"
@@ -107,7 +117,6 @@
           android:textColor="#000000"
           android:textSize="12sp"
           app:layout_constraintBottom_toBottomOf="@+id/poiRatingBar"
-          app:layout_constraintEnd_toEndOf="parent"
           app:layout_constraintStart_toEndOf="@+id/poiRatingBar"
           app:layout_constraintTop_toTopOf="@+id/poiRatingBar"
           />

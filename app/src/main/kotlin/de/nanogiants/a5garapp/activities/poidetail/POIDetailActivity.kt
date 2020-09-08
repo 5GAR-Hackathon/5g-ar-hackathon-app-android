@@ -1,8 +1,6 @@
 package de.nanogiants.a5garapp.activities.poidetail
 
 import android.app.FragmentManager
-import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
@@ -11,7 +9,9 @@ import android.view.View.GONE
 import android.widget.ImageView
 import android.widget.ImageView.ScaleType
 import android.widget.ImageView.VISIBLE
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,6 +20,13 @@ import com.google.android.material.chip.Chip
 import com.huawei.hms.maps.HuaweiMap
 import com.huawei.hms.maps.HuaweiMapOptions
 import com.huawei.hms.maps.OnMapReadyCallback
+import com.huawei.hms.mlsdk.tts.MLTtsAudioFragment
+import com.huawei.hms.mlsdk.tts.MLTtsCallback
+import com.huawei.hms.mlsdk.tts.MLTtsConfig
+import com.huawei.hms.mlsdk.tts.MLTtsConstants
+import com.huawei.hms.mlsdk.tts.MLTtsEngine
+import com.huawei.hms.mlsdk.tts.MLTtsError
+import com.huawei.hms.mlsdk.tts.MLTtsWarn
 import com.stfalcon.imageviewer.StfalconImageViewer
 import dagger.hilt.android.AndroidEntryPoint
 import de.nanogiants.a5garapp.R
@@ -82,6 +89,10 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
 
   lateinit
   var optionsMenu: Menu
+
+  lateinit var mlTtsEngine: MLTtsEngine
+
+  private var isCurrentlyReading: Boolean = false
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -183,6 +194,43 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
     mapFragment.getMapAsync(this)
 
     searchNearbyLocations()
+
+    val mlConfigs: MLTtsConfig = MLTtsConfig()
+      .setLanguage(MLTtsConstants.TTS_EN_US)
+      .setPerson(MLTtsConstants.TTS_SPEAKER_FEMALE_EN)
+      .setSpeed(1.0f)
+      .setVolume(1.0f)
+
+    mlTtsEngine = MLTtsEngine(mlConfigs)
+
+    binding.ttsButton.setOnClickListener {
+      if (isCurrentlyReading) {
+        mlTtsEngine.stop()
+      } else {
+        poi.description.chunked(450).map {
+          mlTtsEngine.speak(it, MLTtsEngine.QUEUE_APPEND)
+        }
+      }
+
+      isCurrentlyReading = !isCurrentlyReading
+
+      val drawable = ContextCompat.getDrawable(
+        this,
+        if (isCurrentlyReading) R.drawable.ic_stop_circle else R.drawable.ic_play_circle
+      )
+      binding.ttsButton.setImageDrawable(drawable)
+
+    }
+  }
+
+  override fun onDestroy() {
+    super.onDestroy()
+    mlTtsEngine.shutdown()
+  }
+
+  override fun onPause() {
+    super.onPause()
+    mlTtsEngine.stop()
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
