@@ -10,8 +10,9 @@ open class POI(
   open val description: String,
   open val tags: List<Tag>,
   open val coordinates: Coordinates,
-  open val imageUrls: List<String>,
+  open val images: List<Image>,
   open val reviews: List<Review>,
-  open val rating: Float,
+  open val upvotes: Int,
+  open val downvotes: Int,
   open val openingHours: List<OpeningHour>
 ) : Serializable

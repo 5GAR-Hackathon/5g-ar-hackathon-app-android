@@ -1,7 +1,6 @@
 package de.nanogiants.a5garapp.model.entities.domain
 
 import com.squareup.moshi.JsonClass
-import java.io.Serializable
 
 @JsonClass(generateAdapter = true)
 data class NearbyPOI(
@@ -10,11 +9,12 @@ data class NearbyPOI(
   override val description: String,
   override val tags: List<Tag>,
   override val coordinates: Coordinates,
-  override val imageUrls: List<String>,
+  override val images: List<Image>,
   override val reviews: List<Review>,
-  override val rating: Float,
+  override val upvotes: Int,
+  override val downvotes: Int,
   override val openingHours: List<OpeningHour>,
   val address: String,
   val distance: Float,
   val url: String
-) : POI(id, name, description, tags, coordinates, imageUrls, reviews, rating, openingHours)
+) : POI(id, name, description, tags, coordinates, images, reviews, upvotes, downvotes, openingHours)

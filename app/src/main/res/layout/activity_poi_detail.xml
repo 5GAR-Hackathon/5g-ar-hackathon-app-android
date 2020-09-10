@@ -89,37 +89,54 @@
           app:layout_constraintTop_toTopOf="parent"
           app:srcCompat="@drawable/ic_play_circle"
           />
-      <me.zhanghai.android.materialratingbar.MaterialRatingBar
-          android:id="@+id/poiRatingBar"
-          android:layout_width="0dp"
-          android:layout_height="24dp"
+
+      <ImageView
+          android:id="@+id/imageView4"
+          android:layout_width="16dp"
+          android:layout_height="16dp"
           android:layout_marginStart="16dp"
-          android:layout_marginTop="16dp"
-          android:isIndicator="true"
-          android:numStars="5"
-          android:progressTint="#FFC107"
-          android:rating="4.5"
-          android:stepSize="0.5"
+          app:layout_constraintBottom_toBottomOf="@+id/ttsButton"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toTopOf="parent"
-          style="@style/Widget.MaterialRatingBar.RatingBar"
+          app:layout_constraintTop_toTopOf="@+id/ttsButton"
+          app:srcCompat="@drawable/ic_thumbs_up"
           />
-
-
       <TextView
-          android:id="@+id/ratingTextView"
+          android:id="@+id/upvotesTextView"
           android:layout_width="wrap_content"
           android:layout_height="0dp"
           android:layout_marginStart="8dp"
-          android:gravity="center_vertical"
-          android:text="24 Reviews"
-          android:textAppearance="@style/TextAppearance.AppCompat.Small"
-          android:textColor="#000000"
+          android:text="2046"
+          android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+          android:textColor="@color/textColorSecondary"
           android:textSize="12sp"
-          app:layout_constraintBottom_toBottomOf="@+id/poiRatingBar"
-          app:layout_constraintStart_toEndOf="@+id/poiRatingBar"
-          app:layout_constraintTop_toTopOf="@+id/poiRatingBar"
+          app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+          app:layout_constraintStart_toEndOf="@+id/imageView4"
+          app:layout_constraintTop_toTopOf="@+id/imageView4"
           />
+      <ImageView
+          android:id="@+id/imageView5"
+          android:layout_width="16dp"
+          android:layout_height="0dp"
+          android:layout_marginStart="16dp"
+          app:layout_constraintBottom_toBottomOf="@+id/imageView4"
+          app:layout_constraintStart_toEndOf="@+id/upvotesTextView"
+          app:layout_constraintTop_toTopOf="@+id/imageView4"
+          app:srcCompat="@drawable/ic_thumbs_down"
+          />
+      <TextView
+          android:id="@+id/downvotesTextView"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:layout_marginStart="8dp"
+          android:text="63"
+          android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+          android:textColor="@color/textColorSecondary"
+          android:textSize="12sp"
+          app:layout_constraintBottom_toBottomOf="@+id/imageView5"
+          app:layout_constraintStart_toEndOf="@+id/imageView5"
+          app:layout_constraintTop_toTopOf="@+id/imageView5"
+          />
+
 
       <com.google.android.material.chip.ChipGroup
           android:id="@+id/tagChipGroup"
@@ -127,7 +144,7 @@
           android:layout_height="wrap_content"
           android:layout_marginStart="8dp"
           app:layout_constraintStart_toStartOf="parent"
-          app:layout_constraintTop_toBottomOf="@+id/poiRatingBar"
+          app:layout_constraintTop_toBottomOf="@+id/upvotesTextView"
           />
 
 

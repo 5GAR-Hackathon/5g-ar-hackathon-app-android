@@ -22,8 +22,8 @@ class POINearbyViewHolder(val viewBinding: ItemNearbyBinding) :
     viewBinding.addressTextView.text = item.address
     viewBinding.distanceTextView.text = item.distance.roundToInt().toString() + "m"
 
-    if (item.imageUrls.size > 0) {
-      viewBinding.imageView2.load(item.imageUrls[0])
+    if (item.images.size > 0) {
+      viewBinding.imageView2.load(item.images[0].url)
     } else {
       val tag = item.tags[0]
       val context = viewBinding.imageView2.context

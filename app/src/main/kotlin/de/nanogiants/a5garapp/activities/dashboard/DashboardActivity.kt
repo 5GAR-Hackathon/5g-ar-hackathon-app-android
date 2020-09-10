@@ -64,7 +64,7 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
   @Inject
   lateinit var navigationDatastore: NavigationDatastore
 
-  val loadFromWeb: Boolean = false
+  val loadFromWeb: Boolean = true
 
   lateinit var mapFragment: POIMapFragment
 

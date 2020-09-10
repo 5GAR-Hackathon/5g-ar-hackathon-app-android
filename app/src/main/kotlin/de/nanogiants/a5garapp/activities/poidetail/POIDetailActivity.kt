@@ -9,7 +9,6 @@ import android.view.View.GONE
 import android.widget.ImageView
 import android.widget.ImageView.ScaleType
 import android.widget.ImageView.VISIBLE
-import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
@@ -20,13 +19,9 @@ import com.google.android.material.chip.Chip
 import com.huawei.hms.maps.HuaweiMap
 import com.huawei.hms.maps.HuaweiMapOptions
 import com.huawei.hms.maps.OnMapReadyCallback
-import com.huawei.hms.mlsdk.tts.MLTtsAudioFragment
-import com.huawei.hms.mlsdk.tts.MLTtsCallback
 import com.huawei.hms.mlsdk.tts.MLTtsConfig
 import com.huawei.hms.mlsdk.tts.MLTtsConstants
 import com.huawei.hms.mlsdk.tts.MLTtsEngine
-import com.huawei.hms.mlsdk.tts.MLTtsError
-import com.huawei.hms.mlsdk.tts.MLTtsWarn
 import com.stfalcon.imageviewer.StfalconImageViewer
 import dagger.hilt.android.AndroidEntryPoint
 import de.nanogiants.a5garapp.R
@@ -104,25 +99,24 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
     Timber.d("New activity $poi")
 
     binding.toolbar.title = poi.name
-    binding.poiRatingBar.rating = 4f
     binding.descriptionTextView.text = poi.description
 
     binding.poiBackgroundImageView.load(
-      if (poi.imageUrls.isEmpty()) {
+      if (poi.images.isEmpty()) {
         "https://www.aekno.de/fileadmin/_processed_/1/6/csm_ks-duesseldorf-01_a8b7d2779a.jpg"
       } else {
-        poi.imageUrls[0]
+        poi.images[0].url
       }
     )
 
     poiPhotoLayoutManager = GridLayoutManager(this, 4)
 
     poiPhotoAdapter = POIPhotoAdapter()
-    poiPhotoAdapter.addAll(poi.imageUrls)
+    poiPhotoAdapter.addAll(poi.images.map { it.url })
     poiPhotoAdapter.onPhotoClicked = { _: String, index: Int, imageView: ImageView ->
-      StfalconImageViewer.Builder(this@POIDetailActivity, poi.imageUrls) { view, image ->
+      StfalconImageViewer.Builder(this@POIDetailActivity, poi.images) { view, image ->
         view.scaleType = ScaleType.FIT_CENTER
-        view.load(image)
+        view.load(image.url)
       }
         .withTransitionFrom(imageView)
         .withHiddenStatusBar(false)
@@ -144,9 +138,8 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
       adapter = poiReviewAdapter
     }
 
-    binding.reviewLabelTextView.text = "Reviews (${poi.reviews.size})"
-    binding.ratingTextView.text = "${poi.reviews.size} Reviews"
-    binding.poiRatingBar.rating = poi.rating
+    binding.upvotesTextView.text = poi.upvotes.toString()
+    binding.downvotesTextView.text = poi.downvotes.toString()
 
     poiOpeningHoursLayoutManager = LinearLayoutManager(this)
     poiOpeningHoursAdapter = POIOpeningHoursAdapter()

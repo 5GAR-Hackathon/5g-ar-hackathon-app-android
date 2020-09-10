@@ -19,13 +19,13 @@ class FavoritesViewHolder(val viewBinding: ItemFavoritesBinding) :
     viewBinding.poiNameTextView.text = item.name
     viewBinding.poiTagTextView.text =
       item.tags.joinToString(", ") { it.name.capitalize(Locale.getDefault()) }
-    viewBinding.poiRatingBar.rating = item.rating
+    viewBinding.poiRatingBar.rating = 0f
 
     viewBinding.poiImageView.load(
-      if (item.imageUrls.isEmpty()) {
+      if (item.images.isEmpty()) {
         "https://www.aekno.de/fileadmin/_processed_/1/6/csm_ks-duesseldorf-01_a8b7d2779a.jpg"
       } else {
-        item.imageUrls[0]
+        item.images[0].url
       }
     )
   }
