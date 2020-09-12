@@ -18,12 +18,14 @@ package de.nanogiants.a5garapp.hms.rendering
 import android.app.Activity
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.graphics.Color
 import android.graphics.Matrix
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView.Renderer
 import android.view.MotionEvent
 import android.view.View.MeasureSpec
 import android.widget.ImageView
+import android.widget.TextView
 import com.huawei.hiar.ARCamera
 import com.huawei.hiar.ARFrame
 import com.huawei.hiar.ARHitResult
@@ -62,8 +64,7 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
   private var fps = 0f
   private val mTextureDisplay: TextureDisplay = TextureDisplay()
   private val mTextDisplay: TextDisplay = TextDisplay()
-  private val mLabelDisplay: LabelDisplay =
-    LabelDisplay()
+  private val mLabelDisplay: LabelDisplay = LabelDisplay()
 //  private val mObjectDisplay: ObjectDisplay =
 //    ObjectDisplay()
 
@@ -71,6 +72,8 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
   private lateinit var mQueuedSingleTaps: ArrayBlockingQueue<GestureEvent>
 
   private val bannerList: MutableList<Banner> = mutableListOf()
+
+  private val textView: TextView = mActivity.findViewById(R.id.wordTextView)
 
   /**
    * Set ARSession, which will update and obtain the latest data in OnDrawFrame.
@@ -115,7 +118,13 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
     // Set the window color.
     GLES20.glClearColor(0.1f, 0.1f, 0.1f, 1.0f)
     mTextureDisplay.init()
-//    mTextDisplay.setListener { text, positionX, positionY -> showWorldTypeTextView(text, positionX, positionY) }
+    /*mTextDisplay.setListener { text: String, positionX: Float, positionY: Float ->
+      showWorldTypeTextView(
+        text,
+        positionX,
+        positionY
+      )
+    }*/
     mLabelDisplay.init(buildBitmaps(activity = mActivity as ARTestActivity))
 //    mObjectDisplay.init(mActivity)
   }
@@ -133,20 +142,20 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
    * @param positionX The left padding in pixels.
    * @param positionY The right padding in pixels.
    */
-//  private fun showWorldTypeTextView(text: String?, positionX: Float, positionY: Float) {
-//    mActivity.runOnUiThread {
-//      mTextView.setTextColor(Color.WHITE)
-//
-//      // Set the font size to be displayed on the screen.
-//      mTextView.textSize = 10f
-//      if (text != null) {
-//        mTextView.text = text
-//        mTextView.setPadding(positionX.toInt(), positionY.toInt(), 0, 0)
-//      } else {
-//        mTextView.text = ""
-//      }
-//    }
-//  }
+  private fun showWorldTypeTextView(text: String?, positionX: Float, positionY: Float) {
+    mActivity.runOnUiThread {
+      textView.setTextColor(Color.WHITE)
+
+      // Set the font size to be displayed on the screen.
+      textView.textSize = 10f
+      if (text != null) {
+        textView.text = text
+        textView.setPadding(positionX.toInt(), positionY.toInt(), 0, 0)
+      } else {
+        textView.text = ""
+      }
+    }
+  }
 
   override fun onSurfaceChanged(unused: GL10, width: Int, height: Int) {
     mTextureDisplay.onSurfaceChanged(width, height)
@@ -169,7 +178,12 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
 
         // The size of the projection matrix is 4 * 4.
         val projectionMatrix = FloatArray(16)
-        arCamera.getProjectionMatrix(projectionMatrix, PROJ_MATRIX_OFFSET, PROJ_MATRIX_NEAR, PROJ_MATRIX_FAR)
+        arCamera.getProjectionMatrix(
+          projectionMatrix,
+          PROJ_MATRIX_OFFSET,
+          PROJ_MATRIX_NEAR,
+          PROJ_MATRIX_FAR
+        )
         mTextureDisplay.onDrawFrame(arFrame)
         val sb = StringBuilder()
         updateMessageData(sb)
@@ -179,6 +193,9 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
         val viewMatrix = FloatArray(16)
         arCamera.getViewMatrix(viewMatrix, 0)
         for (plane in it.getAllTrackables(ARPlane::class.java)) {
+          Timber.d("FOund plane $plane")
+
+
           if (plane.type != UNKNOWN_FACING
             && plane.trackingState == TRACKING
           ) {
@@ -186,12 +203,13 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
             break
           }
         }
-        val planes = it.getAllTrackables(ARPlane::class.java)
-          .filter { item -> item.label == ARPlane.SemanticPlaneLabel.PLANE_WALL }
+        /*val planes = it.getAllTrackables(ARPlane::class.java)
+        //.filter { item -> item.label == ARPlane.SemanticPlaneLabel.PLANE_FLOOR }
         mLabelDisplay.onDrawFrame(
           planes, arCamera.displayOrientedPose,
           projectionMatrix
-        )
+        )*/
+
         handleGestureEvent(arFrame, arCamera, projectionMatrix, viewMatrix)
 //        val lightEstimate = arFrame.lightEstimate
 //        var lightPixelIntensity = if (lightEstimate.state == NOT_VALID) {
@@ -212,9 +230,12 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
 
   private fun drawBannerList(displayOrientedPose: ARPose, projectionMatrix: FloatArray) {
     mLabelDisplay.onDrawBannerList(
-      bannerList.filter { it.anchor.trackingState === TRACKING }, displayOrientedPose, projectionMatrix
+      bannerList.filter { it.anchor.trackingState === TRACKING },
+      displayOrientedPose,
+      projectionMatrix
     )
   }
+
 //
 //  private fun getPlaneBitmap(id: Int): Bitmap? {
 //    val view = mActivity.findViewById<TextView>(id)
@@ -288,6 +309,7 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
     viewMatrix: FloatArray
   ) {
     val event: GestureEvent = mQueuedSingleTaps.poll() ?: return
+    Timber.d("Gesture $event")
 
     // Do not perform anything when the object is not tracked.
     if (arCamera.trackingState != TRACKING) {
@@ -295,7 +317,7 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
     }
     when (event.type) {
       GestureEvent.GESTURE_EVENT_TYPE_DOWN -> {
-//        doWhenEventTypeDown(viewMatrix, projectionMatrix, event)
+//s        doWhenEventTypeDown(viewMatrix, projectionMatrix, event)
       }
 //      GestureEvent.GESTURE_EVENT_TYPE_SCROLL -> {
 //        if (mSelectedObj == null) {
@@ -343,16 +365,21 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
 //      mVirtualObjects[0].getAnchor().detach()
 //      mVirtualObjects.removeAt(0)
 //    }
+    Timber.d("Hit a result??? ${hitResult.trackable}")
     when (hitResult.trackable) {
       is ARPoint -> {
         // TODO: 16.08.2020
 //        mVirtualObjects.add(VirtualObject(hitResult.createAnchor(), BLUE_COLORS))
       }
       is ARPlane -> {
-        if (bannerList.size == 1) return
+        Timber.d("Hit a result!")
+
+        // if (bannerList.size == 1) return
         val bitmap = BitmapFactory.decodeResource(mActivity.resources, R.drawable.dickbutt)
         bitmap.rotate(180f)
         bannerList.add(Banner(hitResult.createAnchor(), bitmap))
+
+        Timber.d("We added a dickbutt")
         // TODO: 16.08.2020
 //        mVirtualObjects.add(VirtualObject(hitResult.createAnchor(), GREEN_COLORS))
       }

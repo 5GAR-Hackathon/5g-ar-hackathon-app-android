@@ -7,5 +7,7 @@ data class POIWebEntity(
   val id: Int,
   val name: String,
   val tags: List<Int>,
+  val description: String?,
+  val images: List<ImageWebEntity>,
   val coordinates: CoordinatesWebEntity
 )

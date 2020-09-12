@@ -10,6 +10,7 @@ import android.widget.ImageView
 import android.widget.ImageView.ScaleType
 import android.widget.ImageView.VISIBLE
 import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -18,6 +19,9 @@ import com.google.android.material.chip.Chip
 import com.huawei.hms.maps.HuaweiMap
 import com.huawei.hms.maps.HuaweiMapOptions
 import com.huawei.hms.maps.OnMapReadyCallback
+import com.huawei.hms.mlsdk.tts.MLTtsConfig
+import com.huawei.hms.mlsdk.tts.MLTtsConstants
+import com.huawei.hms.mlsdk.tts.MLTtsEngine
 import com.stfalcon.imageviewer.StfalconImageViewer
 import dagger.hilt.android.AndroidEntryPoint
 import de.nanogiants.a5garapp.R
@@ -28,14 +32,15 @@ import de.nanogiants.a5garapp.activities.poidetail.adapters.POIReviewAdapter
 import de.nanogiants.a5garapp.base.BaseActivity
 import de.nanogiants.a5garapp.controllers.SharedPreferencesController
 import de.nanogiants.a5garapp.databinding.ActivityPoiDetailBinding
+import de.nanogiants.a5garapp.model.datastore.NavigationDatastore
 import de.nanogiants.a5garapp.model.datastore.ReviewDatastore
 import de.nanogiants.a5garapp.model.datastore.SiteDatastore
+import de.nanogiants.a5garapp.model.entities.domain.NearbyPOI
 import de.nanogiants.a5garapp.model.entities.domain.POI
 import de.nanogiants.a5garapp.views.POIMapFragment
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
 import timber.log.Timber
-import java.lang.Exception
 import java.util.Locale
 import javax.inject.Inject
 
@@ -70,6 +75,9 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
   @Inject
   lateinit var sharedPreferencesController: SharedPreferencesController
 
+  @Inject
+  lateinit var navigationDatastore: NavigationDatastore
+
   lateinit var poi: POI
 
   lateinit var mapFragment: POIMapFragment
@@ -77,6 +85,9 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
   lateinit
   var optionsMenu: Menu
 
+  lateinit var mlTtsEngine: MLTtsEngine
+
+  private var isCurrentlyReading: Boolean = false
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -88,25 +99,24 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
     Timber.d("New activity $poi")
 
     binding.toolbar.title = poi.name
-    binding.poiRatingBar.rating = 4f
     binding.descriptionTextView.text = poi.description
 
     binding.poiBackgroundImageView.load(
-      if (poi.imageUrls.isEmpty()) {
+      if (poi.images.isEmpty()) {
         "https://www.aekno.de/fileadmin/_processed_/1/6/csm_ks-duesseldorf-01_a8b7d2779a.jpg"
       } else {
-        poi.imageUrls[0]
+        poi.images[0].url
       }
     )
 
     poiPhotoLayoutManager = GridLayoutManager(this, 4)
 
     poiPhotoAdapter = POIPhotoAdapter()
-    poiPhotoAdapter.addAll(poi.imageUrls)
+    poiPhotoAdapter.addAll(poi.images.map { it.url })
     poiPhotoAdapter.onPhotoClicked = { _: String, index: Int, imageView: ImageView ->
-      StfalconImageViewer.Builder(this@POIDetailActivity, poi.imageUrls) { view, image ->
+      StfalconImageViewer.Builder(this@POIDetailActivity, poi.images) { view, image ->
         view.scaleType = ScaleType.FIT_CENTER
-        view.load(image)
+        view.load(image.url)
       }
         .withTransitionFrom(imageView)
         .withHiddenStatusBar(false)
@@ -128,16 +138,15 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
       adapter = poiReviewAdapter
     }
 
-    binding.reviewLabelTextView.text = "Reviews (${poi.reviews.size})"
-    binding.ratingTextView.text = "${poi.reviews.size} Reviews"
-    binding.poiRatingBar.rating = poi.rating
+    binding.upvotesTextView.text = poi.upvotes.toString()
+    binding.downvotesTextView.text = poi.downvotes.toString()
 
     poiOpeningHoursLayoutManager = LinearLayoutManager(this)
     poiOpeningHoursAdapter = POIOpeningHoursAdapter()
     poiOpeningHoursAdapter.addAll(poi.openingHours)
 
     binding.openingHoursConstraintLayout.visibility = View.GONE
-      // if (poi.openingHours.isEmpty()) View.GONE else View.VISIBLE
+    // if (poi.openingHours.isEmpty()) View.GONE else View.VISIBLE
     binding.openingHoursRecyclerView.apply {
       layoutManager = poiOpeningHoursLayoutManager
       adapter = poiOpeningHoursAdapter
@@ -145,6 +154,7 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
 
     poiNearbyLayoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
     poiNearbyAdapter = POINearbyAdapter()
+    poiNearbyAdapter.onNearbyPOIClicked = this::onNearbyPOIClicked
 
     binding.nearbyRecyclerView.apply {
       layoutManager = poiNearbyLayoutManager
@@ -177,6 +187,43 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
     mapFragment.getMapAsync(this)
 
     searchNearbyLocations()
+
+    val mlConfigs: MLTtsConfig = MLTtsConfig()
+      .setLanguage(MLTtsConstants.TTS_EN_US)
+      .setPerson(MLTtsConstants.TTS_SPEAKER_FEMALE_EN)
+      .setSpeed(1.0f)
+      .setVolume(1.0f)
+
+    mlTtsEngine = MLTtsEngine(mlConfigs)
+
+    binding.ttsButton.setOnClickListener {
+      if (isCurrentlyReading) {
+        mlTtsEngine.stop()
+      } else {
+        poi.description.chunked(450).map {
+          mlTtsEngine.speak(it, MLTtsEngine.QUEUE_APPEND)
+        }
+      }
+
+      isCurrentlyReading = !isCurrentlyReading
+
+      val drawable = ContextCompat.getDrawable(
+        this,
+        if (isCurrentlyReading) R.drawable.ic_stop_circle else R.drawable.ic_play_circle
+      )
+      binding.ttsButton.setImageDrawable(drawable)
+
+    }
+  }
+
+  override fun onDestroy() {
+    super.onDestroy()
+    mlTtsEngine.shutdown()
+  }
+
+  override fun onPause() {
+    super.onPause()
+    mlTtsEngine.stop()
   }
 
   override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -218,6 +265,7 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
 
   override fun onMapReady(map: HuaweiMap) {
     mapFragment.setMap(map)
+    mapFragment.navigationDatastore = navigationDatastore
     mapFragment.enableInteractiveMap(false)
 
     mapFragment.clearPOIs()
@@ -247,4 +295,15 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
       }
     }
   }
+
+  fun onNearbyPOIClicked(nearbyPOI: NearbyPOI) {
+    lifecycleScope.launch {
+      try {
+        mapFragment.navigate(poi.coordinates, nearbyPOI.coordinates)
+      } catch (error: Exception) {
+        Timber.e(error)
+      }
+    }
+  }
 }
+

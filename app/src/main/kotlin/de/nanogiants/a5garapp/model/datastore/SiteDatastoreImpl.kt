@@ -12,8 +12,8 @@ import com.huawei.hms.site.api.model.NearbySearchRequest
 import com.huawei.hms.site.api.model.NearbySearchResponse
 import com.huawei.hms.site.api.model.SearchStatus
 import de.nanogiants.a5garapp.model.entities.domain.Coordinates
+import de.nanogiants.a5garapp.model.entities.domain.Image
 import de.nanogiants.a5garapp.model.entities.domain.NearbyPOI
-import de.nanogiants.a5garapp.model.entities.domain.POI
 import de.nanogiants.a5garapp.model.entities.domain.Tag
 import timber.log.Timber
 import javax.inject.Inject
@@ -70,12 +70,14 @@ class SiteDatastoreImpl @Inject constructor(context: Context) : SiteDatastore {
                 description = "",
                 tags = listOf(tag),
                 coordinates = Coordinates(it.location.lat, it.location.lng),
-                imageUrls = (it.poi.photoUrls ?: arrayOf()).map { it },
+                images = (it.poi.photoUrls ?: arrayOf()).map { Image(it) },
                 reviews = listOf(),
-                rating = it.poi.rating.toFloat(),
+                upvotes = 0,
+                downvotes = 0,
                 openingHours = listOf(),
                 address = "${it.address.thoroughfare}, ${it.address.streetNumber}",
-                distance = it.distance.toFloat()
+                distance = it.distance.toFloat(),
+                url = it.poi.websiteUrl ?: ""
               )
             }
 

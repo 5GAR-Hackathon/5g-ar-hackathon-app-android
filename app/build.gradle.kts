@@ -103,6 +103,7 @@ dependencies {
   implementation("com.huawei.hms:site:5.0.1.300")
   implementation("com.huawei.hms:panorama:5.0.2.300")
   implementation("com.huawei.hms:panorama-local:5.0.2.300")
+  implementation("com.huawei.hms:ml-computer-voice-tts:2.0.2.300")
   implementation("com.huawei.agconnect:agconnect-core:${properties["agcpVersion"]}")
 }
 

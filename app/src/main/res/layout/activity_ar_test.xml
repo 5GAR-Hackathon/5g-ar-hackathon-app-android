@@ -10,6 +10,14 @@
       android:layout_height="match_parent"
       />
 
+  <TextView
+      android:id="@+id/wordTextView"
+      android:layout_width="match_parent"
+      android:layout_height="match_parent"
+      android:gravity="center"
+      android:text="TextView"
+      android:textColor="@color/teal_700"
+      />
   <ImageView
       android:id="@+id/dickbutt"
       android:layout_width="wrap_content"

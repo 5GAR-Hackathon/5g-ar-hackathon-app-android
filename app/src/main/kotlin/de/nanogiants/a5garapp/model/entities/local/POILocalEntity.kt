@@ -14,6 +14,6 @@ data class POILocalEntity(
   val tags: List<Int>,
   val description: String,
   val coordinates: CoordinatesLocalEntity,
-  val images: List<String>,
+  val images: List<ImageLocalEntity>,
   val openingHours: List<OpeningHourLocalEntity>?
 )

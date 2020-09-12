@@ -208,8 +208,11 @@ class POIMapFragment : MapFragment() {
           navigationLines.add(polyline)
         }
 
-        val cameraUpdate = CameraUpdateFactory.newLatLngBounds(bounds, 5)
+        val cameraPosition =
+          CameraPosition(bounds.center, 15f, 2.0f, 0.0f)
+        val cameraUpdate: CameraUpdate = CameraUpdateFactory.newCameraPosition(cameraPosition)
         huaweiMap!!.moveCamera(cameraUpdate)
+
       }
     } catch (error: Exception) {
       Timber.e("There was an error $error")

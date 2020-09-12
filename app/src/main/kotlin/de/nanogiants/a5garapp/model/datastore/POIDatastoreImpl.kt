@@ -3,6 +3,7 @@ package de.nanogiants.a5garapp.model.datastore
 import de.nanogiants.a5garapp.model.datasource.api.POIDatasource
 import de.nanogiants.a5garapp.model.entities.domain.Coordinates
 import de.nanogiants.a5garapp.model.entities.domain.POI
+import de.nanogiants.a5garapp.model.entities.domain.Review
 import de.nanogiants.a5garapp.model.transformer.POIWebTransformer
 import javax.inject.Inject
 
@@ -25,7 +26,7 @@ class POIDatastoreImpl @Inject constructor() : POIDatastore {
 
     return poiDatasource.getPOIsbyLocation("${coordinates.lat},${coordinates.lng}", distance)
       .map {
-        val reviews = reviewDatastore.getReviewsForPOI(it.id)
+        val reviews: List<Review> = listOf() // reviewDatastore.getReviewsForPOI(it.id)
         poiWebTransformer.toModel(it, tags, reviews)
       }
   }
@@ -33,13 +34,13 @@ class POIDatastoreImpl @Inject constructor() : POIDatastore {
   override suspend fun getAllPOIs(): List<POI> {
     val tags = this.fetchTags()
     return poiDatasource.getAllPOIs().map {
-      val reviews = reviewDatastore.getReviewsForPOI(it.id)
+      val reviews: List<Review> = listOf() // reviewDatastore.getReviewsForPOI(it.id)
       poiWebTransformer.toModel(it, tags, reviews)
     }
   }
 
   override suspend fun getPOIByID(id: Int): POI {
-    val reviews = reviewDatastore.getReviewsForPOI(id)
+    val reviews: List<Review> = listOf() // reviewDatastore.getReviewsForPOI(it.id)
     return poiWebTransformer.toModel(poiDatasource.getPOIbyID(id), this.fetchTags(), reviews)
   }
 
