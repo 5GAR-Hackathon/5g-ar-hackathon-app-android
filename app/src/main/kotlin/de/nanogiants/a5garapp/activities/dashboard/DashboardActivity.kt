@@ -76,7 +76,7 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
 
   lateinit var mapFragment: POIMapFragment
 
-  // lateinit var mLocalInstance: PanoramaInterface.PanoramaLocalInterface
+  lateinit var mLocalInstance: PanoramaInterface.PanoramaLocalInterface
 
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
@@ -146,10 +146,10 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
     mapFragment.getMapAsync(this)
 
 
-    val mLocalInstance = Panorama.getInstance().getLocalInstance(this)
+    mLocalInstance = Panorama.getInstance().getLocalInstance(this)
 
     if (mLocalInstance.init() == 0) {
-      val uri = Uri.parse("android.resource://" + packageName + "/" + R.raw.panorama);
+      val uri = Uri.parse("android.resource://" + packageName + "/" + R.raw.panorama2);
       if (mLocalInstance.setImage(uri, PanoramaInterface.IMAGE_TYPE_SPHERICAL) == 0) {
         val layout = binding.frameLayout
         val view = mLocalInstance.view
@@ -291,9 +291,7 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
   }
 
   override fun onTouch(p0: View?, p1: MotionEvent?): Boolean {
-    //if (mLocalInstance != null) {
-    //  mLocalInstance.updateTouchEvent(p1);
-    //}
+    mLocalInstance.updateTouchEvent(p1);
     return true;
   }
 }
