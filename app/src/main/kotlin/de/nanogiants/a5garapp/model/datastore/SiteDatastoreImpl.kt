@@ -76,7 +76,7 @@ class SiteDatastoreImpl @Inject constructor(context: Context) : SiteDatastore {
                 upvotes = 0,
                 downvotes = 0,
                 openingHours = listOf(),
-                address = "${it.address.thoroughfare}, ${it.address.streetNumber}",
+                address = "${it.address.thoroughfare ?: ""} ${it.address.streetNumber ?: ""}".trimStart(),
                 distance = it.distance.toFloat(),
                 url = it.poi.websiteUrl ?: ""
               )
