@@ -13,6 +13,7 @@ import com.huawei.hms.site.api.model.NearbySearchResponse
 import com.huawei.hms.site.api.model.SearchStatus
 import de.nanogiants.a5garapp.model.entities.domain.Coordinates
 import de.nanogiants.a5garapp.model.entities.domain.Image
+import de.nanogiants.a5garapp.model.entities.domain.ImageType.NORMAL
 import de.nanogiants.a5garapp.model.entities.domain.NearbyPOI
 import de.nanogiants.a5garapp.model.entities.domain.Tag
 import timber.log.Timber
@@ -70,7 +71,7 @@ class SiteDatastoreImpl @Inject constructor(context: Context) : SiteDatastore {
                 description = "",
                 tags = listOf(tag),
                 coordinates = Coordinates(it.location.lat, it.location.lng),
-                images = (it.poi.photoUrls ?: arrayOf()).map { Image(it) },
+                images = (it.poi.photoUrls ?: arrayOf()).map { Image(it, NORMAL) },
                 reviews = listOf(),
                 upvotes = 0,
                 downvotes = 0,

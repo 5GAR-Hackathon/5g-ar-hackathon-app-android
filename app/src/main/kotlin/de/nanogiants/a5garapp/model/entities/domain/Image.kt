@@ -10,5 +10,6 @@ import java.io.Serializable
 
 @JsonClass(generateAdapter = true)
 data class Image(
-  val url: String
+  val url: String,
+  val type: ImageType
 ) : Serializable

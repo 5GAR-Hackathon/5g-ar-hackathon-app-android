@@ -10,16 +10,17 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import de.nanogiants.a5garapp.databinding.ItemPhotoBinding
+import de.nanogiants.a5garapp.model.entities.domain.Image
 
 
 class POIPhotoAdapter : RecyclerView.Adapter<POIPhotoViewHolder>() {
 
-  private var items: MutableList<String> = mutableListOf()
-  var onPhotoClicked: ((String, Int, ImageView) -> Unit) = { _: String, _: Int, _: ImageView -> }
+  private var items: MutableList<Image> = mutableListOf()
+  var onPhotoClicked: ((Image, Int, ImageView) -> Unit) = { _: Image, _: Int, _: ImageView -> }
 
   override fun getItemCount() = items.size
 
-  fun addAll(newItems: Collection<String>) {
+  fun addAll(newItems: Collection<Image>) {
     items.addAll(newItems)
     notifyDataSetChanged()
   }

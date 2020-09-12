@@ -1,11 +1,14 @@
 package de.nanogiants.a5garapp.activities.poidetail
 
 import android.app.FragmentManager
+import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.MotionEvent
 import android.view.View
 import android.view.View.GONE
+import android.view.View.OnTouchListener
 import android.widget.ImageView
 import android.widget.ImageView.ScaleType
 import android.widget.ImageView.VISIBLE
@@ -22,6 +25,8 @@ import com.huawei.hms.maps.OnMapReadyCallback
 import com.huawei.hms.mlsdk.tts.MLTtsConfig
 import com.huawei.hms.mlsdk.tts.MLTtsConstants
 import com.huawei.hms.mlsdk.tts.MLTtsEngine
+import com.huawei.hms.panorama.Panorama
+import com.huawei.hms.panorama.PanoramaInterface
 import com.stfalcon.imageviewer.StfalconImageViewer
 import dagger.hilt.android.AndroidEntryPoint
 import de.nanogiants.a5garapp.R
@@ -35,8 +40,12 @@ import de.nanogiants.a5garapp.databinding.ActivityPoiDetailBinding
 import de.nanogiants.a5garapp.model.datastore.NavigationDatastore
 import de.nanogiants.a5garapp.model.datastore.ReviewDatastore
 import de.nanogiants.a5garapp.model.datastore.SiteDatastore
+import de.nanogiants.a5garapp.model.entities.domain.Image
+import de.nanogiants.a5garapp.model.entities.domain.ImageType.NORMAL
+import de.nanogiants.a5garapp.model.entities.domain.ImageType.PANORAMA
 import de.nanogiants.a5garapp.model.entities.domain.NearbyPOI
 import de.nanogiants.a5garapp.model.entities.domain.POI
+import de.nanogiants.a5garapp.utils.Utilities
 import de.nanogiants.a5garapp.views.POIMapFragment
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.launch
@@ -89,6 +98,12 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
 
   private var isCurrentlyReading: Boolean = false
 
+  lateinit var panorama: PanoramaInterface.PanoramaLocalInterface
+
+  var panoramaWorks = true
+
+  var isPanoramaShowing = false
+
   override fun onCreate(savedInstanceState: Bundle?) {
     super.onCreate(savedInstanceState)
     setSupportActionBar(binding.toolbar)
@@ -112,17 +127,8 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
     poiPhotoLayoutManager = GridLayoutManager(this, 4)
 
     poiPhotoAdapter = POIPhotoAdapter()
-    poiPhotoAdapter.addAll(poi.images.map { it.url })
-    poiPhotoAdapter.onPhotoClicked = { _: String, index: Int, imageView: ImageView ->
-      StfalconImageViewer.Builder(this@POIDetailActivity, poi.images) { view, image ->
-        view.scaleType = ScaleType.FIT_CENTER
-        view.load(image.url)
-      }
-        .withTransitionFrom(imageView)
-        .withHiddenStatusBar(false)
-        .withStartPosition(index)
-        .show()
-    }
+    poiPhotoAdapter.addAll(poi.images)
+    poiPhotoAdapter.onPhotoClicked = this::onPhotoClicked
 
     binding.photoRecyclerView.apply {
       layoutManager = poiPhotoLayoutManager
@@ -212,7 +218,12 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
         if (isCurrentlyReading) R.drawable.ic_stop_circle else R.drawable.ic_play_circle
       )
       binding.ttsButton.setImageDrawable(drawable)
+    }
 
+    panorama = Panorama.getInstance().getLocalInstance(this)
+    if (panorama.init() != 0) {
+      Timber.w("Initializing panorama did not work")
+      panoramaWorks = false
     }
   }
 
@@ -239,18 +250,26 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
   override fun onOptionsItemSelected(item: MenuItem): Boolean {
     return when (item.itemId) {
       R.id.add_to_tour -> {
-        true
+        return true
       }
       R.id.bookmark -> {
         lifecycleScope.launch {
           sharedPreferencesController.bookmarkPOI(poi)
           updateBookmarkOptionsIcon()
         }
+
         return true
       }
       android.R.id.home -> {
-        ActivityCompat.finishAfterTransition(this)
-        true
+        if (isPanoramaShowing) {
+          binding.panoramaLayout.visibility = GONE
+          isPanoramaShowing = false
+        } else {
+          ActivityCompat.finishAfterTransition(this)
+
+        }
+
+        return true
       }
       else -> super.onOptionsItemSelected(item)
     }
@@ -303,6 +322,53 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
       } catch (error: Exception) {
         Timber.e(error)
       }
+    }
+  }
+
+  private fun onPhotoClicked(image: Image, index: Int, imageView: ImageView) {
+    if (image.type == NORMAL || !panoramaWorks) {
+      StfalconImageViewer.Builder(
+        this@POIDetailActivity,
+        poi.images.filter { it.type == NORMAL }) { view, poiImage ->
+        view.scaleType = ScaleType.FIT_CENTER
+        view.load(poiImage.url)
+      }
+        .withTransitionFrom(imageView)
+        .withHiddenStatusBar(false)
+        .withStartPosition(index)
+        .show()
+    } else if (image.type == PANORAMA) {
+      var id = Utilities.getResourceId(Utilities.PACKAGE_RAW, image.url, this)
+      val uri = Uri.parse("android.resource://" + packageName + "/" + id);
+
+      if (panorama.setImage(uri, PanoramaInterface.IMAGE_TYPE_SPHERICAL) == 0) {
+        val layout = binding.panoramaLayout
+        val view = panorama.view
+
+        layout.removeAllViews()
+        layout.addView(view)
+        layout.visibility = VISIBLE
+
+        isPanoramaShowing = true
+
+        view.setOnTouchListener(object : OnTouchListener {
+          override fun onTouch(p0: View?, p1: MotionEvent?): Boolean {
+            panorama.updateTouchEvent(p1)
+            return true
+          }
+        })
+      } else {
+        Timber.e("Could not open this")
+      }
+    }
+  }
+
+  override fun onBackPressed() {
+    if (isPanoramaShowing) {
+      binding.panoramaLayout.visibility = GONE
+      isPanoramaShowing = false
+    } else {
+      super.onBackPressed()
     }
   }
 }
