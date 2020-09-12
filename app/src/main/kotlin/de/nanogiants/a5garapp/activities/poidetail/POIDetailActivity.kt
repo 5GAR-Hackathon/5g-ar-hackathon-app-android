@@ -117,8 +117,8 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
     binding.descriptionTextView.text = poi.description
 
     binding.poiBackgroundImageView.load(
-      if (poi.images.isEmpty()) {
-        "https://www.aekno.de/fileadmin/_processed_/1/6/csm_ks-duesseldorf-01_a8b7d2779a.jpg"
+      if (poi.images.filter { it.type == NORMAL }.isEmpty()) {
+        Utilities.IMAGE_DEFAULT
       } else {
         poi.images[0].url
       }

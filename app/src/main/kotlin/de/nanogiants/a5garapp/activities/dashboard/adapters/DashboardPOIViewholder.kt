@@ -9,7 +9,9 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import de.nanogiants.a5garapp.R
 import de.nanogiants.a5garapp.databinding.ItemDashboardPoiBinding
+import de.nanogiants.a5garapp.model.entities.domain.ImageType.NORMAL
 import de.nanogiants.a5garapp.model.entities.domain.POI
+import de.nanogiants.a5garapp.utils.Utilities
 import timber.log.Timber
 import java.util.Locale
 
@@ -25,8 +27,8 @@ class DashboardPOIViewholder(val viewBinding: ItemDashboardPoiBinding) :
       item.tags.joinToString(", ") { it.name.capitalize(Locale.getDefault()) }
 
     viewBinding.backgroundImageView.load(
-      if (item.images.isEmpty()) {
-        "https://www.aekno.de/fileadmin/_processed_/1/6/csm_ks-duesseldorf-01_a8b7d2779a.jpg"
+      if (item.images.filter { it.type == NORMAL }.isEmpty()) {
+        Utilities.IMAGE_DEFAULT
       } else {
         item.images[0].url
       }

@@ -266,11 +266,6 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
   override fun onSnapPositionChange(position: Int) {
     val poi = poiAdapter.get(position)
     mapFragment.centerMapOnPOI(poi, 400.0f)
-
-    binding.navigateButton.setOnClickListener {
-      Timber.d("Alright. We are going")
-      navigate(poi.coordinates, poiAdapter.get(position + 1).coordinates)
-    }
   }
 
   private fun onTagClicked(tag: SelectableTag, position: Int) {

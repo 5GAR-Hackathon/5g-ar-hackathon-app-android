@@ -41,7 +41,7 @@
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       app:layout_constraintTop_toBottomOf="@+id/toolbar"
-      ></FrameLayout>
+      />
 
   <de.nanogiants.a5garapp.views.ExpandableRecyclerView
       android:id="@+id/tagRecyclerView"
@@ -56,20 +56,11 @@
       android:id="@+id/dashboard_poi_recyclerview"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      app:layout_constraintBottom_toTopOf="@+id/navigateButton"
-      app:layout_constraintEnd_toEndOf="parent"
-      app:layout_constraintStart_toStartOf="parent"
-      ></androidx.recyclerview.widget.RecyclerView>
-
-  <Button
-      android:id="@+id/navigateButton"
-      android:layout_width="wrap_content"
-      android:layout_height="wrap_content"
-      android:text="Navigate to next POI"
-      app:layout_constraintBottom_toTopOf="@+id/bottomNavigationView"
+      app:layout_constraintBottom_toTopOf="@+id/view3"
       app:layout_constraintEnd_toEndOf="parent"
       app:layout_constraintStart_toStartOf="parent"
       />
+
   <com.google.android.material.bottomnavigation.BottomNavigationView
       android:id="@+id/bottomNavigationView"
       android:layout_width="0dp"
@@ -93,11 +84,4 @@
       app:layout_constraintEnd_toEndOf="@+id/bottomNavigationView"
       app:layout_constraintStart_toStartOf="@+id/bottomNavigationView"
       />
-  <FrameLayout
-      android:id="@+id/frameLayout"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-      >
-
-  </FrameLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
