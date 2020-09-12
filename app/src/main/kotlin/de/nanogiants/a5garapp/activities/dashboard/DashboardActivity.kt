@@ -48,8 +48,7 @@ import javax.inject.Inject
 
 @ExperimentalCoroutinesApi
 @AndroidEntryPoint
-class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChangeListener,
-  OnTouchListener {
+class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChangeListener {
 
   override val binding: ActivityDashboardBinding by viewBinding(ActivityDashboardBinding::inflate)
 
@@ -146,7 +145,7 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
     mapFragment.getMapAsync(this)
 
 
-    mLocalInstance = Panorama.getInstance().getLocalInstance(this)
+    /*mLocalInstance = Panorama.getInstance().getLocalInstance(this)
 
     if (mLocalInstance.init() == 0) {
       val uri = Uri.parse("android.resource://" + packageName + "/" + R.raw.panorama2);
@@ -161,7 +160,7 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
       }
     } else {
       Timber.e("erro1")
-    }
+    }*/
   }
 
   override fun onResume() {
@@ -290,9 +289,9 @@ class DashboardActivity : BaseActivity(), OnMapReadyCallback, OnSnapPositionChan
     }
   }
 
-  override fun onTouch(p0: View?, p1: MotionEvent?): Boolean {
+  /*override fun onTouch(p0: View?, p1: MotionEvent?): Boolean {
     mLocalInstance.updateTouchEvent(p1);
     return true;
-  }
+  }*/
 }
 

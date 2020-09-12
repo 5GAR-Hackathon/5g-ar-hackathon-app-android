@@ -2,6 +2,8 @@ package de.nanogiants.a5garapp.model.transformer
 
 import de.nanogiants.a5garapp.model.entities.domain.Coordinates
 import de.nanogiants.a5garapp.model.entities.domain.Image
+import de.nanogiants.a5garapp.model.entities.domain.ImageType.NORMAL
+import de.nanogiants.a5garapp.model.entities.domain.ImageType.PANORAMA
 import de.nanogiants.a5garapp.model.entities.domain.OpeningHour
 import de.nanogiants.a5garapp.model.entities.domain.POI
 import de.nanogiants.a5garapp.model.entities.domain.Review
@@ -24,7 +26,12 @@ class POIWebTransformerImpl @Inject constructor() : POIWebTransformer {
         tags = tags.filter { entity.tags.contains(it.id) },
         description = entity.description ?: "",
         coordinates = toModel(coordinates),
-        images = entity.images.map { Image("https://5gar.vercel.app/${it.url}") },
+        images = entity.images.map {
+          Image(
+            "https://5gar.vercel.app/${it.url}",
+            NORMAL
+          )
+        } + Image("panorama2", PANORAMA),
         reviews = reviews,
         upvotes = Random(id).nextInt(100, 300),
         downvotes = Random(id).nextInt(10, 80),
@@ -41,7 +48,7 @@ class POIWebTransformerImpl @Inject constructor() : POIWebTransformer {
         tags = tags.filter { entity.tags.contains(it.id) },
         description = entity.description,
         coordinates = toModel(coordinates),
-        images = entity.images.map { Image(it.url) },
+        images = entity.images.map { Image(it.url, NORMAL) } + Image("panorama2", PANORAMA),
         reviews = reviews,
         upvotes = Random(id).nextInt(100, 300),
         downvotes = Random(id).nextInt(10, 80),
