@@ -16,12 +16,21 @@
 package de.nanogiants.a5garapp.hms.rendering
 
 import android.app.Activity
+import android.content.Context
 import android.graphics.Bitmap
+import android.graphics.Bitmap.Config.ARGB_8888
 import android.graphics.BitmapFactory
+import android.graphics.Canvas
 import android.graphics.Color
 import android.graphics.Matrix
+import android.graphics.Paint
+import android.graphics.Rect
 import android.opengl.GLES20
 import android.opengl.GLSurfaceView.Renderer
+import android.os.Build.HARDWARE
+import android.text.Layout
+import android.text.StaticLayout
+import android.text.TextPaint
 import android.view.MotionEvent
 import android.view.View.MeasureSpec
 import android.widget.ImageView
@@ -44,6 +53,7 @@ import de.nanogiants.a5garapp.hms.common.ArDemoRuntimeException
 import de.nanogiants.a5garapp.hms.common.DisplayRotationManager
 import de.nanogiants.a5garapp.hms.common.TextDisplay
 import de.nanogiants.a5garapp.hms.common.TextureDisplay
+import okhttp3.internal.wait
 import timber.log.Timber
 import java.util.concurrent.ArrayBlockingQueue
 import javax.microedition.khronos.egl.EGLConfig
@@ -375,9 +385,38 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
         Timber.d("Hit a result!")
 
         // if (bannerList.size == 1) return
-        val bitmap = BitmapFactory.decodeResource(mActivity.resources, R.drawable.dickbutt)
-        bitmap.rotate(180f)
-        bannerList.add(Banner(hitResult.createAnchor(), bitmap))
+        val bitmap = drawTextToBitmap(
+          textView.context,
+          "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor invidunt ut labore et dolore magna aliquyam erat, sed diam voluptua. At vero eos et accusam et justo duo dolores et ea rebum. Stet clita kasd gubergren, no sea takimata sanctus est Lorem ipsum dolor sit amet"
+        )
+
+        /*val canvas = Canvas(bitmap)
+        val paint = Paint(Paint.ANTI_ALIAS_FLAG)
+        paint.color = Color.rgb(110, 110, 110)
+        paint.textSize = 12f
+        //paint.setShadowLayer(1f, 0f, 1f, Color.DKGRAY)
+
+// draw text to the Canvas center
+
+// draw text to the Canvas center
+        val text = "HelloWorld!!!"
+        val bounds = Rect()
+        paint.getTextBounds(text, 0, text.length, bounds)
+        val x: Float = (bitmap.width - bounds.width()) / 6f
+        val y: Float = (bitmap.height + bounds.height()) / 5f
+
+        canvas.drawBitmap(bitmap, 0f, 0f, null)
+        canvas.drawText(text, x, y, paint)*/
+
+
+        // dc.setText(DrawingConfig.TextValues("Hello World", 8))
+        // dc.setBackground(bitmap)
+        // dc.setPaint(Paint(Paint.ANTI_ALIAS_FLAG))
+
+        // val newBitmap = dc.draw()
+
+        bitmap?.rotate(180f)
+        bannerList.add(Banner(hitResult.createAnchor(), bitmap!!))
 
         Timber.d("We added a dickbutt")
         // TODO: 16.08.2020
@@ -386,6 +425,69 @@ class WorldRenderManager(private val mActivity: Activity) : Renderer {
       else -> {
         Timber.i("Hit result is not plane or point.")
       }
+    }
+  }
+
+  private fun drawTextToBitmap(context: Context, mText: String): Bitmap? {
+    return try {
+      val scale: Float = context.resources.getDisplayMetrics().density
+      var bitmap = BitmapFactory.decodeResource(mActivity.resources, R.drawable.untitled)
+      bitmap.setHasAlpha(false)
+
+      var bitmapConfig = bitmap.config
+
+      if (bitmapConfig == null) {
+        bitmapConfig = Bitmap.Config.HARDWARE
+      }
+      // resource bitmaps are imutable,
+      // so we need to convert it to mutable one
+      bitmap = bitmap.copy(bitmapConfig, true)
+      val canvas = Canvas(bitmap)
+      // new antialised Paint
+      val paint = Paint(Paint.ANTI_ALIAS_FLAG)
+      // text color - #3D3D3D
+      paint.color = Color.rgb(1f, 1f, 1f)
+      // text size in pixels
+      paint.textSize = (36 * scale)
+      // text shadow
+      paint.setShadowLayer(1f, 0f, 1f, Color.DKGRAY)
+
+      val padding = 8
+      val textLayout = StaticLayout(
+        mText,
+        TextPaint(paint),
+        canvas.width - (64f * scale).toInt(),
+        Layout.Alignment.ALIGN_CENTER,
+        1f,
+        0f,
+        false
+      )
+
+      // draw text to the Canvas center
+      val bounds = Rect().apply {
+        top = 20
+        left = 20
+        right = canvas.width - padding
+        bottom = textLayout.height
+      }
+
+      paint.getTextBounds(mText, 0, mText.length, bounds)
+
+      val x = (bitmap.width - bounds.width()) / 2f
+      val y = (bitmap.height + bounds.height()) / 2f
+
+      canvas.save()
+      //canvas.translate(x, y)
+      canvas.translate(32f * scale, 32f * scale)
+      textLayout.draw(canvas)
+      canvas.restore()
+      //canvas.drawText(mText, x * scale, y * scale, paint)
+
+
+      bitmap
+    } catch (e: Exception) {
+      Timber.e("ERRRRROR $e")
+      null
     }
   }
 

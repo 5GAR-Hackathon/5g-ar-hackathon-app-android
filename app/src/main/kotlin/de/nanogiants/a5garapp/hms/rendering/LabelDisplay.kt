@@ -108,7 +108,11 @@ class LabelDisplay {
    * @param cameraPose Location and pose of the current camera.
    * @param cameraProjection Projection matrix of the current camera.
    */
-  fun onDrawFrame(allPlanes: Collection<ARPlane>, cameraPose: ARPose, cameraProjection: FloatArray) {
+  fun onDrawFrame(
+    allPlanes: Collection<ARPlane>,
+    cameraPose: ARPose,
+    cameraProjection: FloatArray
+  ) {
     val sortedPlanes = getSortedPlanes(allPlanes, cameraPose)
     val cameraViewMatrix = FloatArray(MATRIX_SIZE)
     cameraPose.inverse().toMatrix(cameraViewMatrix, 0)
@@ -121,13 +125,24 @@ class LabelDisplay {
     drawBanners(banners, cameraViewMatrix, cameraProjection)
   }
 
-  private fun drawBanners(banners: List<Banner>, cameraViewMatrix: FloatArray, cameraProjection: FloatArray) {
+  private fun drawBanners(
+    banners: List<Banner>,
+    cameraViewMatrix: FloatArray,
+    cameraProjection: FloatArray
+  ) {
     ShaderUtil.checkGlError("Draw sorted plans start.")
     GLES20.glDepthMask(false)
     GLES20.glEnable(GLES20.GL_BLEND)
+    GLES20.glBlendColor(1f, 1f, 1f, 1f)
+    /*GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA)
+    GLES20.glBlendEquation(GLES20.GL_FUNC_ADD)
     GLES20.glBlendFuncSeparate(
-      GLES20.GL_DST_ALPHA, GLES20.GL_ONE, GLES20.GL_ZERO, GLES20.GL_ONE_MINUS_SRC_ALPHA
-    )
+      GLES20.GL_ONE,
+      GLES20.GL_ONE,
+      GLES20.GL_ONE,
+      GLES20.GL_ONE
+    )*/
+    GLES20.glBlendFuncSeparate(GLES20.GL_DST_ALPHA, GLES20.GL_ONE, GLES20.GL_ZERO, GLES20.GL_ZERO)
     GLES20.glUseProgram(mProgram)
     GLES20.glEnableVertexAttribArray(glPositionParameter)
 
@@ -215,11 +230,19 @@ class LabelDisplay {
     }
     idxBuffer.rewind()
     GLES20.glUniformMatrix4fv(glModelViewProjectionMatrix, 1, false, modelViewProjectionMatrix, 0)
-    GLES20.glDrawElements(GLES20.GL_TRIANGLE_STRIP, idxBuffer.limit(), GLES20.GL_UNSIGNED_SHORT, idxBuffer)
+    GLES20.glDrawElements(
+      GLES20.GL_TRIANGLE_STRIP,
+      idxBuffer.limit(),
+      GLES20.GL_UNSIGNED_SHORT,
+      idxBuffer
+    )
     ShaderUtil.checkGlError("Draw label end.")
   }
 
-  private fun getSortedPlanes(allPlanes: Collection<ARPlane>, cameraPose: ARPose): ArrayList<ARPlane> {
+  private fun getSortedPlanes(
+    allPlanes: Collection<ARPlane>,
+    cameraPose: ARPose
+  ): ArrayList<ARPlane> {
     // Planes must be sorted by the distance from the camera so that we can
     // first draw the closer planes, and have them block the further planes.
     val pairPlanes: MutableList<Pair<ARPlane, Float>> = ArrayList()
@@ -266,7 +289,11 @@ class LabelDisplay {
     }
   }
 
-  private fun drawSortedPlans(sortedPlanes: ArrayList<ARPlane>, cameraViews: FloatArray, cameraProjection: FloatArray) {
+  private fun drawSortedPlans(
+    sortedPlanes: ArrayList<ARPlane>,
+    cameraViews: FloatArray,
+    cameraProjection: FloatArray
+  ) {
     ShaderUtil.checkGlError("Draw sorted plans start.")
     GLES20.glDepthMask(false)
     GLES20.glEnable(GLES20.GL_BLEND)
@@ -343,15 +370,20 @@ class LabelDisplay {
     }
     idxBuffer.rewind()
     GLES20.glUniformMatrix4fv(glModelViewProjectionMatrix, 1, false, modelViewProjectionMatrix, 0)
-    GLES20.glDrawElements(GLES20.GL_TRIANGLE_STRIP, idxBuffer.limit(), GLES20.GL_UNSIGNED_SHORT, idxBuffer)
+    GLES20.glDrawElements(
+      GLES20.GL_TRIANGLE_STRIP,
+      idxBuffer.limit(),
+      GLES20.GL_UNSIGNED_SHORT,
+      idxBuffer
+    )
     ShaderUtil.checkGlError("Draw label end.")
   }
 
   companion object {
     private val LS = System.lineSeparator()
     private const val COORDS_PER_VERTEX = 3
-    private const val LABEL_WIDTH = 0.3f
-    private const val LABEL_HEIGHT = 0.3f
+    private const val LABEL_WIDTH = 0.8f
+    private const val LABEL_HEIGHT = 0.8f
     private const val TEXTURES_SIZE = 12
     private const val MATRIX_SIZE = 16
     private const val PLANE_ANGLE_MATRIX_SIZE = 4
