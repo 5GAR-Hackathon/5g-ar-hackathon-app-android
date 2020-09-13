@@ -1,6 +1,7 @@
 package de.nanogiants.a5garapp.activities.poidetail
 
 import android.app.FragmentManager
+import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.view.Menu
@@ -8,11 +9,13 @@ import android.view.MenuItem
 import android.view.MotionEvent
 import android.view.View
 import android.view.View.GONE
+import android.view.View.OnClickListener
 import android.view.View.OnTouchListener
 import android.widget.ImageView
 import android.widget.ImageView.ScaleType
 import android.widget.ImageView.VISIBLE
 import androidx.core.app.ActivityCompat
+import androidx.core.app.ActivityOptionsCompat
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.GridLayoutManager
@@ -30,6 +33,7 @@ import com.huawei.hms.panorama.PanoramaInterface
 import com.stfalcon.imageviewer.StfalconImageViewer
 import dagger.hilt.android.AndroidEntryPoint
 import de.nanogiants.a5garapp.R
+import de.nanogiants.a5garapp.activities.arscene.ARSceneActivity
 import de.nanogiants.a5garapp.activities.poidetail.adapters.POINearbyAdapter
 import de.nanogiants.a5garapp.activities.poidetail.adapters.POIOpeningHoursAdapter
 import de.nanogiants.a5garapp.activities.poidetail.adapters.POIPhotoAdapter
@@ -225,6 +229,9 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
       Timber.w("Initializing panorama did not work")
       panoramaWorks = false
     }
+
+    binding.arButton.visibility = if (poi.arModelName == null) GONE else VISIBLE
+    binding.arButton.setOnClickListener { openModelInAR() }
   }
 
   override fun onDestroy() {
@@ -370,6 +377,15 @@ class POIDetailActivity : BaseActivity(), OnMapReadyCallback {
     } else {
       super.onBackPressed()
     }
+  }
+
+  private fun openModelInAR() {
+    val intent = Intent(this, ARSceneActivity::class.java)
+    intent.putExtra("model", poi.arModelName)
+    intent.putExtra("poi", poi)
+    intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+
+    startActivity(intent)
   }
 }
 

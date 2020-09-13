@@ -18,6 +18,7 @@
       android:theme="@style/Theme.5GARApp"
       tools:ignore="AllowBackup"
       tools:replace="android:allowBackup,android:supportsRtl">
+    <activity android:name=".activities.arscene.ARSceneActivity" />
     <activity
         android:name=".activities.filter.FilterActivity"
         android:theme="@style/Theme.5GARApp.NoActionBar" />

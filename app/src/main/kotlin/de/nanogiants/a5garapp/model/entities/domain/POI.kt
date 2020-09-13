@@ -14,5 +14,6 @@ open class POI(
   open val reviews: List<Review>,
   open val upvotes: Int,
   open val downvotes: Int,
-  open val openingHours: List<OpeningHour>
+  open val openingHours: List<OpeningHour>,
+  open val arModelName: String?
 ) : Serializable

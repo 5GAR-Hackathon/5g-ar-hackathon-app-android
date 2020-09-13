@@ -35,7 +35,8 @@ class POIWebTransformerImpl @Inject constructor() : POIWebTransformer {
         reviews = reviews,
         upvotes = Random(id).nextInt(100, 300),
         downvotes = Random(id).nextInt(10, 80),
-        openingHours = listOf()
+        openingHours = listOf(),
+        arModelName = getARModelNameForPOI(id)
       )
     }
   }
@@ -52,7 +53,8 @@ class POIWebTransformerImpl @Inject constructor() : POIWebTransformer {
         reviews = reviews,
         upvotes = Random(id).nextInt(100, 300),
         downvotes = Random(id).nextInt(10, 80),
-        openingHours = (openingHours ?: listOf()).map { toModel(it) }
+        openingHours = (openingHours ?: listOf()).map { toModel(it) },
+        arModelName = getARModelNameForPOI(id)
       )
     }
   }
@@ -72,6 +74,17 @@ class POIWebTransformerImpl @Inject constructor() : POIWebTransformer {
   internal fun toModel(entity: OpeningHourLocalEntity): OpeningHour {
     return with(entity) {
       OpeningHour(day = day, hours = hours)
+    }
+  }
+
+  private fun getARModelNameForPOI(id: Int): String? {
+    return when(id) {
+      3 -> "tonhalle"
+      15 -> "gehrybauten"
+      16 -> "rheinturm"
+      24, 25 -> "k21"
+      29 -> "nrwforum"
+      else -> null
     }
   }
 }

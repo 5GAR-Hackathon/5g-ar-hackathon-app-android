@@ -8,6 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import dagger.hilt.android.AndroidEntryPoint
 import de.nanogiants.a5garapp.R
 import de.nanogiants.a5garapp.activities.ar.ARTestActivity
+import de.nanogiants.a5garapp.activities.arscene.ARSceneActivity
 import de.nanogiants.a5garapp.activities.dashboard.DashboardActivity
 import de.nanogiants.a5garapp.activities.map.MapActivity
 import de.nanogiants.a5garapp.base.BaseActivity
@@ -53,6 +54,13 @@ class MainActivity : BaseActivity() {
         startActivity(Intent(this, ARTestActivity::class.java))
       }, onDenied = {})
     }
+
+    binding.startArScene.setOnClickListener {
+      permissionController.requestPermissions(CAMERA, onGranted = {
+        startActivity(Intent(this, ARSceneActivity::class.java))
+      }, onDenied = {})
+    }
+
 
     binding.startMapTest.setOnClickListener {
       permissionController.requestPermissions(ACCESS_FINE_LOCATION, onGranted = {

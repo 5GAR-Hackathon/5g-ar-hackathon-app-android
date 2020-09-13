@@ -283,6 +283,20 @@
           app:layout_constraintTop_toTopOf="parent"
           tools:visibility="gone"
           />
+      <TextView
+          android:id="@+id/arButton"
+          android:layout_width="48dp"
+          android:layout_height="0dp"
+          android:fontFamily="sans-serif-condensed"
+          android:gravity="center"
+          android:text="AR"
+          android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+          android:textColor="@color/darkgray"
+          android:textSize="20sp"
+          app:layout_constraintBottom_toBottomOf="@+id/ttsButton"
+          app:layout_constraintEnd_toStartOf="@+id/ttsButton"
+          app:layout_constraintTop_toTopOf="@+id/ttsButton"
+          />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
   </androidx.core.widget.NestedScrollView>

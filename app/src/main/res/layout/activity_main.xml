@@ -41,13 +41,23 @@
         app:layout_constraintTop_toTopOf="parent"
         />
     <Button
+        android:id="@+id/start_ar_scene"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:text="TEST AR Scene"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/start_ar_test"
+        />
+
+    <Button
         android:id="@+id/start_map_test"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="16dp"
         android:text="TEST MAP"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/start_ar_test"
+        app:layout_constraintTop_toBottomOf="@id/start_ar_scene"
         />
     <Button
         android:id="@+id/start_location_test"

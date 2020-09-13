@@ -17,4 +17,4 @@ data class NearbyPOI(
   val address: String,
   val distance: Float,
   val url: String
-) : POI(id, name, description, tags, coordinates, images, reviews, upvotes, downvotes, openingHours)
+) : POI(id, name, description, tags, coordinates, images, reviews, upvotes, downvotes, openingHours, null)

@@ -67,7 +67,7 @@ class DashboardTagViewholder(val viewBinding: ItemTagBinding) :
       16 -> "ic_flag" // hotel
 
       17 -> "ic_flag" // historic
-      else -> ""
+      else -> "ic_flag"
     }
 
     return "$name${if (selected) "_selected" else ""}"

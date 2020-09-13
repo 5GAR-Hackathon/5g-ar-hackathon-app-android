@@ -66,5 +66,9 @@
   {
     "id": 17,
     "name": "historic"
+  },
+  {
+    "id": 18,
+    "name": "statue"
   }
 ]

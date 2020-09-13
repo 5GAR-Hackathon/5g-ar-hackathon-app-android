@@ -9,29 +9,7 @@
     "coordinates": {
       "lat": 51.2203973,
       "lng": 6.7792577
-    },
-    "images": [
-      {
-        "url": "https://img.fotocommunity.com/duesseldorfer-koenigsallee-37b92bdf-e788-4bbe-9834-dca8c1cfa763.jpg?width=1000"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.sAXcSE01vEDdn1YSGFKgkAHaFj?w=243&h=182&c=7&o=5&pid=1.7"
-      }
-    ],
-    "openingHours": [
-      {
-        "day": "Monday - Friday",
-        "hours": "08:00 - 20:00"
-      },
-      {
-        "day": "Saturday",
-        "hours": "Closed"
-      },
-      {
-        "day": "Sunday",
-        "hours": "Closed"
-      }
-    ]
+    }
   },
   {
     "id": 2,
@@ -44,48 +22,7 @@
     "coordinates": {
       "lat": 51.2317803,
       "lng": 6.7724412
-    },
-    "images": [
-      {
-        "url": "https://static.duesseldorf-tonight.de/thumbs/img/News/91/80/99/p/p_pano/das-museum-kunstpalast-bekommt-einen-neuen-namen-998091.jpg"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.X6_G5bYwWnJBNqFHfhXfvgHaE3?w=266&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.vpLmtz5_IO8p5YjlqTI52gHaFj?w=233&h=180&c=7&o=5&pid=1.7"
-      }
-    ],
-    "openingHours": [
-      {
-        "day": "Monday",
-        "hours": "08:00 - 18:00"
-      },
-      {
-        "day": "Tuesday",
-        "hours": "08:00 - 18:00"
-      },
-      {
-        "day": "Wednesday",
-        "hours": "08:00 - 14:00"
-      },
-      {
-        "day": "Thursday",
-        "hours": "08:00 - 22:00"
-      },
-      {
-        "day": "Friday",
-        "hours": "08:00 - 22:00"
-      },
-      {
-        "day": "Saturday",
-        "hours": "Closed"
-      },
-      {
-        "day": "Sunday",
-        "hours": "Closed"
-      }
-    ]
+    }
   },
   {
     "id": 3,
@@ -98,18 +35,7 @@
     "coordinates": {
       "lat": 51.2320933,
       "lng": 6.7704388
-    },
-    "images": [
-      {
-        "url": "https://galerie-saudade.de/wp-content/uploads/2019/08/duesseldorf-bei-nacht-tonhalle.jpg"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.gfs0hUh7oiuN8-CF7p5hRAHaFj?w=265&h=199&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.XFWKWGU1jvsR85CCqweLkwHaE8?w=298&h=199&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 4,
@@ -121,15 +47,7 @@
     "coordinates": {
       "lat": 51.2324896,
       "lng": 6.7722627
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIP.wiPLyKhk6zXthWSxqWbjrgHaE7?w=269&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.IKwxXM7Sdnl0erBkODFQcwHaDt?w=344&h=173&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 5,
@@ -141,8 +59,7 @@
     "coordinates": {
       "lat": 51.2115444,
       "lng": 6.798739
-    },
-    "images": []
+    }
   },
   {
     "id": 6,
@@ -155,27 +72,7 @@
     "coordinates": {
       "lat": 51.2045237,
       "lng": 6.7687527
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIP.bOp4k84HW8GgbwTbdntPCQHaLI?w=115&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.rurSAdG8Y7wANBdsSIa6zwHaE8?w=232&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.bTLvIZoTPGocwsNR4isNtAHaFj?w=205&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.76gGZq80wiXbnL0NwO9J2AAAAA?w=127&h=150&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.D8cNkZ1iCVUHgtffwKUELAHaFj?w=205&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.wok-0bGB0S_hQfyypBCj-gHaHa?w=153&h=180&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 7,
@@ -187,18 +84,7 @@
     "coordinates": {
       "lat": 51.2251932,
       "lng": 6.7701232
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIP.BvneAENUIn82F1s-pcpelwHaE6?w=257&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.a5mFSyTp_JF8aRk-pRuDbAHaFj?w=227&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.fKe_TYJp1-xJ3Ab9DNNKUgHaEK?w=303&h=180&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 8,
@@ -211,21 +97,7 @@
     "coordinates": {
       "lat": 51.2586849,
       "lng": 6.7532111
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIP.9jsuXp61HXx-5eoKJuHqhAHaHa?w=161&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.Nfjv60H4BFryFX448eNj4QHaE7?w=242&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.mLpRwzXxi89yp7BYbXh-4wHaE6?w=243&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.oIJpomI5WZbtcKvbtOECDQHaHa?w=161&h=180&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 9,
@@ -237,15 +109,7 @@
     "coordinates": {
       "lat": 51.2266437,
       "lng": 6.7779544
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIP.5zaPOkyeYMYoWyy4G6RWXQHaEG?w=318&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.PYC9IkMAqRJ5TeFVDAcXNQHaDp?w=343&h=172&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 10,
@@ -257,18 +121,7 @@
     "coordinates": {
       "lat": 51.2266437,
       "lng": 6.7779544
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIP.xrXmwyG-fLkwhDLyT9MA3wHaFN?w=265&h=186&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.dFp9p-FjTCXFOoOtojXOgwHaEK?w=331&h=186&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.PVCJ3Hq1b5R_VGlu4mr1zAHaHa?w=186&h=186&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 11,
@@ -281,33 +134,7 @@
     "coordinates": {
       "lat": 51.2280009,
       "lng": 6.7800584
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIP.28ggFDI5Q5j835uWh2rzdgHaLH?w=121&h=182&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.iZunl9jFvQdYyzmwIU5vrAHaL5?w=115&h=182&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.yF5mH0El1U0xbSS_z6DfcwHaJm?w=140&h=182&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.vWdqqvBEceXWJEmy1aJ0egHaIK?w=165&h=182&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.cvNwWEiWeFKwF0muang2sgHaLH?w=121&h=182&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.rHMA_KNpt3GANn1pR3qGbgHaLa?w=118&h=182&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.EMa8AOkV2rwx8FxzjjOhIAHaFh?w=245&h=182&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.U1k-3w6dMBupuUWs6mtG2QHaEm?w=264&h=180&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 15,
@@ -321,18 +148,7 @@
     "coordinates": {
       "lat": 51.2161866,
       "lng": 6.7556451
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIP.74uqs9Dq9oKPf19pap7t6QHaHa?w=181&h=181&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.PM1rufgPBOYUj-MqKbWgdQHaE8?w=272&h=181&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.REh1r4wt2QTl4HntFUz8SQHaLH?w=120&h=181&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 16,
@@ -346,30 +162,7 @@
     "coordinates": {
       "lat": 51.2161866,
       "lng": 6.7556451
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIP.Og0UcHGfdyuQJFqnPbGZhwHaPO?w=115&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.SlVqelFFuryGXLzx0PesCgHaLH?w=113&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.x4l-FcDEGLMDXYOLuOO1pwHaE6?w=260&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.oW7h75RZfa3zaGCFh4g8UQHaEK?w=308&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.55mJeTM3E4UTxuXGkjNbPAHaM9?w=113&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.Iz5GuiHPJnwdl4wD61sELQHaJ4?w=128&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.TxgAG5442X2ZPq-GBitbkQHaFw?w=257&h=200&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 17,
@@ -382,15 +175,7 @@
     "coordinates": {
       "lat": 51.2149988,
       "lng": 6.7516446
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIP.jHW4wZnanyhK9nKm2ans5gHaED?w=285&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.8EnsLVAbcmbCmXmsbC-Q1QHaFj?w=207&h=180&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 18,
@@ -403,15 +188,7 @@
     "coordinates": {
       "lat": 51.215416,
       "lng": 6.7539663
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIP.5fFZdJljBQGDGiHz3NeBlQHaD4?w=310&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.xTmGyNh3Clxgvdi_6AYczQHaE8?w=243&h=180&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 19,
@@ -424,15 +201,7 @@
     "coordinates": {
       "lat": 51.2131534,
       "lng": 6.7567091
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIP.AGifQuRAUrcWH91hhYgIrQHaE8?w=278&h=185&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.u5e2-xFQWPf-OrdvvI1P9gHaEy?w=285&h=185&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 21,
@@ -446,24 +215,7 @@
     "coordinates": {
       "lat": 51.2507022,
       "lng": 6.7870017
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIP._Fe5nnIyKzzOuUStqkSfOwAAAA?w=150&h=150&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.dQdVmWLXo-_sW4dMqSaTLgHaFj?w=240&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.HIpKKWWJ-QvrsMs7eK-M0gAAAA?w=239&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.wcG7236Cwgo2sZQlHrO18gHaHa?w=180&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.jI9lG4kbE0c_Tksq0bjSwAHaFj?w=240&h=180&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 22,
@@ -477,15 +229,7 @@
     "coordinates": {
       "lat": 51.2238669,
       "lng": 6.7849136
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIP.kGgzoz9DNtxU4zpI1BH1CAHaE8?w=243&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.auaAii6cpXIyN1kBbBV0FAHaEK?w=288&h=180&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 23,
@@ -500,15 +244,7 @@
     "coordinates": {
       "lat": 51.1610129,
       "lng": 6.8683692
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIP.oc8RXT8hf1YMK5UGVCE5GQHaE2?w=261&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.yPlfTk3z69QZxOue8A27RAHaE3?w=261&h=180&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 24,
@@ -520,30 +256,7 @@
     "coordinates": {
       "lat": 51.21656,
       "lng": 6.7718824
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIP.2mrS-EwHCj-TCSfuoeZivwAAAA?w=165&h=122&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.OSM74HfoCWbAiM-7rMWsnQAAAA?w=115&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.wDhQSC8E0TBGQ9wwmwFJVAHaFj?w=217&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.fynyQ7QKZn4zrr0E7aau-QAAAA?w=129&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.F4Esqj1-gWPiCvl4MRovpAHaFg?w=219&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.NPGKfRP3CzJ-f3SBR_4_ZAAAAA?w=192&h=159&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.4Vpz16TuPoC6YRkzGp6BywHaE0?w=263&h=180&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 25,
@@ -555,21 +268,7 @@
     "coordinates": {
       "lat": 51.21656,
       "lng": 6.7718824
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIP.xN6b49NNNGzncKPqTiSYqAHaFj?w=255&h=191&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.wXjK1YRFLnIP4f0nWLOjIAHaFc?w=260&h=191&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.pHZcGzwSsusf6WYfJHin7QHaFc?w=259&h=191&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.4FVbvmRxpisIPA_3X9mYLwHaE6?w=287&h=191&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 26,
@@ -581,18 +280,7 @@
     "coordinates": {
       "lat": 51.2275955,
       "lng": 6.7736936
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIF.aGtc5IVPJ3LfCr4oYSxYLw?w=203&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIF.5R1WKrDHsnjd4QsLU4TWuA?w=214&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th?id=OIF.4NhJ%2foUFer1NtCvNJkdyQA&w=228&h=180&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 27,
@@ -604,18 +292,7 @@
     "coordinates": {
       "lat": 51.219906,
       "lng": 6.7645877
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIP.BzSviVH12EUzDNlXG_zi2QHaEK?w=315&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.Cs85NErnsb1WCz17mMIYGwHaEK?w=315&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.9OaZle3F1CO4AQE3M-2M9wHaEK?w=315&h=180&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 28,
@@ -627,18 +304,7 @@
     "coordinates": {
       "lat": 51.2346939,
       "lng": 6.770839
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIP.7gqQdXGgIVBX3l4HqGvhIwHaDX?w=340&h=159&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.X6_G5bYwWnJBNqFHfhXfvgHaE3?w=266&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.vpLmtz5_IO8p5YjlqTI52gHaFj?w=233&h=180&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 29,
@@ -650,24 +316,7 @@
     "coordinates": {
       "lat": 51.233033,
       "lng": 6.7697184
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIP.M2q6276RRCmyW0bpWPvSrwHaJ4?w=115&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.2UyBGXJMA_aQvwWPlbqgfAHaFj?w=201&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.BVh5UQTJHKStqG4NQOVwlgHaDH?w=294&h=147&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.enVcpu-aSMFy2K257VFUTQHaEQ?w=262&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.F1F-c4Gh8I_fAo6s1nbMUgAAAA?w=177&h=141&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 30,
@@ -680,18 +329,7 @@
     "coordinates": {
       "lat": 51.2304108,
       "lng": 6.7727206
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIP.xUw1sm231K7w1uCWEcURCAHaFC?w=258&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.hLJt-rSczQUvBL5jyPEBuAHaFC?w=257&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.eDuL6pIbSwOpShGo9QoFSQHaFj?w=234&h=180&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 32,
@@ -704,15 +342,7 @@
     "coordinates": {
       "lat": 51.228195,
       "lng": 6.7813063
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIP.EKQTyWFxf0zFK2gszMIvWQHaE8?w=250&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.i0CtYzTxUc7g7IhBuoWl2AHaE9?w=249&h=180&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 33,
@@ -725,21 +355,7 @@
     "coordinates": {
       "lat": 51.2276086,
       "lng": 6.7752053
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIP.Fzeo6diny5SyowHNDKjp_wHaFM?w=242&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.4cEgZRipwHe8DZ1_ZkXv2QHaEa?w=284&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.RH0Xhn_pV-thoOcoa8b8ggHaEK?w=303&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.FHpRSqxF-NRPQKoTbkC37QHaFb?w=232&h=180&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 34,
@@ -752,21 +368,7 @@
     "coordinates": {
       "lat": 51.2240256,
       "lng": 6.7978421
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIP.qixXybPmfEgd3sT4COnl_gHaFQ?w=268&h=190&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.JAMhg2MPmklA2NJmXf6GiwHaFI?w=274&h=190&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.7e3ghA-JJ1YWxO5WtXHe1AHaFQ?w=267&h=190&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.spHWClzTeRV9emcaNBglNQHaD4?w=314&h=180&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 35,
@@ -779,18 +381,7 @@
     "coordinates": {
       "lat": 51.229385,
       "lng": 6.7721221
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIP.U_6_uYYfYr_z9KPbEZFpYQHaFb?w=225&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.SBPhY3pdQ9armuX0ThSQngHaEK?w=294&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.AV_M0qBxcKFVqJ2MLKRrpwHaE9?w=247&h=180&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 36,
@@ -802,24 +393,7 @@
     "coordinates": {
       "lat": 51.2293749,
       "lng": 6.7725038
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIP.lQn23RagyGm1EkKmS7ZTrgHaE7?w=268&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.MS_TsPxCtowa_3T40JnsrQHaKJ?w=130&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.wtgYscx-2ta7ym8lfkDqzQHaFK?w=256&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.LesSM8s7t-wusF7To_FdGgHaKc?w=127&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.hAXf4UaUUaUPqjXyS6WeYwHaE7?w=268&h=180&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 37,
@@ -833,15 +407,7 @@
     "coordinates": {
       "lat": 51.2192485,
       "lng": 6.8073153
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIP.GWLcRlRO_-EKxI8wmm9GegHaEn?w=262&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.Le0KfX5B7LDpJZE_4kVACgHaEL?w=290&h=180&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 38,
@@ -855,18 +421,7 @@
     "coordinates": {
       "lat": 51.2275791,
       "lng": 6.7734441
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIP.MOwTjBd8aEAOJ588cYCiFAHaEx?w=260&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.T2U5Jyg0rBwAcG8zo-tq3QHaE8?w=251&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.I5z4yD334h0EDmGuFFkgGwHaEK?w=298&h=180&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 39,
@@ -879,18 +434,7 @@
     "coordinates": {
       "lat": 51.224152,
       "lng": 6.7681754
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th?id=OIF.brblF3sarCNBCqJG%2bBIdAQ&w=136&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th?id=OIF.RxqK8HlH5RerszTSy7%2fPJw&w=132&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIF.gheyufGayL4Uu0yjGar0TA?w=122&h=180&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 40,
@@ -904,18 +448,7 @@
     "coordinates": {
       "lat": 51.2222222,
       "lng": 6.7708669
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIP.8Baw_9TDBX8y19j9C4F-owHaEK?w=333&h=187&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.ffWHhqBz_nXbVvNoyAIFVwHaEK?w=332&h=187&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.tvNJ8nl7cNYfOVVawYpTbQAAAA?w=115&h=187&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 41,
@@ -928,18 +461,7 @@
     "coordinates": {
       "lat": 51.2273504,
       "lng": 6.771567
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIP._WhqZN-MEECRsHGlH2oCFAHaET?w=301&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.3tkTxG4zfPWR6dhnlTonIgHaFj?w=234&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.qLxakRp-JH8vfrmR8R9c9AHaE4?w=265&h=180&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 42,
@@ -954,15 +476,7 @@
     "coordinates": {
       "lat": 51.2300062,
       "lng": 6.7791233
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIP.jZB8CaXPOhqW2swHG3E5bgHaFj?w=240&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.PugkpIJfASrMnr4L3mXpeAHaE0?w=278&h=180&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 43,
@@ -976,15 +490,7 @@
     "coordinates": {
       "lat": 51.2273963,
       "lng": 6.768933
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIP.pMKbDMGzjgDnIDQLevW1RgHaEK?w=280&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.QfdUqtSwL-p-I_KKMYZAoQHaEK?w=280&h=180&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
   },
   {
     "id": 44,
@@ -997,8 +503,7 @@
     "coordinates": {
       "lat": 51.2240613,
       "lng": 6.7685026
-    },
-    "images": []
+    }
   },
   {
     "id": 45,
@@ -1013,8 +518,7 @@
     "coordinates": {
       "lat": 51.2178229,
       "lng": 6.7578845
-    },
-    "images": []
+    }
   },
   {
     "id": 46,
@@ -1030,23 +534,169 @@
     "coordinates": {
       "lat": 51.2178229,
       "lng": 6.7578845
-    },
-    "images": [
-      {
-        "url": "https://th.bing.com/th/id/OIP.1aLYBykHZxPQKSPnZfDU8QHaFj?w=224&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.rQJsnWyqVLIpqk-M3QQTYwHaE8?w=252&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.yMH7vZ1k_xtnC-kYSPi0fwHaFj?w=224&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.Hbm2hYdJC0XLV7Z3sL5URQHaJ4?w=126&h=180&c=7&o=5&pid=1.7"
-      },
-      {
-        "url": "https://th.bing.com/th/id/OIP.-xgWJe2QwsnYBDNqPSGABwHaFj?w=223&h=180&c=7&o=5&pid=1.7"
-      }
-    ]
+    }
+  },
+  {
+    "id": 47,
+    "name": "Kriegerdenkmal im Hofgarten",
+    "tags": [
+      4,
+      18
+    ],
+    "coordinates": {
+      "lat": 51.2288205,
+      "lng": 6.7797607
+    }
+  },
+  {
+    "id": 48,
+    "name": "Aalschokker",
+    "tags": [
+      2
+    ],
+    "coordinates": {
+      "lat": 51.2244708,
+      "lng": 6.7686479
+    }
+  },
+  {
+    "id": 49,
+    "name": "Roncalli's Apollo Varieté Theater",
+    "tags": [
+      11
+    ],
+    "coordinates": {
+      "lat": 51.2223341,
+      "lng": 6.766942
+    }
+  },
+  {
+    "id": 50,
+    "name": "Gänsebrunnen",
+    "tags": [
+      2
+    ],
+    "coordinates": {
+      "lat": 51.2255631,
+      "lng": 6.7708456
+    }
+  },
+  {
+    "id": 51,
+    "name": "Haus des Karnevals",
+    "tags": [
+      2,
+      3,
+      17
+    ],
+    "coordinates": {
+      "lat": 51.2255685,
+      "lng": 6.7701381
+    }
+  },
+  {
+    "id": 52,
+    "name": "Henry-Moore-Plastik",
+    "tags": [
+      4,
+      18
+    ],
+    "coordinates": {
+      "lat": 51.2275443,
+      "lng": 6.7770166
+    }
+  },
+  {
+    "id": 53,
+    "name": "Landtag Nordrhein-Westfalen",
+    "tags": [
+      2
+    ],
+    "coordinates": {
+      "lat": 51.2189692,
+      "lng": 6.761408
+    }
+  },
+  {
+    "id": 54,
+    "name": "Oberkasseler Brücke",
+    "tags": [
+      2
+    ],
+    "coordinates": {
+      "lat": 51.2316137,
+      "lng": 6.7660405
+    }
+  },
+  {
+    "id": 55,
+    "name": "Düsseldorfer Pegeluhr",
+    "tags": [
+      2,
+      17
+    ],
+    "coordinates": {
+      "lat": 51.2255017,
+      "lng": 6.7679204
+    }
+  },
+  {
+    "id": 56,
+    "name": "Marktplatz",
+    "tags": [
+      2
+    ],
+    "coordinates": {
+      "lat": 51.2258435,
+      "lng": 6.7720473
+    }
+  },
+  {
+    "id": 57,
+    "name": "Rheinpromenade",
+    "tags": [
+      2
+    ],
+    "coordinates": {
+      "lat": 51.2249807,
+      "lng": 6.7677399
+    }
+  },
+  {
+    "id": 58,
+    "name": "Rheinterrasse",
+    "tags": [
+      2,
+      7
+    ],
+    "coordinates": {
+      "lat": 51.2360113,
+      "lng": 6.7690153
+    }
+  },
+  {
+    "id": 59,
+    "name": "Rheintreppe",
+    "tags": [
+      2
+    ],
+    "coordinates": {
+      "lat": 51.2274625,
+      "lng": 6.7685531
+    }
+  },
+  {
+    "id": 60,
+    "name": "Ulanendenkmal",
+    "tags": [
+      2,
+      18,
+      17,
+      4
+    ],
+    "coordinates": {
+      "lat": 51.233983,
+      "lng": 6.7692042
+    }
   }
 ]
