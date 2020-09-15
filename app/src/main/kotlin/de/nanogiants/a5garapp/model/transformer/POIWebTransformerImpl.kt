@@ -28,11 +28,11 @@ class POIWebTransformerImpl @Inject constructor() : POIWebTransformer {
         coordinates = toModel(coordinates),
         images = entity.images.map {
           Image(
-            "https://5gar.vercel.app/${it.url}",
+            if (it.url.startsWith("http")) it.url else "https://5gar.vercel.app/${it.url}",
             NORMAL
           )
         } + Image("panorama2", PANORAMA),
-        reviews = reviews,
+        reviews = listOf(),
         upvotes = Random(id).nextInt(100, 300),
         downvotes = Random(id).nextInt(10, 80),
         openingHours = listOf(),
@@ -47,10 +47,15 @@ class POIWebTransformerImpl @Inject constructor() : POIWebTransformer {
         id = id,
         name = name,
         tags = tags.filter { entity.tags.contains(it.id) },
-        description = entity.description,
+        description = entity.description ?: "",
         coordinates = toModel(coordinates),
-        images = entity.images.map { Image(it.url, NORMAL) } + Image("panorama2", PANORAMA),
-        reviews = reviews,
+        images = entity.images.map {
+          Image(
+            if (it.url.startsWith("http")) it.url else "https://5gar.vercel.app/${it.url}",
+            NORMAL
+          )
+        } + Image("panorama2", PANORAMA),
+        reviews = listOf(),
         upvotes = Random(id).nextInt(100, 300),
         downvotes = Random(id).nextInt(10, 80),
         openingHours = (openingHours ?: listOf()).map { toModel(it) },
@@ -78,7 +83,7 @@ class POIWebTransformerImpl @Inject constructor() : POIWebTransformer {
   }
 
   private fun getARModelNameForPOI(id: Int): String? {
-    return when(id) {
+    return when (id) {
       3 -> "tonhalle"
       15 -> "gehrybauten"
       16 -> "rheinturm"

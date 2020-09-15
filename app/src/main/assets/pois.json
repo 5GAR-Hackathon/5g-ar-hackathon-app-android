@@ -9,7 +9,25 @@
     "coordinates": {
       "lat": 51.2203973,
       "lng": 6.7792577
-    }
+    },
+    "images": [
+      {
+        "url": "/images/koenigsallee/1.jpg",
+        "copyright": "Sarah Thorenz"
+      },
+      {
+        "url": "/images/koenigsallee/2.jpg",
+        "copyright": "Sarah Thorenz"
+      },
+      {
+        "url": "/images/koenigsallee/3.jpg",
+        "copyright": "Sarah Thorenz"
+      },
+      {
+        "url": "/images/koenigsallee/4.jpg",
+        "copyright": "Sarah Thorenz"
+      }
+    ]
   },
   {
     "id": 2,
@@ -22,7 +40,13 @@
     "coordinates": {
       "lat": 51.2317803,
       "lng": 6.7724412
-    }
+    },
+    "images": [
+      {
+        "url": "/images/kunstpalast/1.jpg",
+        "copyright": "Sarah Thorenz"
+      }
+    ]
   },
   {
     "id": 3,
@@ -35,7 +59,17 @@
     "coordinates": {
       "lat": 51.2320933,
       "lng": 6.7704388
-    }
+    },
+    "images": [
+      {
+        "url": "/images/tonhalle/1.jpg",
+        "copyright": "Sarah Thorenz"
+      },
+      {
+        "url": "/images/tonhalle/2.jpg",
+        "copyright": "Sarah Thorenz"
+      }
+    ]
   },
   {
     "id": 4,
@@ -47,7 +81,8 @@
     "coordinates": {
       "lat": 51.2324896,
       "lng": 6.7722627
-    }
+    },
+    "images": []
   },
   {
     "id": 5,
@@ -59,7 +94,8 @@
     "coordinates": {
       "lat": 51.2115444,
       "lng": 6.798739
-    }
+    },
+    "images": []
   },
   {
     "id": 6,
@@ -72,7 +108,8 @@
     "coordinates": {
       "lat": 51.2045237,
       "lng": 6.7687527
-    }
+    },
+    "images": []
   },
   {
     "id": 7,
@@ -84,7 +121,21 @@
     "coordinates": {
       "lat": 51.2251932,
       "lng": 6.7701232
-    }
+    },
+    "images": [
+      {
+        "url": "/images/burgplatz/1.jpg",
+        "copyright": "Sarah Thorenz"
+      },
+      {
+        "url": "/images/burgplatz/2.jpg",
+        "copyright": "Sarah Thorenz"
+      },
+      {
+        "url": "/images/burgplatz/3.jpg",
+        "copyright": "Sarah Thorenz"
+      }
+    ]
   },
   {
     "id": 8,
@@ -97,7 +148,8 @@
     "coordinates": {
       "lat": 51.2586849,
       "lng": 6.7532111
-    }
+    },
+    "images": []
   },
   {
     "id": 9,
@@ -109,7 +161,12 @@
     "coordinates": {
       "lat": 51.2266437,
       "lng": 6.7779544
-    }
+    },
+    "images": [
+      {
+        "url": "https://digihub.sharepoint.com/Freigegebene%20Dokumente/Events/23_Huawei%20Hackathon/07_App%20Content/01_K%C3%B6_Bogen/Landmark_K%C3%B6-Bogen.jpg"
+      }
+    ]
   },
   {
     "id": 10,
@@ -121,7 +178,27 @@
     "coordinates": {
       "lat": 51.2266437,
       "lng": 6.7779544
-    }
+    },
+    "images": [
+      {
+        "url": "https://digihub.sharepoint.com/Freigegebene%20Dokumente/Events/23_Huawei%20Hackathon/07_App%20Content/02_K%C3%B6_Bogen_II/EP03601-0561.jpg"
+      },
+      {
+        "url": "https://digihub.sharepoint.com/Freigegebene%20Dokumente/Events/23_Huawei%20Hackathon/07_App%20Content/02_K%C3%B6_Bogen_II/EP03601-0573.jpg"
+      },
+      {
+        "url": "https://digihub.sharepoint.com/Freigegebene%20Dokumente/Events/23_Huawei%20Hackathon/07_App%20Content/02_K%C3%B6_Bogen_II/EP03601-0575.jpg"
+      },
+      {
+        "url": "https://digihub.sharepoint.com/Freigegebene%20Dokumente/Events/23_Huawei%20Hackathon/07_App%20Content/02_K%C3%B6_Bogen_II/EP03601-0577.jpg"
+      },
+      {
+        "url": "https://digihub.sharepoint.com/Freigegebene%20Dokumente/Events/23_Huawei%20Hackathon/07_App%20Content/02_K%C3%B6_Bogen_II/EP03601-0590.jpg"
+      },
+      {
+        "url": "https://digihub.sharepoint.com/Freigegebene%20Dokumente/Events/23_Huawei%20Hackathon/07_App%20Content/02_K%C3%B6_Bogen_II/EP03601-0593.jpg"
+      }
+    ]
   },
   {
     "id": 11,
@@ -134,7 +211,18 @@
     "coordinates": {
       "lat": 51.2280009,
       "lng": 6.7800584
-    }
+    },
+    "images": [
+      {
+        "url": "https://digihub.sharepoint.com/Freigegebene%20Dokumente/Events/23_Huawei%20Hackathon/07_App%20Content/03_Dreischeibenhaus/01_HPP_DSH_2014_Ansicht-S%C3%BCd_Foto-Ralph-Richter.jpg"
+      },
+      {
+        "url": "https://digihub.sharepoint.com/Freigegebene%20Dokumente/Events/23_Huawei%20Hackathon/07_App%20Content/03_Dreischeibenhaus/03_HPP_DSH_2014_Ansicht-Ost_Foto-Momeni-Gruppe.jpg"
+      },
+      {
+        "url": "https://digihub.sharepoint.com/Freigegebene%20Dokumente/Events/23_Huawei%20Hackathon/07_App%20Content/03_Dreischeibenhaus/07_HPP_DSH_2015_Foyer-unter-Denkmalschutz_Foto-HG-Esch.jpg"
+      }
+    ]
   },
   {
     "id": 15,
@@ -148,7 +236,15 @@
     "coordinates": {
       "lat": 51.2161866,
       "lng": 6.7556451
-    }
+    },
+    "images": [
+      {
+        "url": "https://digihub.sharepoint.com/Freigegebene%20Dokumente/Events/23_Huawei%20Hackathon/07_App%20Content/07_GehryBauten/Landmark_Gehry_Bauten.jpg"
+      },
+      {
+        "url": "https://digihub.sharepoint.com/Freigegebene%20Dokumente/Events/23_Huawei%20Hackathon/07_App%20Content/07_GehryBauten/2A713A5D-5AA7-4F52-BCF5-142C603C9156.jpg"
+      }
+    ]
   },
   {
     "id": 16,
@@ -162,7 +258,21 @@
     "coordinates": {
       "lat": 51.2161866,
       "lng": 6.7556451
-    }
+    },
+    "images": [
+      {
+        "url": "/images/rheinturm/1.jpg",
+        "copyright": "Sarah Thorenz"
+      },
+      {
+        "url": "/images/rheinturm/2.jpg",
+        "copyright": "Sarah Thorenz"
+      },
+      {
+        "url": "/images/rheinturm/3.jpg",
+        "copyright": "Sarah Thorenz"
+      }
+    ]
   },
   {
     "id": 17,
@@ -175,7 +285,8 @@
     "coordinates": {
       "lat": 51.2149988,
       "lng": 6.7516446
-    }
+    },
+    "images": []
   },
   {
     "id": 18,
@@ -188,7 +299,15 @@
     "coordinates": {
       "lat": 51.215416,
       "lng": 6.7539663
-    }
+    },
+    "images": [
+      {
+        "url": "https://digihub.sharepoint.com/Freigegebene%20Dokumente/Events/23_Huawei%20Hackathon/07_App%20Content/10_Architektenkammer/Hackathon_Fotoauswahl/2019_Medienhafen%20D%C3%BCsseldorf_Fotos%20Thomas%20Robbin/28078_Medienhafen_Duesseldorf.jpg"
+      },
+      {
+        "url": "https://digihub.sharepoint.com/Freigegebene%20Dokumente/Events/23_Huawei%20Hackathon/07_App%20Content/10_Architektenkammer/Hackathon_Fotoauswahl/2016_Aussenaufnahmen_Fotos%20Ingo%20Lammert/2017_HdA_illuminiert_bearb.jpg"
+      }
+    ]
   },
   {
     "id": 19,
@@ -201,7 +320,8 @@
     "coordinates": {
       "lat": 51.2131534,
       "lng": 6.7567091
-    }
+    },
+    "images": []
   },
   {
     "id": 21,
@@ -215,7 +335,8 @@
     "coordinates": {
       "lat": 51.2507022,
       "lng": 6.7870017
-    }
+    },
+    "images": []
   },
   {
     "id": 22,
@@ -229,7 +350,8 @@
     "coordinates": {
       "lat": 51.2238669,
       "lng": 6.7849136
-    }
+    },
+    "images": []
   },
   {
     "id": 23,
@@ -244,7 +366,8 @@
     "coordinates": {
       "lat": 51.1610129,
       "lng": 6.8683692
-    }
+    },
+    "images": []
   },
   {
     "id": 24,
@@ -256,7 +379,21 @@
     "coordinates": {
       "lat": 51.21656,
       "lng": 6.7718824
-    }
+    },
+    "images": [
+      {
+        "url": "/images/k21/1.jpg",
+        "copyright": "Sarah Thorenz"
+      },
+      {
+        "url": "/images/k21/2.jpg",
+        "copyright": "Sarah Thorenz"
+      },
+      {
+        "url": "/images/k21/3.jpg",
+        "copyright": "Sarah Thorenz"
+      }
+    ]
   },
   {
     "id": 25,
@@ -268,7 +405,8 @@
     "coordinates": {
       "lat": 51.21656,
       "lng": 6.7718824
-    }
+    },
+    "images": []
   },
   {
     "id": 26,
@@ -280,7 +418,8 @@
     "coordinates": {
       "lat": 51.2275955,
       "lng": 6.7736936
-    }
+    },
+    "images": []
   },
   {
     "id": 27,
@@ -292,7 +431,13 @@
     "coordinates": {
       "lat": 51.219906,
       "lng": 6.7645877
-    }
+    },
+    "images": [
+      {
+        "url": "/images/kit/1.jpg",
+        "copyright": "Sarah Thorenz"
+      }
+    ]
   },
   {
     "id": 28,
@@ -304,7 +449,8 @@
     "coordinates": {
       "lat": 51.2346939,
       "lng": 6.770839
-    }
+    },
+    "images": []
   },
   {
     "id": 29,
@@ -316,7 +462,17 @@
     "coordinates": {
       "lat": 51.233033,
       "lng": 6.7697184
-    }
+    },
+    "images": [
+      {
+        "url": "/images/nrw-forum-duesseldorf/1.jpg",
+        "copyright": "Sarah Thorenz"
+      },
+      {
+        "url": "/images/nrw-forum-duesseldorf/2.jpg",
+        "copyright": "Sarah Thorenz"
+      }
+    ]
   },
   {
     "id": 30,
@@ -329,7 +485,13 @@
     "coordinates": {
       "lat": 51.2304108,
       "lng": 6.7727206
-    }
+    },
+    "images": [
+      {
+        "url": "/images/kunstakademie/1.jpg",
+        "copyright": "Sarah Thorenz"
+      }
+    ]
   },
   {
     "id": 32,
@@ -342,7 +504,8 @@
     "coordinates": {
       "lat": 51.228195,
       "lng": 6.7813063
-    }
+    },
+    "images": []
   },
   {
     "id": 33,
@@ -355,7 +518,8 @@
     "coordinates": {
       "lat": 51.2276086,
       "lng": 6.7752053
-    }
+    },
+    "images": []
   },
   {
     "id": 34,
@@ -368,7 +532,8 @@
     "coordinates": {
       "lat": 51.2240256,
       "lng": 6.7978421
-    }
+    },
+    "images": []
   },
   {
     "id": 35,
@@ -381,7 +546,8 @@
     "coordinates": {
       "lat": 51.229385,
       "lng": 6.7721221
-    }
+    },
+    "images": []
   },
   {
     "id": 36,
@@ -393,7 +559,8 @@
     "coordinates": {
       "lat": 51.2293749,
       "lng": 6.7725038
-    }
+    },
+    "images": []
   },
   {
     "id": 37,
@@ -407,7 +574,8 @@
     "coordinates": {
       "lat": 51.2192485,
       "lng": 6.8073153
-    }
+    },
+    "images": []
   },
   {
     "id": 38,
@@ -421,7 +589,8 @@
     "coordinates": {
       "lat": 51.2275791,
       "lng": 6.7734441
-    }
+    },
+    "images": []
   },
   {
     "id": 39,
@@ -434,7 +603,8 @@
     "coordinates": {
       "lat": 51.224152,
       "lng": 6.7681754
-    }
+    },
+    "images": []
   },
   {
     "id": 40,
@@ -448,7 +618,8 @@
     "coordinates": {
       "lat": 51.2222222,
       "lng": 6.7708669
-    }
+    },
+    "images": []
   },
   {
     "id": 41,
@@ -461,7 +632,8 @@
     "coordinates": {
       "lat": 51.2273504,
       "lng": 6.771567
-    }
+    },
+    "images": []
   },
   {
     "id": 42,
@@ -476,7 +648,8 @@
     "coordinates": {
       "lat": 51.2300062,
       "lng": 6.7791233
-    }
+    },
+    "images": []
   },
   {
     "id": 43,
@@ -490,7 +663,8 @@
     "coordinates": {
       "lat": 51.2273963,
       "lng": 6.768933
-    }
+    },
+    "images": []
   },
   {
     "id": 44,
@@ -503,7 +677,8 @@
     "coordinates": {
       "lat": 51.2240613,
       "lng": 6.7685026
-    }
+    },
+    "images": []
   },
   {
     "id": 45,
@@ -518,7 +693,8 @@
     "coordinates": {
       "lat": 51.2178229,
       "lng": 6.7578845
-    }
+    },
+    "images": []
   },
   {
     "id": 46,
@@ -534,7 +710,8 @@
     "coordinates": {
       "lat": 51.2178229,
       "lng": 6.7578845
-    }
+    },
+    "images": []
   },
   {
     "id": 47,
@@ -546,7 +723,13 @@
     "coordinates": {
       "lat": 51.2288205,
       "lng": 6.7797607
-    }
+    },
+    "images": [
+      {
+        "url": "/images/kriegerdenkmal-im-hofgarten/1.jpg",
+        "copyright": "Sarah Thorenz"
+      }
+    ]
   },
   {
     "id": 48,
@@ -557,7 +740,13 @@
     "coordinates": {
       "lat": 51.2244708,
       "lng": 6.7686479
-    }
+    },
+    "images": [
+      {
+        "url": "/images/aalschokker/1.jpg",
+        "copyright": "Sarah Thorenz"
+      }
+    ]
   },
   {
     "id": 49,
@@ -568,7 +757,13 @@
     "coordinates": {
       "lat": 51.2223341,
       "lng": 6.766942
-    }
+    },
+    "images": [
+      {
+        "url": "/images/apollo/1.jpg",
+        "copyright": "Sarah Thorenz"
+      }
+    ]
   },
   {
     "id": 50,
@@ -579,7 +774,13 @@
     "coordinates": {
       "lat": 51.2255631,
       "lng": 6.7708456
-    }
+    },
+    "images": [
+      {
+        "url": "/images/gaensebrunnen/1.jpg",
+        "copyright": "Sarah Thorenz"
+      }
+    ]
   },
   {
     "id": 51,
@@ -592,7 +793,17 @@
     "coordinates": {
       "lat": 51.2255685,
       "lng": 6.7701381
-    }
+    },
+    "images": [
+      {
+        "url": "/images/haus-des-karnevals/1.jpg",
+        "copyright": "Sarah Thorenz"
+      },
+      {
+        "url": "/images/haus-des-karnevals/2.jpg",
+        "copyright": "Sarah Thorenz"
+      }
+    ]
   },
   {
     "id": 52,
@@ -604,7 +815,13 @@
     "coordinates": {
       "lat": 51.2275443,
       "lng": 6.7770166
-    }
+    },
+    "images": [
+      {
+        "url": "/images/henry-moore-plastik/1.jpg",
+        "copyright": "Sarah Thorenz"
+      }
+    ]
   },
   {
     "id": 53,
@@ -615,7 +832,13 @@
     "coordinates": {
       "lat": 51.2189692,
       "lng": 6.761408
-    }
+    },
+    "images": [
+      {
+        "url": "/images/landtag/1.jpg",
+        "copyright": "Sarah Thorenz"
+      }
+    ]
   },
   {
     "id": 54,
@@ -626,7 +849,13 @@
     "coordinates": {
       "lat": 51.2316137,
       "lng": 6.7660405
-    }
+    },
+    "images": [
+      {
+        "url": "/images/oberkasseler-bruecke/1.jpg",
+        "copyright": "Sarah Thorenz"
+      }
+    ]
   },
   {
     "id": 55,
@@ -638,7 +867,13 @@
     "coordinates": {
       "lat": 51.2255017,
       "lng": 6.7679204
-    }
+    },
+    "images": [
+      {
+        "url": "/images/pegeluhr/1.jpg",
+        "copyright": "Sarah Thorenz"
+      }
+    ]
   },
   {
     "id": 56,
@@ -649,7 +884,13 @@
     "coordinates": {
       "lat": 51.2258435,
       "lng": 6.7720473
-    }
+    },
+    "images": [
+      {
+        "url": "/images/marktplatz/1.jpg",
+        "copyright": "Sarah Thorenz"
+      }
+    ]
   },
   {
     "id": 57,
@@ -660,7 +901,25 @@
     "coordinates": {
       "lat": 51.2249807,
       "lng": 6.7677399
-    }
+    },
+    "images": [
+      {
+        "url": "/images/rheinpromenade/1.jpg",
+        "copyright": "Sarah Thorenz"
+      },
+      {
+        "url": "/images/rheinpromenade/2.jpg",
+        "copyright": "Sarah Thorenz"
+      },
+      {
+        "url": "/images/rheinpromenade/3.jpg",
+        "copyright": "Sarah Thorenz"
+      },
+      {
+        "url": "/images/rheinpromenade/4.jpg",
+        "copyright": "Sarah Thorenz"
+      }
+    ]
   },
   {
     "id": 58,
@@ -672,7 +931,13 @@
     "coordinates": {
       "lat": 51.2360113,
       "lng": 6.7690153
-    }
+    },
+    "images": [
+      {
+        "url": "/images/rheinterrasse/1.jpg",
+        "copyright": "Sarah Thorenz"
+      }
+    ]
   },
   {
     "id": 59,
@@ -683,7 +948,13 @@
     "coordinates": {
       "lat": 51.2274625,
       "lng": 6.7685531
-    }
+    },
+    "images": [
+      {
+        "url": "/images/rheintreppe/1.jpg",
+        "copyright": "Sarah Thorenz"
+      }
+    ]
   },
   {
     "id": 60,
@@ -697,6 +968,12 @@
     "coordinates": {
       "lat": 51.233983,
       "lng": 6.7692042
-    }
+    },
+    "images": [
+      {
+        "url": "/images/ulanendenkmal/1.jpg",
+        "copyright": "Sarah Thorenz"
+      }
+    ]
   }
 ]

@@ -12,7 +12,7 @@ data class POILocalEntity(
   val id: Int,
   val name: String,
   val tags: List<Int>,
-  val description: String,
+  val description: String?,
   val coordinates: CoordinatesLocalEntity,
   val images: List<ImageLocalEntity>,
   val openingHours: List<OpeningHourLocalEntity>?
