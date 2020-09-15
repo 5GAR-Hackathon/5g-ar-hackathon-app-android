@@ -217,13 +217,13 @@
     },
     "images": [
       {
-        "url": "https://digihub.sharepoint.com/Freigegebene%20Dokumente/Events/23_Huawei%20Hackathon/07_App%20Content/03_Dreischeibenhaus/01_HPP_DSH_2014_Ansicht-S%C3%BCd_Foto-Ralph-Richter.jpg"
+        "url": "https://raw.githubusercontent.com/5GAR-Hackathon/5g-ar-hackathon-app-android/develop/app/src/main/assets/images/01_HPP_DSH_2014_Ansicht-Süd_Foto-Ralph-Richter.jpg"
       },
       {
-        "url": "https://digihub.sharepoint.com/Freigegebene%20Dokumente/Events/23_Huawei%20Hackathon/07_App%20Content/03_Dreischeibenhaus/03_HPP_DSH_2014_Ansicht-Ost_Foto-Momeni-Gruppe.jpg"
+        "url": "https://raw.githubusercontent.com/5GAR-Hackathon/5g-ar-hackathon-app-android/develop/app/src/main/assets/images/03_HPP_DSH_2014_Ansicht-Ost_Foto-Momeni-Gruppe.jpg"
       },
       {
-        "url": "https://digihub.sharepoint.com/Freigegebene%20Dokumente/Events/23_Huawei%20Hackathon/07_App%20Content/03_Dreischeibenhaus/07_HPP_DSH_2015_Foyer-unter-Denkmalschutz_Foto-HG-Esch.jpg"
+        "url": "https://raw.githubusercontent.com/5GAR-Hackathon/5g-ar-hackathon-app-android/develop/app/src/main/assets/images/07_HPP_DSH_2015_Foyer-unter-Denkmalschutz_Foto-HG-Esch.jpg"
       }
     ]
   },
@@ -242,10 +242,10 @@
     },
     "images": [
       {
-        "url": "https://digihub.sharepoint.com/Freigegebene%20Dokumente/Events/23_Huawei%20Hackathon/07_App%20Content/07_GehryBauten/Landmark_Gehry_Bauten.jpg"
+        "url": "https://raw.githubusercontent.com/5GAR-Hackathon/5g-ar-hackathon-app-android/develop/app/src/main/assets/images/2A713A5D-5AA7-4F52-BCF5-142C603C9156.jpg"
       },
       {
-        "url": "https://digihub.sharepoint.com/Freigegebene%20Dokumente/Events/23_Huawei%20Hackathon/07_App%20Content/07_GehryBauten/2A713A5D-5AA7-4F52-BCF5-142C603C9156.jpg"
+        "url": "https://raw.githubusercontent.com/5GAR-Hackathon/5g-ar-hackathon-app-android/develop/app/src/main/assets/images/BF53D692-84B1-4B20-91C0-18313D872A1A.jpg"
       }
     ]
   },
@@ -305,10 +305,10 @@
     },
     "images": [
       {
-        "url": "https://digihub.sharepoint.com/Freigegebene%20Dokumente/Events/23_Huawei%20Hackathon/07_App%20Content/10_Architektenkammer/Hackathon_Fotoauswahl/2019_Medienhafen%20D%C3%BCsseldorf_Fotos%20Thomas%20Robbin/28078_Medienhafen_Duesseldorf.jpg"
+        "url": "https://raw.githubusercontent.com/5GAR-Hackathon/5g-ar-hackathon-app-android/develop/app/src/main/assets/images/2017_HdA_illuminiert_bearb.jpg"
       },
       {
-        "url": "https://digihub.sharepoint.com/Freigegebene%20Dokumente/Events/23_Huawei%20Hackathon/07_App%20Content/10_Architektenkammer/Hackathon_Fotoauswahl/2016_Aussenaufnahmen_Fotos%20Ingo%20Lammert/2017_HdA_illuminiert_bearb.jpg"
+        "url": "https://raw.githubusercontent.com/5GAR-Hackathon/5g-ar-hackathon-app-android/develop/app/src/main/assets/images/28078_Medienhafen_Duesseldorf.jpg"
       }
     ]
   },
@@ -324,37 +324,14 @@
       "lat": 51.2131534,
       "lng": 6.7567091
     },
-    "images": []
-  },
-  {
-    "id": 21,
-    "name": "Super 7000",
-    "tags": [
-      12,
-      13,
-      1
-    ],
-    "description": "The founding members of the first two coworking spaces in Düsseldorf (Garage Bilk and “Gewächshaus”) have been developing the Super7000 together with their accumulated experience since 2017.\n\nIn Dusseldorf Derendorf a place for really new things is being created on 7000 square meters. Coworkers, foodies, marketers, techies, nerds and makers meet musicians and event makers. Startups find the creative and open environment they need to turn ideas into reality. Corporates, employees and students who are looking for just that are also very welcome.",
-    "coordinates": {
-      "lat": 51.2507022,
-      "lng": 6.7870017
-    },
-    "images": []
-  },
-  {
-    "id": 22,
-    "name": "Me and All",
-    "tags": [
-      1,
-      16,
-      10
-    ],
-    "description": "The me and all hotel düsseldorf is an endless declaration of love for the Düsseldorf feeling. With a lot of passion for really good neighborhood details. Here city and people come into focus, scene and hotel merge. Neighborhood friendship counts here. High quality standards and a huge helping of local flavor too. We don't have anything that we don't like ourselves. We have created space for comfort and networking, for travelers and non-travelers and for cozy living room events. We have integrated areas so that you can work and brainstorm together using the finest technology. Here you will always find the room you are looking for. In a super central location, within walking distance of Düsseldorf's old town and within walking distance of Düsseldorf Central Station.",
-    "coordinates": {
-      "lat": 51.2238669,
-      "lng": 6.7849136
-    },
-    "images": []
+    "images": [
+      {
+        "url": "https://raw.githubusercontent.com/5GAR-Hackathon/5g-ar-hackathon-app-android/develop/app/src/main/assets/images/43595_Buerogebaeude_Speditionstrasse_Duesseldorf.jpg"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/5GAR-Hackathon/5g-ar-hackathon-app-android/develop/app/src/main/assets/images/43596_Buerogebaeude_Speditionstrasse_Duesseldorf.jpg"
+      }
+    ]
   },
   {
     "id": 23,
@@ -370,7 +347,14 @@
       "lat": 51.1610129,
       "lng": 6.8683692
     },
-    "images": []
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/4/49/Schloss_Benrath%2C_D%C3%BCsseldorf_---_Corps_de_Logis_%288039799933%29.jpg/1600px-Schloss_Benrath%2C_D%C3%BCsseldorf_---_Corps_de_Logis_%288039799933%29.jpg"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/a2/Schloss_Benrath%3B_Gartensaal_a.jpg/1600px-Schloss_Benrath%3B_Gartensaal_a.jpg"
+      }
+    ]
   },
   {
     "id": 24,
@@ -422,7 +406,11 @@
       "lat": 51.2275955,
       "lng": 6.7736936
     },
-    "images": []
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/de/D%C3%BCsseldorf_-_Grabbeplatz_%2B_Kunsthalle_02_ies.jpg/1599px-D%C3%BCsseldorf_-_Grabbeplatz_%2B_Kunsthalle_02_ies.jpg"
+      }
+    ]
   },
   {
     "id": 27,
@@ -453,7 +441,14 @@
       "lat": 51.2346939,
       "lng": 6.770839
     },
-    "images": []
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e3/D%C3%BCsseldorf_Museum_Kunstpalast_15-08-2012_14-34-32.JPG/1600px-D%C3%BCsseldorf_Museum_Kunstpalast_15-08-2012_14-34-32.JPG"
+      },
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b7/Museum_Kunstpalast_-_Haupteingang_im_Westfl%C3%BCgel_%288238-40%29.jpg/1600px-Museum_Kunstpalast_-_Haupteingang_im_Westfl%C3%BCgel_%288238-40%29.jpg"
+      }
+    ]
   },
   {
     "id": 29,
@@ -508,7 +503,11 @@
       "lat": 51.228195,
       "lng": 6.7813063
     },
-    "images": []
+    "images": [
+      {
+        "url": "https://raw.githubusercontent.com/5GAR-Hackathon/5g-ar-hackathon-app-android/develop/app/src/main/assets/images/FCC8E2D6-77F7-4947-895E-E621B66F01CD.jpg"
+      }
+    ]
   },
   {
     "id": 33,
@@ -522,7 +521,11 @@
       "lat": 51.2276086,
       "lng": 6.7752053
     },
-    "images": []
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/7b/Duisburg_Oper_Theater_2009_03_13.jpg/1600px-Duisburg_Oper_Theater_2009_03_13.jpg"
+      }
+    ]
   },
   {
     "id": 34,
@@ -536,7 +539,11 @@
       "lat": 51.2240256,
       "lng": 6.7978421
     },
-    "images": []
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/1/19/Tanzhaus_nrw_2_klein_Foto_Katja_Illner.jpg"
+      }
+    ]
   },
   {
     "id": 35,
@@ -550,35 +557,11 @@
       "lat": 51.229385,
       "lng": 6.7721221
     },
-    "images": []
-  },
-  {
-    "id": 36,
-    "name": "Ratinger Straße",
-    "tags": [
-      2
-    ],
-    "description": "Ratinger Straße in Düsseldorf's old town is one of the oldest streets in the city and dates from the 14th century. The street played an important role in the history of Düsseldorf. Since its inception, Ratinger Straße has been a meeting place for various institutions and milieus. The young city's first hospital was built near the collegiate church of St. Lambertus. Between 1470 and 1544 the town hall was on Ratinger Straße. The Lords of the Cross and Coelestines built monasteries and churches. Some of the numerous restaurants are meeting places for teachers and students from the nearby art academy. The Ratinger Hof was one of the origins of early punk in Germany. Today, along with Bolkerstrasse, the street is one of the popular entertainment streets in Düsseldorf's old town. The street is called “De Retematäng” on Düsseldorfer Platt. The numerous visitors often simply call them “Die Ratinger”.",
-    "coordinates": {
-      "lat": 51.2293749,
-      "lng": 6.7725038
-    },
-    "images": []
-  },
-  {
-    "id": 37,
-    "name": "AK47",
-    "tags": [
-      1,
-      7,
-      9
-    ],
-    "description": "",
-    "coordinates": {
-      "lat": 51.2192485,
-      "lng": 6.8073153
-    },
-    "images": []
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/5/5c/D%C3%BCsseldorf_-_Ratinger_Stra%C3%9Fe%2BHofgartenrampe_%2B_Parkhaus_Ratinger_Tor_01_ies.jpg/1599px-D%C3%BCsseldorf_-_Ratinger_Stra%C3%9Fe%2BHofgartenrampe_%2B_Parkhaus_Ratinger_Tor_01_ies.jpg"
+      }
+    ]
   },
   {
     "id": 38,
@@ -593,7 +576,11 @@
       "lat": 51.2275791,
       "lng": 6.7734441
     },
-    "images": []
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/76/D%C3%BCsseldorf_%28DerHexer%29_2010-08-13_029.jpg/1599px-D%C3%BCsseldorf_%28DerHexer%29_2010-08-13_029.jpg"
+      }
+    ]
   },
   {
     "id": 39,
@@ -607,7 +594,11 @@
       "lat": 51.224152,
       "lng": 6.7681754
     },
-    "images": []
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/2/23/D%C3%BCsseldorf_-_Schulstra%C3%9Fe_-_Filmmuseum_03_ies.jpg/1599px-D%C3%BCsseldorf_-_Schulstra%C3%9Fe_-_Filmmuseum_03_ies.jpg"
+      }
+    ]
   },
   {
     "id": 40,
@@ -622,21 +613,11 @@
       "lat": 51.2222222,
       "lng": 6.7708669
     },
-    "images": []
-  },
-  {
-    "id": 41,
-    "name": "Mahn- und Gedenkstätte",
-    "tags": [
-      2,
-      17
-    ],
-    "description": "The Düsseldorf Memorial for the Victims of National Socialist Tyranny is a cultural institute of the state capital Düsseldorf. It is a museum, research facility and archive. The house was opened in 1987 and has since been dedicated to the memory of the Düsseldorf victims and those persecuted by the Nazi regime. It is located in the western part of the historic town hall in the old town and has been showing the permanent exhibition \"Düsseldorf Children and Young People under National Socialism\" since a thorough renovation and its reopening in May 2015.",
-    "coordinates": {
-      "lat": 51.2273504,
-      "lng": 6.771567
-    },
-    "images": []
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bd/D%C3%BCsseldorf_%28DerHexer%29_2010-08-13_091.jpg/1599px-D%C3%BCsseldorf_%28DerHexer%29_2010-08-13_091.jpg"
+      }
+    ]
   },
   {
     "id": 42,
@@ -652,7 +633,11 @@
       "lat": 51.2300062,
       "lng": 6.7791233
     },
-    "images": []
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/D%C3%BCsseldorf_Theatermuseum.jpg/1600px-D%C3%BCsseldorf_Theatermuseum.jpg"
+      }
+    ]
   },
   {
     "id": 43,
@@ -667,7 +652,11 @@
       "lat": 51.2273963,
       "lng": 6.768933
     },
-    "images": []
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b5/Das_Vorg%C3%A4ngerbauwerk_der_Lambertuskirche_wurde_breits_1159_urkundlich_erw%C3%A4hnt_und_der_Schlossturm_des_ehemaligen_D%C3%BCsseldorfer_Schlosses_ist_heute_ein_Schifffahrtmuseum_-_panoramio.jpg/1600px-thumbnail.jpg"
+      }
+    ]
   },
   {
     "id": 44,
@@ -681,40 +670,11 @@
       "lat": 51.2240613,
       "lng": 6.7685026
     },
-    "images": []
-  },
-  {
-    "id": 45,
-    "name": "Historisches Schiff Voorwaarts",
-    "tags": [
-      17,
-      3,
-      2,
-      10
-    ],
-    "description": "Tradition meets the present - often used in modern architecture, the “Voorwaarts” from 1899 is a good example of the ever-developing media port of Düsseldorf. Outstanding thanks to its unique architectural ensemble, this historic ship with a berth in the marina fits in as a new monument in the overall picture.\n\nFull of history and full of soul.\n\nA place of longing, a meeting place, a museum, a space for exhibitions and for innovative formats, a backdrop for what you make of it. A special event location for special people who want to see their ideas and ideas implemented in a unique ambience - or who just like to be on the water. In a marina with a breathtaking view of the media harbor in every season.",
-    "coordinates": {
-      "lat": 51.2178229,
-      "lng": 6.7578845
-    },
-    "images": []
-  },
-  {
-    "id": 46,
-    "name": "HafenKunstKino",
-    "tags": [
-      2,
-      4,
-      3,
-      1,
-      10
-    ],
-    "description": "The space known as \"Platz der Medien\" or \"Ueckerplatz\" in front of the media center in Düsseldorf harbor was designed by the artist Günther Uecker as a multifunctional space with an open-air cinema on behalf of the city. Up until about eight years ago, the Düsseldorf Film Workshop hosted the Hafenlichtspiele here; since then, the semicircular benches, the projection tower and the playable outer wall of the cultural office have been living their abandoned existence.\n\nHere the company art.vision, as the organizer and with the support of the cultural office and the cultural department of the city of Düsseldorf, opens the HafenKunstKino - the first permanent installation for film and video art in public space in the state capital Düsseldorf.",
-    "coordinates": {
-      "lat": 51.2178229,
-      "lng": 6.7578845
-    },
-    "images": []
+    "images": [
+      {
+        "url": "https://upload.wikimedia.org/wikipedia/commons/thumb/0/09/Fayencen_im_HETJENS_-_Deutsches_Keramikmuseum.jpg/1599px-Fayencen_im_HETJENS_-_Deutsches_Keramikmuseum.jpg"
+      }
+    ]
   },
   {
     "id": 47,
