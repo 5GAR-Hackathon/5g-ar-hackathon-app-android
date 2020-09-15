@@ -164,7 +164,7 @@
     },
     "images": [
       {
-        "url": "https://digihub.sharepoint.com/Freigegebene%20Dokumente/Events/23_Huawei%20Hackathon/07_App%20Content/01_K%C3%B6_Bogen/Landmark_K%C3%B6-Bogen.jpg"
+        "url": "https://raw.githubusercontent.com/5GAR-Hackathon/5g-ar-hackathon-app-android/develop/app/src/main/assets/images/Landmark_K%C3%B6-Bogen.jpg"
       }
     ]
   },
@@ -181,22 +181,25 @@
     },
     "images": [
       {
-        "url": "https://digihub.sharepoint.com/Freigegebene%20Dokumente/Events/23_Huawei%20Hackathon/07_App%20Content/02_K%C3%B6_Bogen_II/EP03601-0561.jpg"
+        "url": "https://raw.githubusercontent.com/5GAR-Hackathon/5g-ar-hackathon-app-android/develop/app/src/main/assets/images/EP03601-0561.jpg"
       },
       {
-        "url": "https://digihub.sharepoint.com/Freigegebene%20Dokumente/Events/23_Huawei%20Hackathon/07_App%20Content/02_K%C3%B6_Bogen_II/EP03601-0573.jpg"
+        "url": "https://raw.githubusercontent.com/5GAR-Hackathon/5g-ar-hackathon-app-android/develop/app/src/main/assets/images/EP03601-0573.jpg"
       },
       {
-        "url": "https://digihub.sharepoint.com/Freigegebene%20Dokumente/Events/23_Huawei%20Hackathon/07_App%20Content/02_K%C3%B6_Bogen_II/EP03601-0575.jpg"
+        "url": "https://raw.githubusercontent.com/5GAR-Hackathon/5g-ar-hackathon-app-android/develop/app/src/main/assets/images/EP03601-0575.jpg"
       },
       {
-        "url": "https://digihub.sharepoint.com/Freigegebene%20Dokumente/Events/23_Huawei%20Hackathon/07_App%20Content/02_K%C3%B6_Bogen_II/EP03601-0577.jpg"
+        "url": "https://raw.githubusercontent.com/5GAR-Hackathon/5g-ar-hackathon-app-android/develop/app/src/main/assets/images/EP03601-0577.jpg"
       },
       {
-        "url": "https://digihub.sharepoint.com/Freigegebene%20Dokumente/Events/23_Huawei%20Hackathon/07_App%20Content/02_K%C3%B6_Bogen_II/EP03601-0590.jpg"
+        "url": "https://raw.githubusercontent.com/5GAR-Hackathon/5g-ar-hackathon-app-android/develop/app/src/main/assets/images/EP03601-0590.jpg"
       },
       {
-        "url": "https://digihub.sharepoint.com/Freigegebene%20Dokumente/Events/23_Huawei%20Hackathon/07_App%20Content/02_K%C3%B6_Bogen_II/EP03601-0593.jpg"
+        "url": "https://raw.githubusercontent.com/5GAR-Hackathon/5g-ar-hackathon-app-android/develop/app/src/main/assets/images/EP03601-0593.jpg"
+      },
+      {
+        "url": "https://raw.githubusercontent.com/5GAR-Hackathon/5g-ar-hackathon-app-android/develop/app/src/main/assets/images/EP03601-0596.jpg"
       }
     ]
   },
